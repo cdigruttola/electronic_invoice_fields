@@ -32,3 +32,8 @@ admin-dev/import/
 download/
 /img/*
 upload/
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
