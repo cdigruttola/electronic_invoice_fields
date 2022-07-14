@@ -50,6 +50,7 @@ function toggleCustomerType() {
         var obj_sdi = $('input[name=sdi]');
         var obj_pec = $('input[name=pec]');
         var obj_pa = $('input[name=pa]');
+        var obj_dni = $('input[name=dni]');
 
         if (chk === '1') {
             obj_company.parent().parent().show(100);
@@ -57,6 +58,9 @@ function toggleCustomerType() {
             if (!obj_company.parent().parent().find('label.form-control-label').hasClass('required')) {
                 obj_company.parent().parent().find('label.form-control-label').addClass('required');
             }
+
+            obj_dni.parent().parent().hide(100);
+
             obj_company.parent().parent().find('div .form-control-comment').html('');
             obj_vat_number.parent().parent().show(100);
             obj_vat_number.prop('required', true);
@@ -87,6 +91,9 @@ function toggleCustomerType() {
             if (obj_company.parent().parent().find('label.form-control-label').hasClass('required')) {
                 obj_company.parent().parent().find('label.form-control-label').removeClass('required');
             }
+
+            obj_dni.parent().parent().show(100);
+
             obj_vat_number.parent().parent().hide(100);
             obj_vat_number.prop('required', false);
             if (obj_vat_number.parent().parent().find('label.form-control-label').hasClass('required')) {
