@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="admin-dev" source-language="it-IT" target-language="it-IT" datatype="plaintext">
-    <body>
-      <trans-unit id="9c7fefd47b9952a16ba0e87c697fbfb4">
-        <source>Electronic Invoice - fields</source>
-        <target>Fatturazione Elettronica - Campi</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="563812197ad2113f883dc94696121324">
-        <source>EInvoice Module</source>
-        <target>Modulo Fatturazione Elettronica</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="0ff5d2a761fc57a0450af6591e9ae143">
-        <source>This module helps you to add SDI and PEC fields in addresses</source>
-        <target>Questa module permette di aggiungere i campi PEC e SDI negli indirizzi</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="5b6cf869265c13af8566f192b4ab3d2a">
-        <source>Documentation</source>
-        <target>Documentazione</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="dfc94e8224bbd24aa039a3c79fbb9d4e">
-        <source>You can get a PDF documentation to configure this module</source>
-        <target>Puoi scaricare la documentazione per configurare questo modulo</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="78463a384a5aa4fad5fa73e2f506ecfc">
-        <source>English</source>
-        <target>Inglese</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="4be8e06d27bca7e1828f2fa9a49ca985">
-        <source>Italian</source>
-        <target>Italiano</target>
-        <note>Line: </note>
-      </trans-unit>
-    </body>
-  </file>
+    <file original="admin-dev" source-language="it-IT" target-language="it-IT" datatype="plaintext">
+        <body>
+            <trans-unit id="9c7fefd47b9952a16ba0e87c697fbfb4">
+                <source>Electronic Invoice - fields</source>
+                <target>Fatturazione Elettronica - Campi</target>
+                <note>Line:</note>
+            </trans-unit>
+            <trans-unit id="563812197ad2113f883dc94696121324">
+                <source>EInvoice Module</source>
+                <target>Modulo Fatturazione Elettronica</target>
+                <note>Line:</note>
+            </trans-unit>
+            <trans-unit id="0ff5d2a761fc57a0450af6591e9ae143">
+                <source>This module helps you to add SDI and PEC fields in addresses</source>
+                <target>Questa module permette di aggiungere i campi PEC e SDI negli indirizzi</target>
+                <note>Line:</note>
+            </trans-unit>
+            <trans-unit id="5b6cf869265c13af8566f192b4ab3d2a">
+                <source>Documentation</source>
+                <target>Documentazione</target>
+                <note>Line:</note>
+            </trans-unit>
+            <trans-unit id="dfc94e8224bbd24aa039a3c79fbb9d4e">
+                <source>You can get a PDF documentation to configure this module</source>
+                <target>Puoi scaricare la documentazione per configurare questo modulo</target>
+                <note>Line:</note>
+            </trans-unit>
+            <trans-unit id="78463a384a5aa4fad5fa73e2f506ecfc">
+                <source>English</source>
+                <target>Inglese</target>
+                <note>Line:</note>
+            </trans-unit>
+            <trans-unit id="4be8e06d27bca7e1828f2fa9a49ca985">
+                <source>Italian</source>
+                <target>Italiano</target>
+                <note>Line:</note>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>
