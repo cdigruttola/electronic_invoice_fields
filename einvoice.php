@@ -74,7 +74,7 @@ class Einvoice extends Module
 
         return parent::install() &&
             $this->registerHook('header') &&
-            $this->registerHook('backOfficeHeader') &&
+            $this->registerHook('displayBackOfficeHeader') &&
             $this->registerHooks();
     }
 
@@ -100,12 +100,17 @@ class Einvoice extends Module
         return true;
     }
 
-    public function uninstall(): bool
+    public function uninstall($delete_params = true): bool
     {
-
-        include(dirname(__FILE__) . '/sql/uninstall.php');
-
+        if ($delete_params) {
+            include(dirname(__FILE__) . '/sql/uninstall.php');
+        }
         return parent::uninstall();
+    }
+
+    public function reset(): bool
+    {
+        return $this->uninstall(false);
     }
 
     /**
@@ -240,12 +245,10 @@ class Einvoice extends Module
     /**
      * Add the CSS & JavaScript files you want to be loaded in the BO.
      */
-    public function hookBackOfficeHeader()
+    public function hookDisplayBackOfficeHeader()
     {
-        if (Tools::getValue('module_name') == $this->name) {
-            $this->context->controller->addJS($this->_path . 'views/js/back.js');
-            $this->context->controller->addCSS($this->_path . 'views/css/back.css');
-        }
+        $this->context->controller->addJS($this->_path . 'views/js/back.js');
+        $this->context->controller->addCSS($this->_path . 'views/css/back.css');
     }
 
     /**
