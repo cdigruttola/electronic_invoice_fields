@@ -42,8 +42,8 @@ function toggleCustomerType() {
         var obj_company = $('input[name=company]');
         var obj_vat_number = $('input[name=vat_number]');
 
-        if (chk === 0 && (obj_company.val().length > 0 || obj_vat_number.val().length > 0)) {
-            chk = 1;
+        if (chk === '0' && (obj_company.val().length > 0 || obj_vat_number.val().length > 0)) {
+            chk = '1';
             $('input[name=customertype]').filter('[value=1]').prop('checked', true);
         }
 
