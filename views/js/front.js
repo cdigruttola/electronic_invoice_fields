@@ -53,67 +53,63 @@ function toggleCustomerType() {
         var obj_dni = $('input[name=dni]');
 
         if (chk === '1') {
-            obj_company.parent().parent().show(100);
+            obj_company.closest('.form-group').show(100);
             obj_company.prop('required', true);
-            if (!obj_company.parent().parent().find('label.form-control-label').hasClass('required')) {
-                obj_company.parent().parent().find('label.form-control-label').addClass('required');
+            if (!obj_company.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+                obj_company.closest('.form-group').find('label.form-control-label').addClass('required');
             }
 
-            obj_dni.parent().parent().hide(100);
+            obj_dni.closest('.form-group').hide(100);
 
-            obj_company.parent().parent().find('div .form-control-comment').html('');
-            obj_vat_number.parent().parent().show(100);
+            obj_company.closest('.form-group').find('div .form-control-comment').html('');
+            obj_vat_number.closest('.form-group').show(100);
             obj_vat_number.prop('required', true);
-            if (!obj_vat_number.parent().parent().find('label.form-control-label').hasClass('required')) {
-                obj_vat_number.parent().parent().find('label.form-control-label').addClass('required');
+            if (!obj_vat_number.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+                obj_vat_number.closest('.form-group').find('label.form-control-label').addClass('required');
             }
-            obj_vat_number.parent().parent().find('div .form-control-comment').html('');
-            obj_sdi.parent().parent().show(100);
+            obj_vat_number.closest('.form-group').find('div .form-control-comment').html('');
+            obj_sdi.closest('.form-group').show(100);
             if (sdi_required) {
                 obj_sdi.prop('required', true);
-                if (!obj_sdi.parent().parent().find('label.form-control-label').hasClass('required')) {
-                    obj_sdi.parent().parent().find('label.form-control-label').addClass('required');
+                if (!obj_sdi.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+                    obj_sdi.closest('.form-group').find('label.form-control-label').addClass('required');
                 }
-                obj_sdi.parent().parent().find('div .form-control-comment').html('');
+                obj_sdi.closest('.form-group').find('div .form-control-comment').html('');
             }
-            obj_pec.parent().parent().show(100);
+            obj_pec.closest('.form-group').show(100);
             if (pec_required) {
                 obj_pec.prop('required', true);
-                if (!obj_pec.parent().parent().find('label.form-control-label').hasClass('required')) {
-                    obj_pec.parent().parent().find('label.form-control-label').addClass('required');
+                if (!obj_pec.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+                    obj_pec.closest('.form-group').find('label.form-control-label').addClass('required');
                 }
-                obj_pec.parent().parent().find('div .form-control-comment').html('');
+                obj_pec.closest('.form-group').find('div .form-control-comment').html('');
             }
-            obj_pa.length ? obj_pa.parent().parent().parent().parent().show(100) : null;
+            obj_pa.length ? obj_pa.closest('.form-group').closest('.form-group').show(100) : null;
         } else {
-            obj_company.parent().parent().hide(100);
+            obj_company.closest('.form-group').hide(100);
             obj_company.prop('required', false);
-            if (obj_company.parent().parent().find('label.form-control-label').hasClass('required')) {
-                obj_company.parent().parent().find('label.form-control-label').removeClass('required');
+            if (obj_company.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+                obj_company.closest('.form-group').find('label.form-control-label').removeClass('required');
             }
 
-            obj_dni.parent().parent().show(100);
+            obj_dni.closest('.form-group').show(100);
 
-            obj_vat_number.parent().parent().hide(100);
+            obj_vat_number.closest('.form-group').hide(100);
             obj_vat_number.prop('required', false);
-            if (obj_vat_number.parent().parent().find('label.form-control-label').hasClass('required')) {
-                obj_vat_number.parent().parent().find('label.form-control-label').removeClass('required');
+            if (obj_vat_number.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+                obj_vat_number.closest('.form-group').find('label.form-control-label').removeClass('required');
             }
-            obj_sdi.parent().parent().hide(100);
-            //if (sdi_required) {
+            obj_sdi.closest('.form-group').hide(100);
             obj_sdi.prop('required', false);
-            if (obj_sdi.parent().parent().find('label.form-control-label').hasClass('required')) {
-                obj_sdi.parent().parent().find('label.form-control-label').removeClass('required');
-                //}
+            if (obj_sdi.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+                obj_sdi.closest('.form-group').find('label.form-control-label').removeClass('required');
             }
-            obj_pec.parent().parent().hide(100);
-            //if (pec_required) {
+            obj_pec.closest('.form-group').hide(100);
             obj_pec.prop('required', false);
-            if (obj_pec.parent().parent().find('label.form-control-label').hasClass('required')) {
-                obj_pec.parent().parent().find('label.form-control-label').removeClass('required');
-                //}
+            if (obj_pec.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+                obj_pec.closest('.form-group').find('label.form-control-label').removeClass('required');
             }
-            obj_pa.length ? obj_pa.parent().parent().parent().parent().hide(100) : null;
+            obj_pa.length ? obj_pa.closest('.form-group').closest('.form-group').hide(100) : null;
         }
     }
 }
