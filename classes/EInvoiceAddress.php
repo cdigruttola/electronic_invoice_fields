@@ -1,5 +1,4 @@
 <?php
-
 /**
  * 2007-2022 PrestaShop
  *
@@ -26,6 +25,7 @@
  *
  *
  */
+
 class EInvoiceAddress extends ObjectModel
 {
     /** @var int id_address */
