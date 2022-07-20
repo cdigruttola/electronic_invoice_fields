@@ -55,7 +55,7 @@ class Address extends AddressCore
                 $this->customertype = (string)$eiaddress->customertype;
                 $this->sdi = (string)$eiaddress->sdi;
                 $this->pec = (string)$eiaddress->pec;
-                $this->pa = (int)$eiaddress->ipa;
+                $this->pa = (int)$eiaddress->pa;
             }
             unset($eiaddress);
         }
