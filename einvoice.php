@@ -29,13 +29,13 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 if (!defined('_PS_VERSION_')) {
     exit;
 }
-require('vendor/autoload.php');
+require 'vendor/autoload.php';
 require_once dirname(__FILE__) . '/classes/EInvoiceAddress.php';
 
 class Einvoice extends Module
 {
-    const EINVOICE_PEC_REQUIRED = 'EINVOICE_PEC_REQUIRED';
-    const EINVOICE_SDI_REQUIRED = 'EINVOICE_SDI_REQUIRED';
+    public const EINVOICE_PEC_REQUIRED = 'EINVOICE_PEC_REQUIRED';
+    public const EINVOICE_SDI_REQUIRED = 'EINVOICE_SDI_REQUIRED';
     protected $config_form = false;
 
     public function __construct()
@@ -46,7 +46,7 @@ class Einvoice extends Module
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
 
-        /**
+        /*
          * Set $this->bootstrap to true if your module is compliant with bootstrap (PrestaShop 1.6)
          */
         $this->bootstrap = true;
@@ -58,7 +58,7 @@ class Einvoice extends Module
 
         $this->confirmUninstall = $this->trans('Are you sure you want to uninstall?', [], 'Modules.Einvoice.Einvoice');
 
-        $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
+        $this->ps_versions_compliancy = ['min' => '1.6', 'max' => _PS_VERSION_];
     }
 
     public function isUsingNewTranslationSystem(): bool
@@ -72,7 +72,7 @@ class Einvoice extends Module
      */
     public function install(): bool
     {
-        include(dirname(__FILE__) . '/sql/install.php');
+        include dirname(__FILE__) . '/sql/install.php';
 
         return parent::install() &&
             $this->registerHook('header') &&
@@ -99,16 +99,18 @@ class Einvoice extends Module
         ) {
             return false;
         }
+
         return true;
     }
 
     public function uninstall($delete_params = true): bool
     {
         if ($delete_params) {
-            include(dirname(__FILE__) . '/sql/uninstall.php');
+            include dirname(__FILE__) . '/sql/uninstall.php';
         }
         Configuration::deleteByName(self::EINVOICE_PEC_REQUIRED);
         Configuration::deleteByName(self::EINVOICE_SDI_REQUIRED);
+
         return parent::uninstall();
     }
 
@@ -122,10 +124,10 @@ class Einvoice extends Module
      */
     public function getContent()
     {
-        /**
+        /*
          * If values have been submitted in the form, process.
          */
-        if (((bool)Tools::isSubmit('submitEinvoiceModule')) == true) {
+        if (((bool) Tools::isSubmit('submitEinvoiceModule')) == true) {
             $this->postProcess();
         }
 
@@ -155,13 +157,13 @@ class Einvoice extends Module
             . '&configure=' . $this->name . '&tab_module=' . $this->tab . '&module_name=' . $this->name;
         $helper->token = Tools::getAdminTokenLite('AdminModules');
 
-        $helper->tpl_vars = array(
+        $helper->tpl_vars = [
             'fields_value' => $this->getConfigFormValues(), /* Add values for your inputs */
             'languages' => $this->context->controller->getLanguages(),
             'id_language' => $this->context->language->id,
-        );
+        ];
 
-        return $helper->generateForm(array($this->getConfigForm()));
+        return $helper->generateForm([$this->getConfigForm()]);
     }
 
     /**
@@ -169,57 +171,57 @@ class Einvoice extends Module
      */
     protected function getConfigForm()
     {
-        return array(
-            'form' => array(
-                'legend' => array(
+        return [
+            'form' => [
+                'legend' => [
                     'title' => $this->trans('Settings', [], 'Modules.Einvoice.Einvoice'),
                     'icon' => 'icon-cogs',
-                ),
-                'input' => array(
-                    array(
+                ],
+                'input' => [
+                    [
                         'type' => 'switch',
                         'label' => $this->trans('PEC field required', [], 'Modules.Einvoice.Einvoice'),
                         'name' => self::EINVOICE_PEC_REQUIRED,
                         'is_bool' => true,
                         'desc' => $this->trans('This options set the PEC field mandatory only for Italian customer.', [], 'Modules.Einvoice.Einvoice'),
-                        'values' => array(
-                            array(
+                        'values' => [
+                            [
                                 'id' => 'active_on',
                                 'value' => true,
-                                'label' => $this->trans('Enabled', [], 'Modules.Einvoice.Einvoice')
-                            ),
-                            array(
+                                'label' => $this->trans('Enabled', [], 'Modules.Einvoice.Einvoice'),
+                            ],
+                            [
                                 'id' => 'active_off',
                                 'value' => false,
-                                'label' => $this->trans('Disabled', [], 'Modules.Einvoice.Einvoice')
-                            )
-                        ),
-                    ),
-                    array(
+                                'label' => $this->trans('Disabled', [], 'Modules.Einvoice.Einvoice'),
+                            ],
+                        ],
+                    ],
+                    [
                         'type' => 'switch',
                         'label' => $this->trans('SDI field required', [], 'Modules.Einvoice.Einvoice'),
                         'name' => self::EINVOICE_SDI_REQUIRED,
                         'is_bool' => true,
                         'desc' => $this->trans('This options set the SDI field mandatory only for Italian customer.', [], 'Modules.Einvoice.Einvoice'),
-                        'values' => array(
-                            array(
+                        'values' => [
+                            [
                                 'id' => 'active_on',
                                 'value' => true,
-                                'label' => $this->trans('Enabled', [], 'Modules.Einvoice.Einvoice')
-                            ),
-                            array(
+                                'label' => $this->trans('Enabled', [], 'Modules.Einvoice.Einvoice'),
+                            ],
+                            [
                                 'id' => 'active_off',
                                 'value' => false,
-                                'label' => $this->trans('Disabled', [], 'Modules.Einvoice.Einvoice')
-                            )
-                        ),
-                    ),
-                ),
-                'submit' => array(
+                                'label' => $this->trans('Disabled', [], 'Modules.Einvoice.Einvoice'),
+                            ],
+                        ],
+                    ],
+                ],
+                'submit' => [
                     'title' => $this->trans('Save', [], 'Modules.Einvoice.Einvoice'),
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**
@@ -227,11 +229,12 @@ class Einvoice extends Module
      */
     protected function getConfigFormValues()
     {
-        $id_shop = (int)$this->context->shop->id;
-        return array(
+        $id_shop = (int) $this->context->shop->id;
+
+        return [
             self::EINVOICE_PEC_REQUIRED => Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop),
             self::EINVOICE_SDI_REQUIRED => Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop),
-        );
+        ];
     }
 
     /**
@@ -260,19 +263,19 @@ class Einvoice extends Module
      */
     public function hookHeader()
     {
-        $id_shop = (int)$this->context->shop->id;
+        $id_shop = (int) $this->context->shop->id;
 
-        $sdi_required = (int)Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop);
-        $pec_required = (int)Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop);
+        $sdi_required = (int) Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop);
+        $pec_required = (int) Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop);
 
         $this->context->controller->addJS($this->_path . '/views/js/front.js');
         $this->context->controller->addCSS($this->_path . '/views/css/front.css');
 
         Media::addJsDef(
-            array(
-                'sdi_required' => (int)$sdi_required,
-                'pec_required' => (int)$pec_required,
-            )
+            [
+                'sdi_required' => (int) $sdi_required,
+                'pec_required' => (int) $pec_required,
+            ]
         );
     }
 
@@ -287,7 +290,7 @@ class Einvoice extends Module
         $sdi_required = Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop);
         $pec_required = Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop);
 
-        $id_address = isset($params['id']) ? (int)$params['id'] : null;
+        $id_address = isset($params['id']) ? (int) $params['id'] : null;
         $obj = new EInvoiceAddress($id_address);
 
         $formBuilder = $params['form_builder'];
@@ -308,7 +311,7 @@ class Einvoice extends Module
             ]
         );
 
-        $params['data']['sdi'] = Tools::strtoupper((string)$obj->sdi);
+        $params['data']['sdi'] = Tools::strtoupper((string) $obj->sdi);
 
         $formBuilder->add(
             'pec',
@@ -322,7 +325,7 @@ class Einvoice extends Module
             ]
         );
 
-        $params['data']['pec'] = (string)$obj->pec;
+        $params['data']['pec'] = (string) $obj->pec;
 
         $formBuilder->add(
             'pa',
@@ -333,7 +336,7 @@ class Einvoice extends Module
             ]
         );
 
-        $params['data']['pa'] = (int)$obj->pa == 1;
+        $params['data']['pa'] = (int) $obj->pa == 1;
 
         $formBuilder->add(
             'customertype',
@@ -348,7 +351,7 @@ class Einvoice extends Module
             ]
         );
 
-        $params['data']['customertype'] = (int)$obj->customertype;
+        $params['data']['customertype'] = (int) $obj->customertype;
 
         $formBuilder->setData($params['data']);
         unset($obj);
@@ -370,78 +373,77 @@ class Einvoice extends Module
         $part1 = array_slice($params['fields'][0]['form']['input'], 0, $key + 1);
         $part2 = array_slice($params['fields'][0]['form']['input'], $key + 1);
 
-        $fields = array(
-            array(
+        $fields = [
+            [
                 'type' => 'text',
                 'label' => $this->trans('PEC Email', [], 'Modules.Einvoice.Einvoice'),
                 'name' => 'pec',
                 'prefix' => "<i class='icon-envelope-o'></i>",
                 'class' => 'fixed-width-xxl',
                 'hint' => $this->trans('Invalid characters:', [], 'Modules.Einvoice.Einvoice') . ' <>;=#{}',
-            ),
-            array(
+            ],
+            [
                 'type' => 'text',
                 'label' => $this->trans('SDI Code'),
                 'name' => 'sdi',
                 'class' => 'fixed-width-xxl',
                 'hint' => $this->trans('Invalid characters:', [], 'Modules.Einvoice.Einvoice') . ' <>;=#{}',
-            ),
-            array(
+            ],
+            [
                 'type' => $switch,
                 'label' => $this->trans('Public Administration', [], 'Modules.Einvoice.Einvoice'),
                 'name' => 'pa',
                 'class' => 't',
                 'is_bool' => true,
-                'values' => array(
-                    array(
+                'values' => [
+                    [
                         'id' => 'active_on',
                         'value' => 1,
-                        'label' => $this->trans('Yes', [], 'Modules.Einvoice.Einvoice')
-                    ),
-                    array(
+                        'label' => $this->trans('Yes', [], 'Modules.Einvoice.Einvoice'),
+                    ],
+                    [
                         'id' => 'active_off',
                         'value' => 0,
-                        'label' => $this->trans('No', [], 'Modules.Einvoice.Einvoice')
-                    )
-                ),
-            ),
-            array(
+                        'label' => $this->trans('No', [], 'Modules.Einvoice.Einvoice'),
+                    ],
+                ],
+            ],
+            [
                 'type' => $switch,
                 'label' => $this->trans('Customer Type', [], 'Modules.Einvoice.Einvoice'),
                 'name' => 'customertype',
                 'class' => 't',
                 'is_bool' => true,
-                'values' => array(
-                    array(
+                'values' => [
+                    [
                         'id' => 'active_on',
                         'value' => 0,
-                        'label' => $this->trans('Private', [], 'Modules.Einvoice.Einvoice')
-                    ),
-                    array(
+                        'label' => $this->trans('Private', [], 'Modules.Einvoice.Einvoice'),
+                    ],
+                    [
                         'id' => 'active_off',
                         'value' => 1,
-                        'label' => $this->trans('Company', [], 'Modules.Einvoice.Einvoice')
-                    )
-                ),
-            ),
-        );
+                        'label' => $this->trans('Company', [], 'Modules.Einvoice.Einvoice'),
+                    ],
+                ],
+            ],
+        ];
 
         $params['fields'][0]['form']['input'] = array_merge($part1, $fields, $part2);
 
         if (version_compare(_PS_VERSION_, '1.7', '>=')) {
-            $id_address = (int)$params['object']->id;
+            $id_address = (int) $params['object']->id;
         } else {
-            $id_address = (int)Tools::getValue('id_address');
+            $id_address = (int) Tools::getValue('id_address');
         }
         $obj = new EInvoiceAddress($id_address);
 
-        $params['fields_value']['sdi'] = Tools::strtoupper((string)$obj->sdi);
-        $params['fields_value']['pec'] = (string)$obj->pec;
-        $params['fields_value']['pa'] = (int)$obj->pa;
-        $params['fields_value']['customertype'] = (int)$obj->customertype;
+        $params['fields_value']['sdi'] = Tools::strtoupper((string) $obj->sdi);
+        $params['fields_value']['pec'] = (string) $obj->pec;
+        $params['fields_value']['pa'] = (int) $obj->pa;
+        $params['fields_value']['customertype'] = (int) $obj->customertype;
         unset($obj);
     }
-
 
     public function hookActionValidateCustomerAddressForm($params)
     {
@@ -514,8 +516,8 @@ class Einvoice extends Module
 
     public function hookActionObjectAddressDeleteAfter($params)
     {
-        $id_address = (int)$params['object']->id;
-        $address = new Address((int)$id_address);
+        $id_address = (int) $params['object']->id;
+        $address = new Address((int) $id_address);
         if (!$address->isUsed()) {
             $eiaddress = new EInvoiceAddress($id_address);
             $eiaddress->delete();
@@ -525,18 +527,18 @@ class Einvoice extends Module
     public function hookAddWebserviceResources($params)
     {
         if (Module::isEnabled('einvoice')) {
-            $def = array(
-                'pec' => array('type' => ObjectModel::TYPE_STRING, 'validate' => 'isGenericName'),
-                'sdi' => array('type' => ObjectModel::TYPE_STRING, 'validate' => 'isGenericName'),
-                'pa' => array('type' => ObjectModel::TYPE_INT, 'validate' => 'isUnsignedInt'),
-                'customertype' => array('type' => ObjectModel::TYPE_INT, 'validate' => 'isUnsignedInt'),
-            );
+            $def = [
+                'pec' => ['type' => ObjectModel::TYPE_STRING, 'validate' => 'isGenericName'],
+                'sdi' => ['type' => ObjectModel::TYPE_STRING, 'validate' => 'isGenericName'],
+                'pa' => ['type' => ObjectModel::TYPE_INT, 'validate' => 'isUnsignedInt'],
+                'customertype' => ['type' => ObjectModel::TYPE_INT, 'validate' => 'isUnsignedInt'],
+            ];
             Address::$definition['fields'] = array_merge(Address::$definition['fields'], $def);
             ksort(Address::$definition['fields']);
         }
+
         return true;
     }
-
 
     private function setAddressParams($params)
     {
@@ -544,25 +546,25 @@ class Einvoice extends Module
             return;
         }
 
-        $datas = array();
-        $datas[$params['object']->id] = array(
-            'customertype' => isset($params['object']->customertype) ? (string)$params['object']->customertype : '',
-            'sdi' => isset($params['object']->sdi) ? (string)$params['object']->sdi : '',
-            'pec' => isset($params['object']->pec) ? (string)$params['object']->pec : '',
-            'pa' => isset($params['object']->pa) ? (int)$params['object']->pa : 0
-        );
+        $datas = [];
+        $datas[$params['object']->id] = [
+            'customertype' => isset($params['object']->customertype) ? (string) $params['object']->customertype : '',
+            'sdi' => isset($params['object']->sdi) ? (string) $params['object']->sdi : '',
+            'pec' => isset($params['object']->pec) ? (string) $params['object']->pec : '',
+            'pa' => isset($params['object']->pa) ? (int) $params['object']->pa : 0,
+        ];
 
         foreach ($datas as $id_address => $data) {
-            $customertype = isset($data['customertype']) ? trim((string)$data['customertype']) : 0;
-            $sdi = isset($data['sdi']) ? trim((string)$data['sdi']) : '';
-            $pec = isset($data['pec']) ? trim((string)$data['pec']) : '';
-            $pa = isset($data['pa']) ? (int)$data['pa'] : 0;
+            $customertype = isset($data['customertype']) ? trim((string) $data['customertype']) : 0;
+            $sdi = isset($data['sdi']) ? trim((string) $data['sdi']) : '';
+            $pec = isset($data['pec']) ? trim((string) $data['pec']) : '';
+            $pa = isset($data['pa']) ? (int) $data['pa'] : 0;
 
             if (!$pa && empty($sdi)) {
-                $address = new Address((int)$id_address);
+                $address = new Address((int) $id_address);
                 if (isset($address) && $address->id) {
-                    $country = new Country((int)$address->id_country);
-                    if (isset($country) && (string)$country->iso_code != 'IT') {
+                    $country = new Country((int) $address->id_country);
+                    if (isset($country) && (string) $country->iso_code != 'IT') {
                         if (!empty($address->company) || !empty($address->vat_number)) {
                             $sdi = 'XXXXXXX';
                         } else {
@@ -578,50 +580,52 @@ class Einvoice extends Module
             if ($id_address) {
                 $eiaddress = new $eiaddress($id_address);
             }
-            $eiaddress->id_address = (int)$id_address;
-            $eiaddress->sdi = Tools::strtoupper((string)$sdi);
-            $eiaddress->pec = (string)$pec;
-            $eiaddress->pa = (int)$pa;
-            $eiaddress->customertype = (int)$customertype;
+            $eiaddress->id_address = (int) $id_address;
+            $eiaddress->sdi = Tools::strtoupper((string) $sdi);
+            $eiaddress->pec = (string) $pec;
+            $eiaddress->pa = (int) $pa;
+            $eiaddress->customertype = (int) $customertype;
             $eiaddress->save();
         }
     }
 
     /**
      * @param $params
+     *
      * @return void
      */
     private function retrieveValuesFromHttpMethod($params): void
     {
-        $customertype = (int)Tools::getValue('customertype');
-        $sdi = (string)Tools::getValue('sdi');
-        $pec = (string)Tools::getValue('pec');
-        $pa = (int)Tools::getValue('pa');
+        $customertype = (int) Tools::getValue('customertype');
+        $sdi = (string) Tools::getValue('sdi');
+        $pec = (string) Tools::getValue('pec');
+        $pa = (int) Tools::getValue('pa');
 
-        $params['object']->customertype = (int)$customertype;
-        $params['object']->sdi = (string)$sdi;
-        $params['object']->pec = (string)$pec;
-        $params['object']->pa = (int)$pa;
+        $params['object']->customertype = (int) $customertype;
+        $params['object']->sdi = (string) $sdi;
+        $params['object']->pec = (string) $pec;
+        $params['object']->pa = (int) $pa;
 
         $this->setAddressParams($params);
     }
 
     /**
      * @param $params
+     *
      * @return void
      */
     private function retrieveValuesFromFormData($params): void
     {
         if (version_compare(_PS_VERSION_, '1.7.7', '>=')) {
             if (!isset($params['object'])) {
-                $params['object'] = (object)null;
+                $params['object'] = (object) null;
             }
 
-            $params['object']->id = (int)$params['id'];
-            $params['object']->customertype = isset($params['form_data']['customertype']) ? (string)$params['form_data']['customertype'] : '';
-            $params['object']->sdi = isset($params['form_data']['sdi']) ? (string)$params['form_data']['sdi'] : '';
-            $params['object']->pec = isset($params['form_data']['pec']) ? (string)$params['form_data']['pec'] : '';
-            $params['object']->pa = isset($params['form_data']['pa']) ? (int)$params['form_data']['pa'] : 0;
+            $params['object']->id = (int) $params['id'];
+            $params['object']->customertype = isset($params['form_data']['customertype']) ? (string) $params['form_data']['customertype'] : '';
+            $params['object']->sdi = isset($params['form_data']['sdi']) ? (string) $params['form_data']['sdi'] : '';
+            $params['object']->pec = isset($params['form_data']['pec']) ? (string) $params['form_data']['pec'] : '';
+            $params['object']->pa = isset($params['form_data']['pa']) ? (int) $params['form_data']['pa'] : 0;
 
             $this->setAddressParams($params);
         }
@@ -629,19 +633,18 @@ class Einvoice extends Module
 
     /**
      * @param $params
+     *
      * @return void
      */
     private function retrieveValuesFromCustomerAddress($params): void
     {
         $customer_address = Tools::getValue('customer_address');
         if (isset($customer_address) && !empty($customer_address)) {
-            $params['object']->customertype = (int)$customer_address['customertype'];
-            $params['object']->sdi = (string)$customer_address['sdi'];
-            $params['object']->pec = (string)$customer_address['pec'];
-            $params['object']->pa = (int)$customer_address['pa'];
+            $params['object']->customertype = (int) $customer_address['customertype'];
+            $params['object']->sdi = (string) $customer_address['sdi'];
+            $params['object']->pec = (string) $customer_address['pec'];
+            $params['object']->pa = (int) $customer_address['pa'];
         }
         $this->setAddressParams($params);
     }
-
-
 }

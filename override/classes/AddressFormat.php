@@ -23,8 +23,6 @@
  * @copyright 2007-2022 PrestaShop SA
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
- *
- *
  */
 class AddressFormat extends AddressFormatCore
 {
@@ -35,14 +33,14 @@ class AddressFormat extends AddressFormatCore
         $einvoice = Module::getInstanceByName('einvoice');
         if (isset($einvoice) && isset($einvoice->active) && $einvoice->active) {
             if (isset($tab['pa'])) {
-                if ((int)$tab['pa'] == 1) {
+                if ((int) $tab['pa'] == 1) {
                     $tab['pa'] = $einvoice->getTranslator()->trans('Public Administration');
                 } else {
                     $tab['pa'] = '';
                 }
             }
             if (isset($tab['sdi'])) {
-                if (in_array((string)$tab['sdi'], array('000000', '0000000', 'XXXXXX', 'XXXXXXX'))) {
+                if (in_array((string) $tab['sdi'], ['000000', '0000000', 'XXXXXX', 'XXXXXXX'])) {
                     $tab['sdi'] = '';
                 }
             }
@@ -56,11 +54,11 @@ class AddressFormat extends AddressFormatCore
         $address = new CustomerAddress();
         $einvoice = Module::getInstanceByName('einvoice');
         if ($einvoice->active) {
-            $id_shop = (int)Context::getContext()->shop->id;
-            if ((int)Configuration::get('EINVOICE_PEC_REQUIRED', null, null, $id_shop)) {
+            $id_shop = (int) Context::getContext()->shop->id;
+            if ((int) Configuration::get('EINVOICE_PEC_REQUIRED', null, null, $id_shop)) {
                 AddressFormat::$requireFormFieldsList[] = 'pec';
             }
-            if ((int)Configuration::get('EINVOICE_SDI_REQUIRED', null, null, $id_shop)) {
+            if ((int) Configuration::get('EINVOICE_SDI_REQUIRED', null, null, $id_shop)) {
                 AddressFormat::$requireFormFieldsList[] = 'sdi';
             }
         }

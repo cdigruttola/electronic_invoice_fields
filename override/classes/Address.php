@@ -23,8 +23,6 @@
  * @copyright 2007-2022 PrestaShop SA
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
- *
- *
  */
 class Address extends AddressCore
 {
@@ -50,12 +48,12 @@ class Address extends AddressCore
 
         $einvoice = Module::getInstanceByName('einvoice');
         if (isset($einvoice) && isset($einvoice->active) && $einvoice->active) {
-            $eiaddress = new EInvoiceAddress((int)$this->id);
+            $eiaddress = new EInvoiceAddress((int) $this->id);
             if ($eiaddress->id_address) {
-                $this->customertype = (string)$eiaddress->customertype;
-                $this->sdi = (string)$eiaddress->sdi;
-                $this->pec = (string)$eiaddress->pec;
-                $this->pa = (int)$eiaddress->pa;
+                $this->customertype = (string) $eiaddress->customertype;
+                $this->sdi = (string) $eiaddress->sdi;
+                $this->pec = (string) $eiaddress->pec;
+                $this->pa = (int) $eiaddress->pa;
             }
             unset($eiaddress);
         }

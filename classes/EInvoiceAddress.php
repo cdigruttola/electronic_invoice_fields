@@ -22,10 +22,7 @@
  * @copyright 2007-2022 PrestaShop SA
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
- *
- *
  */
-
 class EInvoiceAddress extends ObjectModel
 {
     /** @var int id_address */
@@ -46,15 +43,15 @@ class EInvoiceAddress extends ObjectModel
     /**
      * @see ObjectModel::$definition
      */
-    public static $definition = array(
+    public static $definition = [
         'table' => 'einvoice_address',
         'primary' => 'id_address',
-        'fields' => array(
-            'id_address' => array('type' => self::TYPE_INT, 'validate' => 'isUnsignedInt'),
-            'customertype' => array('type' => self::TYPE_BOOL),
-            'pec' => array('type' => self::TYPE_STRING, 'validate' => 'isEmail'),
-            'sdi' => array('type' => self::TYPE_STRING, 'validate' => 'isString', 'size' => 7),
-            'pa' => array('type' => self::TYPE_BOOL),
-        ),
-    );
+        'fields' => [
+            'id_address' => ['type' => self::TYPE_INT, 'validate' => 'isUnsignedInt'],
+            'customertype' => ['type' => self::TYPE_BOOL],
+            'pec' => ['type' => self::TYPE_STRING, 'validate' => 'isEmail'],
+            'sdi' => ['type' => self::TYPE_STRING, 'validate' => 'isString', 'size' => 7],
+            'pa' => ['type' => self::TYPE_BOOL],
+        ],
+    ];
 }
