@@ -34,13 +34,15 @@ require_once dirname(__FILE__) . '/classes/EInvoiceAddress.php';
 
 class Einvoice extends Module
 {
+    const EINVOICE_PEC_REQUIRED = 'EINVOICE_PEC_REQUIRED';
+    const EINVOICE_SDI_REQUIRED = 'EINVOICE_SDI_REQUIRED';
     protected $config_form = false;
 
     public function __construct()
     {
         $this->name = 'einvoice';
         $this->tab = 'administration';
-        $this->version = '1.0.0';
+        $this->version = '1.1.0';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
 
@@ -105,6 +107,8 @@ class Einvoice extends Module
         if ($delete_params) {
             include(dirname(__FILE__) . '/sql/uninstall.php');
         }
+        Configuration::deleteByName(self::EINVOICE_PEC_REQUIRED);
+        Configuration::deleteByName(self::EINVOICE_SDI_REQUIRED);
         return parent::uninstall();
     }
 
@@ -175,7 +179,7 @@ class Einvoice extends Module
                     array(
                         'type' => 'switch',
                         'label' => $this->trans('PEC field required', [], 'Modules.Einvoice.Einvoice'),
-                        'name' => 'EINVOICE_PEC_REQUIRED',
+                        'name' => self::EINVOICE_PEC_REQUIRED,
                         'is_bool' => true,
                         'desc' => $this->trans('This options set the PEC field mandatory only for Italian customer.', [], 'Modules.Einvoice.Einvoice'),
                         'values' => array(
@@ -194,7 +198,7 @@ class Einvoice extends Module
                     array(
                         'type' => 'switch',
                         'label' => $this->trans('SDI field required', [], 'Modules.Einvoice.Einvoice'),
-                        'name' => 'EINVOICE_SDI_REQUIRED',
+                        'name' => self::EINVOICE_SDI_REQUIRED,
                         'is_bool' => true,
                         'desc' => $this->trans('This options set the SDI field mandatory only for Italian customer.', [], 'Modules.Einvoice.Einvoice'),
                         'values' => array(
@@ -225,8 +229,8 @@ class Einvoice extends Module
     {
         $id_shop = (int)$this->context->shop->id;
         return array(
-            'EINVOICE_PEC_REQUIRED' => Configuration::get('EINVOICE_PEC_REQUIRED', null, null, $id_shop),
-            'EINVOICE_SDI_REQUIRED' => Configuration::get('EINVOICE_SDI_REQUIRED', null, null, $id_shop),
+            self::EINVOICE_PEC_REQUIRED => Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop),
+            self::EINVOICE_SDI_REQUIRED => Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop),
         );
     }
 
@@ -258,8 +262,8 @@ class Einvoice extends Module
     {
         $id_shop = (int)$this->context->shop->id;
 
-        $sdi_required = (int)Configuration::get('EINVOICE_PEC_REQUIRED', null, null, $id_shop);
-        $pec_required = (int)Configuration::get('EINVOICE_SDI_REQUIRED', null, null, $id_shop);
+        $sdi_required = (int)Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop);
+        $pec_required = (int)Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop);
 
         $this->context->controller->addJS($this->_path . '/views/js/front.js');
         $this->context->controller->addCSS($this->_path . '/views/css/front.css');
@@ -280,8 +284,8 @@ class Einvoice extends Module
 
         $id_shop = $this->context->shop->id;
 
-        $sdi_required = Configuration::get('EINVOICE_SDI_REQUIRED', null, null, $id_shop);
-        $pec_required = Configuration::get('EINVOICE_SDI_REQUIRED', null, null, $id_shop);
+        $sdi_required = Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop);
+        $pec_required = Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop);
 
         $id_address = isset($params['id']) ? (int)$params['id'] : null;
         $obj = new EInvoiceAddress($id_address);
