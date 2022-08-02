@@ -27,30 +27,31 @@
 $(document).ready(function () {
     toggleCustomerType();
 
-    $('input[name=customertype]').change(function (e) {
+    $('select[name=customertype]').change(function (e) {
         e.preventDefault();
         toggleCustomerType();
     });
 });
 
 function toggleCustomerType() {
-    var chk = $('input[name=customertype]:checked').val();
+    var chk = $('select[name=customertype] option:selected').val();
 
     if (typeof chk !== 'undefined') {
+        var obj_first_name = $('input[name=firstname]');
+        var obj_last_name = $('input[name=lastname]');
         var obj_company = $('input[name=company]');
         var obj_vat_number = $('input[name=vat_number]');
 
-        if (chk === '0' && (obj_company.val().length > 0 || obj_vat_number.val().length > 0)) {
-            chk = '1';
-            $('input[name=customertype]').filter('[value=1]').prop('checked', true);
-        }
-
         var obj_sdi = $('input[name=sdi]');
         var obj_pec = $('input[name=pec]');
-        var obj_pa = $('input[name=pa]');
         var obj_dni = $('input[name=dni]');
 
-        if (chk === '1') {
+        if (chk !== '0') {
+            obj_first_name.prop('required', false);
+            obj_first_name.closest('.form-group').hide(100);
+            obj_last_name.prop('required', false);
+            obj_last_name.closest('.form-group').hide(100);
+
             obj_company.closest('.form-group').show(100);
             obj_company.prop('required', true);
             if (!obj_company.closest('.form-group').find('label.form-control-label').hasClass('required')) {
@@ -82,8 +83,12 @@ function toggleCustomerType() {
                 }
                 obj_pec.closest('.form-group').find('div .form-control-comment').html('');
             }
-            obj_pa.length ? obj_pa.closest('.form-group').closest('.form-group').show(100) : null;
         } else {
+            obj_first_name.prop('required', true);
+            obj_first_name.closest('.form-group').show(100);
+            obj_last_name.prop('required', true);
+            obj_last_name.closest('.form-group').show(100);
+
             obj_company.closest('.form-group').hide(100);
             obj_company.prop('required', false);
             if (obj_company.closest('.form-group').find('label.form-control-label').hasClass('required')) {
@@ -107,7 +112,6 @@ function toggleCustomerType() {
             if (obj_pec.closest('.form-group').find('label.form-control-label').hasClass('required')) {
                 obj_pec.closest('.form-group').find('label.form-control-label').removeClass('required');
             }
-            obj_pa.length ? obj_pa.closest('.form-group').closest('.form-group').hide(100) : null;
         }
     }
 }
