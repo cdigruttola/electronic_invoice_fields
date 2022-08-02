@@ -35,7 +35,7 @@ class Customer extends CustomerCore
             . '-' . ($shareOrder ? 1 : 0);
         if (!Cache::isStored($cacheId)) {
             $sql = 'SELECT DISTINCT a.*, cl.`name` AS country, s.name AS state, s.iso_code AS state_iso,
-                    ei.customertype AS customertype, ei.pec AS pec, ei.sdi AS sdi, ei.pa AS pa
+                    ei.*
                     FROM `' . _DB_PREFIX_ . 'address` a
                     LEFT JOIN `' . _DB_PREFIX_ . 'country` c ON (a.`id_country` = c.`id_country`)
                     LEFT JOIN `' . _DB_PREFIX_ . 'country_lang` cl ON (c.`id_country` = cl.`id_country`)

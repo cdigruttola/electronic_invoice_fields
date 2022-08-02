@@ -28,7 +28,7 @@ class EInvoiceAddress extends ObjectModel
     /** @var int id_address */
     public $id_address;
 
-    /** @var bool customertype */
+    /** @var int customertype */
     public $customertype;
 
     /** @var string pec_email */
@@ -36,9 +36,6 @@ class EInvoiceAddress extends ObjectModel
 
     /** @var string sdi_code */
     public $sdi;
-
-    /** @var int is_pa */
-    public $pa;
 
     /**
      * @see ObjectModel::$definition
@@ -48,10 +45,9 @@ class EInvoiceAddress extends ObjectModel
         'primary' => 'id_address',
         'fields' => [
             'id_address' => ['type' => self::TYPE_INT, 'validate' => 'isUnsignedInt'],
-            'customertype' => ['type' => self::TYPE_BOOL],
+            'customertype' => ['type' => self::TYPE_INT, 'validate' => 'isUnsignedInt'],
             'pec' => ['type' => self::TYPE_STRING, 'validate' => 'isEmail'],
             'sdi' => ['type' => self::TYPE_STRING, 'validate' => 'isString', 'size' => 7],
-            'pa' => ['type' => self::TYPE_BOOL],
         ],
     ];
 }

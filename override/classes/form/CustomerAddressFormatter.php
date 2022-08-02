@@ -33,10 +33,11 @@ class CustomerAddressFormatter extends CustomerAddressFormatterCore
     private $definition;
 
     public function __construct(
-        Country $country,
+        Country             $country,
         TranslatorInterface $translator,
-        array $availableCountries
-    ) {
+        array               $availableCountries
+    )
+    {
         $this->country = $country;
         $this->translator = $translator;
         $this->availableCountries = $availableCountries;
@@ -100,11 +101,11 @@ class CustomerAddressFormatter extends CustomerAddressFormatterCore
                     } elseif ($field === 'phone') {
                         $formField->setType('tel');
                     } elseif ($field === 'customertype') {
-                        $formField->setType('radio-buttons');
+                        $formField->setType('select');
                         $formField->addAvailableValue(0, $einvoice->getTranslator()->trans('Private', [], 'Modules.Einvoice.Einvoice'));
-                        $formField->addAvailableValue(1, $einvoice->getTranslator()->trans('Company', [], 'Modules.Einvoice.Einvoice'));
-                    } elseif ($field === 'pa') {
-                        $formField->setType('checkbox');
+                        $formField->addAvailableValue(1, $einvoice->getTranslator()->trans('Company/Professional', [], 'Modules.Einvoice.Einvoice'));
+                        $formField->addAvailableValue(2, $einvoice->getTranslator()->trans('Association', [], 'Modules.Einvoice.Einvoice'));
+                        $formField->addAvailableValue(3, $einvoice->getTranslator()->trans('Public Administration', [], 'Modules.Einvoice.Einvoice'));
                     } elseif ($field === 'dni' && null !== $this->country) {
                         if ($this->country->need_identification_number) {
                             $formField->setRequired(true);
@@ -236,8 +237,6 @@ class CustomerAddressFormatter extends CustomerAddressFormatterCore
                 return $einvoice->getTranslator()->trans('SDI Code', [], 'Modules.Einvoice.Einvoice');
             case 'pec':
                 return $einvoice->getTranslator()->trans('PEC Email', [], 'Modules.Einvoice.Einvoice');
-            case 'pa':
-                return $einvoice->getTranslator()->trans('Public Administration', [], 'Modules.Einvoice.Einvoice');
             default:
                 return $field;
         }

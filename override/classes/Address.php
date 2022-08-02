@@ -25,7 +25,7 @@
 
 class Address extends AddressCore
 {
-    /** @var bool Customer Type */
+    /** @var int Customer Type */
     public $customertype;
 
     /** @var string SDI */
@@ -33,9 +33,6 @@ class Address extends AddressCore
 
     /** @var string PEC */
     public $pec;
-
-    /** @var int PA */
-    public $pa;
 
     /**
      * @throws PrestaShopDatabaseException
@@ -52,7 +49,6 @@ class Address extends AddressCore
                 $this->customertype = $eiaddress->customertype;
                 $this->sdi = $eiaddress->sdi;
                 $this->pec = $eiaddress->pec;
-                $this->pa = $eiaddress->pa;
             }
             unset($eiaddress);
         }
