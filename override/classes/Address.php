@@ -25,7 +25,7 @@
 
 class Address extends AddressCore
 {
-    /** @var int Customer Type */
+    /** @var bool Customer Type */
     public $customertype;
 
     /** @var string SDI */
@@ -47,12 +47,12 @@ class Address extends AddressCore
 
         $einvoice = Module::getInstanceByName('einvoice');
         if (isset($einvoice) && isset($einvoice->active) && $einvoice->active) {
-            $eiaddress = new EInvoiceAddress((int) $this->id);
+            $eiaddress = new EInvoiceAddress($this->id);
             if ($eiaddress->id_address) {
-                $this->customertype = (string) $eiaddress->customertype;
-                $this->sdi = (string) $eiaddress->sdi;
-                $this->pec = (string) $eiaddress->pec;
-                $this->pa = (int) $eiaddress->pa;
+                $this->customertype = $eiaddress->customertype;
+                $this->sdi = $eiaddress->sdi;
+                $this->pec = $eiaddress->pec;
+                $this->pa = $eiaddress->pa;
             }
             unset($eiaddress);
         }

@@ -28,7 +28,7 @@ class EInvoiceAddress extends ObjectModel
     /** @var int id_address */
     public $id_address;
 
-    /** @var string pec_email */
+    /** @var bool customertype */
     public $customertype;
 
     /** @var string pec_email */

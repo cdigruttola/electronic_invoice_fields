@@ -39,3 +39,5 @@ upload/
 .LSOverride
 
 **/.php-cs-fixer.dist.php
+
+.idea
