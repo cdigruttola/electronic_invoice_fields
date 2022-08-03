@@ -60,20 +60,20 @@ function toggleCustomerType() {
 
             obj_dni.closest('.form-group').hide(100);
 
-            obj_company.closest('.form-group').find('div .form-control-comment').html('');
+            obj_company.closest('.form-group').find('.form-control-comment').html('');
             obj_vat_number.closest('.form-group').show(100);
             obj_vat_number.prop('required', true);
             if (!obj_vat_number.closest('.form-group').find('label.form-control-label').hasClass('required')) {
                 obj_vat_number.closest('.form-group').find('label.form-control-label').addClass('required');
             }
-            obj_vat_number.closest('.form-group').find('div .form-control-comment').html('');
+            obj_vat_number.closest('.form-group').find('.form-control-comment').html('');
             obj_sdi.closest('.form-group').show(100);
             if (sdi_required) {
                 obj_sdi.prop('required', true);
                 if (!obj_sdi.closest('.form-group').find('label.form-control-label').hasClass('required')) {
                     obj_sdi.closest('.form-group').find('label.form-control-label').addClass('required');
                 }
-                obj_sdi.closest('.form-group').find('div .form-control-comment').html('');
+                obj_sdi.closest('.form-group').find('.form-control-comment').html('');
             }
             obj_pec.closest('.form-group').show(100);
             if (pec_required) {
@@ -81,7 +81,7 @@ function toggleCustomerType() {
                 if (!obj_pec.closest('.form-group').find('label.form-control-label').hasClass('required')) {
                     obj_pec.closest('.form-group').find('label.form-control-label').addClass('required');
                 }
-                obj_pec.closest('.form-group').find('div .form-control-comment').html('');
+                obj_pec.closest('.form-group').find('.form-control-comment').html('');
             }
         } else {
             obj_first_name.prop('required', true);
