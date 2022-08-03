@@ -27,14 +27,14 @@
 $(document).ready(function () {
     toggleCustomerType();
 
-    $('select[name=customertype]').change(function (e) {
+    $('select[name=id_addresscustomertype]').change(function (e) {
         e.preventDefault();
         toggleCustomerType();
     });
 });
 
 function toggleCustomerType() {
-    var chk = $('select[name=customertype] option:selected').val();
+    var chk = $('select[name=id_addresscustomertype] option:selected').val();
 
     if (typeof chk !== 'undefined') {
         var obj_first_name = $('input[name=firstname]');
@@ -46,7 +46,7 @@ function toggleCustomerType() {
         var obj_pec = $('input[name=pec]');
         var obj_dni = $('input[name=dni]');
 
-        if (chk !== '0') {
+        if (chk !== '1') {
             obj_first_name.prop('required', false);
             obj_first_name.closest('.form-group').hide(100);
             obj_last_name.prop('required', false);

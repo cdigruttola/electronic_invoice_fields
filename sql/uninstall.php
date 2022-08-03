@@ -31,6 +31,8 @@
 $sql = [];
 
 $sql[] = 'DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'einvoice_address`;';
+$sql[] = 'DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'einvoice_customer_type`;';
+$sql[] = 'DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'einvoice_customer_type_lang`;';
 
 foreach ($sql as $query) {
     if (!Db::getInstance()->execute($query)) {

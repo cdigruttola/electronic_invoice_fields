@@ -6,22 +6,24 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitc37d6450b0d4011af3ce091ac26f26d8
 {
-    public static $prefixLengthsPsr4 = array(
-        'c' =>
-            array(
-                'cdigruttola\\Module\\Einvoice\\' => 28,
-            ),
+    public static $prefixLengthsPsr4 = array (
+        'c' => 
+        array (
+            'cdigruttola\\Module\\Einvoice\\' => 28,
+        ),
     );
 
-    public static $prefixDirsPsr4 = array(
-        'cdigruttola\\Module\\Einvoice\\' =>
-            array(
-                0 => __DIR__ . '/../..' . '/src',
-            ),
+    public static $prefixDirsPsr4 = array (
+        'cdigruttola\\Module\\Einvoice\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
     );
 
-    public static $classMap = array(
+    public static $classMap = array (
+        'Addresscustomertype' => __DIR__ . '/../..' . '/classes/Addresscustomertype.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'EInvoiceAddress' => __DIR__ . '/../..' . '/classes/EInvoiceAddress.php',
         'Einvoice' => __DIR__ . '/../..' . '/einvoice.php',
     );
 

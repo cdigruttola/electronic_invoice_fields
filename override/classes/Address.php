@@ -26,7 +26,7 @@
 class Address extends AddressCore
 {
     /** @var int Customer Type */
-    public $customertype;
+    public $id_addresscustomertype;
 
     /** @var string SDI */
     public $sdi;
@@ -46,7 +46,7 @@ class Address extends AddressCore
         if (isset($einvoice) && isset($einvoice->active) && $einvoice->active) {
             $eiaddress = new EInvoiceAddress($this->id);
             if ($eiaddress->id_address) {
-                $this->customertype = $eiaddress->customertype;
+                $this->id_addresscustomertype = $eiaddress->id_addresscustomertype;
                 $this->sdi = $eiaddress->sdi;
                 $this->pec = $eiaddress->pec;
             }

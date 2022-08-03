@@ -15,7 +15,8 @@
       "cdigruttola\\Module\\Einvoice\\": "src/"
     },
     "classmap": [
-      "einvoice.php"
+      "einvoice.php",
+      "classes/"
     ],
     "exclude-from-classmap": []
   },

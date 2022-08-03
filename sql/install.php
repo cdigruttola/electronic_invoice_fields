@@ -27,12 +27,24 @@ $sql = [];
 
 $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'einvoice_address` (
 `id_address` int(10) unsigned NOT NULL,
-  `customertype` tinyint(1) DEFAULT \'0\',
+  `id_addresscustomertype` int(10),
   `pec` varchar(128) DEFAULT NULL,
   `sdi` varchar(10) DEFAULT NULL,
-  `pa` tinyint(1) DEFAULT \'0\',
   PRIMARY KEY (`id_address`),
   UNIQUE KEY `id_address_UNIQUE` (`id_address`)
+) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
+
+$sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'einvoice_customer_type` (
+  `id_addresscustomertype` int(10) NOT NULL,
+  PRIMARY KEY (`id_addresscustomertype`),
+  UNIQUE KEY `id_addresscustomertype_UNIQUE` (`id_addresscustomertype`)
+) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
+
+$sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'einvoice_customer_type_lang` (
+  `id_addresscustomertype` int(10) NOT NULL,
+   `id_lang` int(10) unsigned NOT NULL,
+   `name` varchar(40),
+  PRIMARY KEY (`id_addresscustomertype`, `id_lang`)
 ) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8;';
 
 foreach ($sql as $query) {

@@ -56,6 +56,10 @@ class CustomerAddressFormatter extends CustomerAddressFormatterCore
         return $this->country;
     }
 
+    /**
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
+     */
     public function getFormat()
     {
         $einvoice = Module::getInstanceByName('einvoice');
@@ -100,12 +104,6 @@ class CustomerAddressFormatter extends CustomerAddressFormatterCore
                         }
                     } elseif ($field === 'phone') {
                         $formField->setType('tel');
-                    } elseif ($field === 'customertype') {
-                        $formField->setType('select');
-                        $formField->addAvailableValue(0, $einvoice->getTranslator()->trans('Private', [], 'Modules.Einvoice.Einvoice'));
-                        $formField->addAvailableValue(1, $einvoice->getTranslator()->trans('Company/Professional', [], 'Modules.Einvoice.Einvoice'));
-                        $formField->addAvailableValue(2, $einvoice->getTranslator()->trans('Association', [], 'Modules.Einvoice.Einvoice'));
-                        $formField->addAvailableValue(3, $einvoice->getTranslator()->trans('Public Administration', [], 'Modules.Einvoice.Einvoice'));
                     } elseif ($field === 'dni' && null !== $this->country) {
                         if ($this->country->need_identification_number) {
                             $formField->setRequired(true);
@@ -141,6 +139,12 @@ class CustomerAddressFormatter extends CustomerAddressFormatterCore
                                 );
                             }
                             $formField->setRequired(true);
+                        }
+                    } elseif ($entity === 'Addresscustomertype') {
+                        $formField->setType('select');
+                        $customerTypes = Addresscustomertype::getAddressCustomerType($this->country->getAssociatedLanguage()->id);
+                        foreach ($customerTypes as $customerType) {
+                            $formField->addAvailableValue($customerType['id_addresscustomertype'], $customerType[$entityField]);
                         }
                     }
                 }
@@ -231,7 +235,7 @@ class CustomerAddressFormatter extends CustomerAddressFormatterCore
                 return $this->translator->trans('Identification number', [], 'Shop.Forms.Labels');
             case 'other':
                 return $this->translator->trans('Other', [], 'Shop.Forms.Labels');
-            case 'customertype':
+            case 'Addresscustomertype':
                 return $einvoice->getTranslator()->trans('Customer type', [], 'Modules.Einvoice.Einvoice');
             case 'sdi':
                 return $einvoice->getTranslator()->trans('SDI Code', [], 'Modules.Einvoice.Einvoice');

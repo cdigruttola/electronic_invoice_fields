@@ -29,7 +29,6 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 require 'vendor/autoload.php';
-require_once dirname(__FILE__) . '/classes/EInvoiceAddress.php';
 
 class Einvoice extends Module
 {
@@ -76,7 +75,8 @@ class Einvoice extends Module
         return parent::install() &&
             $this->registerHook('header') &&
             $this->registerHook('displayBackOfficeHeader') &&
-            $this->registerHooks();
+            $this->registerHooks() &&
+            $this->insertAddressCustomerType();
     }
 
     public function registerHooks(): bool
@@ -278,6 +278,10 @@ class Einvoice extends Module
         );
     }
 
+    /**
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
+     */
     public function hookActionCustomerAddressFormBuilderModifier($params)
     {
         if (!$this->active) {
@@ -327,21 +331,16 @@ class Einvoice extends Module
         $params['data']['pec'] = (string)$obj->pec;
 
         $formBuilder->add(
-            'customertype',
+            'id_addresscustomertype',
             ChoiceType::class,
             [
-                'choices' => [
-                    $this->trans('Private', [], 'Modules.Einvoice.Einvoice') => 0,
-                    $this->trans('Company/Professional', [], 'Modules.Einvoice.Einvoice') => 1,
-                    $this->trans('Association', [], 'Modules.Einvoice.Einvoice') => 2,
-                    $this->trans('Public Administration', [], 'Modules.Einvoice.Einvoice') => 3,
-                ],
+                'choices' => Addresscustomertype::getAddressCustomerTypeChoice($this->context->language->id),
                 'required' => true,
                 'label' => $this->trans('Customer Type', [], 'Modules.Einvoice.Einvoice'),
             ]
         );
 
-        $params['data']['customertype'] = (int)$obj->customertype;
+        $params['data']['id_addresscustomertype'] = (int)$obj->id_addresscustomertype;
 
         $formBuilder->setData($params['data']);
         unset($obj);
@@ -382,31 +381,10 @@ class Einvoice extends Module
             [
                 'type' => $switch,
                 'label' => $this->trans('Customer Type', [], 'Modules.Einvoice.Einvoice'),
-                'name' => 'customertype',
+                'name' => 'id_addresscustomertype',
                 'class' => 't',
                 'is_bool' => true,
-                'values' => [
-                    [
-                        'id' => 'active_on',
-                        'value' => 0,
-                        'label' => $this->trans('Private', [], 'Modules.Einvoice.Einvoice'),
-                    ],
-                    [
-                        'id' => 'active_off',
-                        'value' => 1,
-                        'label' => $this->trans('Company/Professional', [], 'Modules.Einvoice.Einvoice'),
-                    ],
-                    [
-                        'id' => 'active_off',
-                        'value' => 2,
-                        'label' => $this->trans('Association', [], 'Modules.Einvoice.Einvoice'),
-                    ],
-                    [
-                        'id' => 'active_off',
-                        'value' => 3,
-                        'label' => $this->trans('Public Administration', [], 'Modules.Einvoice.Einvoice'),
-                    ],
-                ],
+                'values' => Addresscustomertype::getAddressCustomerTypeChoice($this->context->language->id),
             ],
         ];
 
@@ -421,7 +399,7 @@ class Einvoice extends Module
 
         $params['fields_value']['sdi'] = Tools::strtoupper((string)$obj->sdi);
         $params['fields_value']['pec'] = (string)$obj->pec;
-        $params['fields_value']['customertype'] = (int)$obj->customertype;
+        $params['fields_value']['id_addresscustomertype'] = (int)$obj->id_addresscustomertype;
         unset($obj);
     }
 
@@ -510,7 +488,7 @@ class Einvoice extends Module
             $def = [
                 'pec' => ['type' => ObjectModel::TYPE_STRING, 'validate' => 'isGenericName'],
                 'sdi' => ['type' => ObjectModel::TYPE_STRING, 'validate' => 'isGenericName'],
-                'customertype' => ['type' => ObjectModel::TYPE_INT, 'validate' => 'isUnsignedInt'],
+                'id_addresscustomertype' => ['type' => ObjectModel::TYPE_INT, 'validate' => 'isUnsignedInt'],
             ];
             Address::$definition['fields'] = array_merge(Address::$definition['fields'], $def);
             ksort(Address::$definition['fields']);
@@ -527,13 +505,13 @@ class Einvoice extends Module
 
         $datas = [];
         $datas[$params['object']->id] = [
-            'customertype' => isset($params['object']->customertype) ? (int)$params['object']->customertype : '',
+            'id_addresscustomertype' => isset($params['object']->id_addresscustomertype) ? (int)$params['object']->id_addresscustomertype : '',
             'sdi' => isset($params['object']->sdi) ? (string)$params['object']->sdi : '',
             'pec' => isset($params['object']->pec) ? (string)$params['object']->pec : '',
         ];
 
         foreach ($datas as $id_address => $data) {
-            $customertype = isset($data['customertype']) ? trim((bool)$data['customertype']) : 0;
+            $id_addresscustomertype = isset($data['id_addresscustomertype']) ? trim((int)$data['id_addresscustomertype']) : 0;
             $sdi = isset($data['sdi']) ? trim((string)$data['sdi']) : '';
             $pec = isset($data['pec']) ? trim((string)$data['pec']) : '';
 
@@ -560,7 +538,7 @@ class Einvoice extends Module
             $eiaddress->id_address = (int)$id_address;
             $eiaddress->sdi = Tools::strtoupper((string)$sdi);
             $eiaddress->pec = (string)$pec;
-            $eiaddress->customertype = (int)$customertype;
+            $eiaddress->id_addresscustomertype = (int)$id_addresscustomertype;
             $eiaddress->save();
         }
     }
@@ -572,11 +550,11 @@ class Einvoice extends Module
      */
     private function retrieveValuesFromHttpMethod($params): void
     {
-        $customertype = (int)Tools::getValue('customertype');
+        $id_addresscustomertype = (int)Tools::getValue('id_addresscustomertype');
         $sdi = (string)Tools::getValue('sdi');
         $pec = (string)Tools::getValue('pec');
 
-        $params['object']->customertype = (int)$customertype;
+        $params['object']->id_addresscustomertype = (int)$id_addresscustomertype;
         $params['object']->sdi = (string)$sdi;
         $params['object']->pec = (string)$pec;
 
@@ -596,7 +574,7 @@ class Einvoice extends Module
             }
 
             $params['object']->id = (int)$params['id'];
-            $params['object']->customertype = isset($params['form_data']['customertype']) ? (int)$params['form_data']['customertype'] : '';
+            $params['object']->id_addresscustomertype = isset($params['form_data']['id_addresscustomertype']) ? (int)$params['form_data']['id_addresscustomertype'] : '';
             $params['object']->sdi = isset($params['form_data']['sdi']) ? (string)$params['form_data']['sdi'] : '';
             $params['object']->pec = isset($params['form_data']['pec']) ? (string)$params['form_data']['pec'] : '';
 
@@ -613,10 +591,31 @@ class Einvoice extends Module
     {
         $customer_address = Tools::getValue('customer_address');
         if (isset($customer_address) && !empty($customer_address)) {
-            $params['object']->customertype = (int)$customer_address['customertype'];
+            $params['object']->id_addresscustomertype = (int)$customer_address['id_addresscustomertype'];
             $params['object']->sdi = (string)$customer_address['sdi'];
             $params['object']->pec = (string)$customer_address['pec'];
         }
         $this->setAddressParams($params);
+    }
+
+    private function insertAddressCustomerType(): bool
+    {
+        $sql = [];
+        $sql[] = 'INSERT INTO `' . _DB_PREFIX_ . 'einvoice_customer_type` (`id_addresscustomertype`) VALUES (1), (2), (3), (4);';
+
+        foreach (Language::getLanguages(false) as $lang) {
+            $sql[] = 'INSERT INTO ' . _DB_PREFIX_ . 'einvoice_customer_type_lang (`id_addresscustomertype`, `id_lang`, `name`) VALUES '
+                . '(1, ' . $lang['id_lang'] . ", '" . $this->trans('Private', [], 'Modules.Einvoice.Einvoice', $lang['locale']) . "'),"
+                . '(2, ' . $lang['id_lang'] . ", '" . $this->trans('Company/Professional', [], 'Modules.Einvoice.Einvoice', $lang['locale']) . "'),"
+                . '(3, ' . $lang['id_lang'] . ", '" . $this->trans('Association', [], 'Modules.Einvoice.Einvoice', $lang['locale']) . "'),"
+                . '(4, ' . $lang['id_lang'] . ", '" . $this->trans('Public Administration', [], 'Modules.Einvoice.Einvoice', $lang['locale']) . "');";
+        }
+
+        foreach ($sql as $query) {
+            if (!Db::getInstance()->execute($query)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
