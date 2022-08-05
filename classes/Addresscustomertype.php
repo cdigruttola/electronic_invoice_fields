@@ -99,5 +99,4 @@ class Addresscustomertype extends ObjectModel
 
         return $result > 0;
     }
-
 }

@@ -3,7 +3,7 @@ services:
     public: true
 
   cdigruttola.module.einvoice.core.domain.command_handler.add_address_customer_type_handler:
-    class: 'cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\CommandHandler\AddddressCustomerTypeHandler'
+    class: 'cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\CommandHandler\AddAddressCustomerTypeHandler'
     tags:
       - name: tactician.handler
         command: 'cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Command\AddAddressCustomerTypeCommand'

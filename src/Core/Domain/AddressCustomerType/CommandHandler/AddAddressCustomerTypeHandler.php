@@ -27,7 +27,7 @@ declare(strict_types=1);
 
 namespace cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\CommandHandler;
 
-use AddressCustomerType;
+use Addresscustomertype;
 use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Command\AddAddressCustomerTypeCommand;
 use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeException;
 use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
@@ -44,7 +44,7 @@ final class AddAddressCustomerTypeHandler extends AbstractAddressCustomerTypeHan
      */
     public function handle(AddAddressCustomerTypeCommand $command)
     {
-        $AddressCustomerType = new AddressCustomerType();
+        $AddressCustomerType = new Addresscustomertype();
 
         $this->fillAddressCustomerTypeWithCommandData($AddressCustomerType, $command);
         $this->assertRequiredFieldsAreNotMissing($AddressCustomerType);

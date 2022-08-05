@@ -26,9 +26,14 @@
 namespace cdigruttola\Module\Einvoice\Controller\Admin;
 
 use Addresscustomertype;
+use AddressCustomerTypeConstraintException;
 use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeException;
+use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeNotFoundException;
+use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\DuplicateAddressCustomerTypeNameException;
+use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\MissingAddressCustomerTypeRequiredFieldsException;
 use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Query\GetAddressCustomerTypeForEditing;
 use cdigruttola\Module\Einvoice\Core\Search\Filters\AddressCustomerTypeFilters;
+use Exception;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use PrestaShopBundle\Security\Annotation\AdminSecurity;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -60,6 +65,47 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
     }
 
     /**
+     * Show address_customer_type create form & handle processing of it.
+     *
+     * @AdminSecurity("is_granted(['create'], request.get('_legacy_controller'))")
+     *
+     * @return Response
+     */
+    public function createAction(Request $request)
+    {
+        $addressCustomerTypeForm = $this->get('cdigruttola.module.einvoice.core.form.identifiable_object.builder.address_customer_type_form_builder')->getForm();
+        $addressCustomerTypeForm->handleRequest($request);
+
+        $addressCustomerTypeFormHandler = $this->get('cdigruttola.module.einvoice.core.form.identifiable_object.handler.address_customer_type_form_handler');
+
+        try {
+            $result = $addressCustomerTypeFormHandler->handle($addressCustomerTypeForm);
+
+            if ($orderStateId = $result->getIdentifiableObjectId()) {
+                $this->addFlash('success', $this->trans('Successful creation.', 'Admin.Notifications.Success'));
+
+                return $this->redirectToRoute(self::INDEX_ROUTE);
+            }
+        } catch (AddressCustomerTypeException $e) {
+            $this->addFlash('error', $this->getErrorMessageForException($e, $this->getErrorMessages($e)));
+        }
+
+        return $this->render('@Modules/einvoice/views/templates/admin/create.html.twig', [
+            'addressCustomerTypeForm' => $addressCustomerTypeForm->createView(),
+            'help_link' => $this->generateSidebarLink($request->attributes->get('_legacy_controller')),
+            'contextLangId' => $this->getContextLangId(),
+            'templatesPreviewUrl' => _MAIL_DIR_,
+            'languages' => array_map(
+                function (array $language) {
+                    return [
+                        'id' => $language['iso_code'],
+                        'value' => sprintf('%s - %s', $language['iso_code'], $language['name']),];
+                }, $this->get('prestashop.adapter.legacy.context')->getLanguages()),
+        ]);
+    }
+
+
+    /**
      * @AdminSecurity("is_granted(['update'], request.get('_legacy_controller'))")
      *
      * @return Response
@@ -69,10 +115,10 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
         $addressCustomerTypeForm = $this->get('cdigruttola.module.einvoice.core.form.identifiable_object.builder.address_customer_type_form_builder')->getFormFor($addressCustomerTypeId);
         $addressCustomerTypeForm->handleRequest($request);
 
-        $orderReturnStateFormHandler = $this->get('cdigruttola.module.einvoice.core.form.identifiable_object.handler.address_customer_type_form_handler');
+        $addressCustomerTypeFormHandler = $this->get('cdigruttola.module.einvoice.core.form.identifiable_object.handler.address_customer_type_form_handler');
 
         try {
-            $result = $orderReturnStateFormHandler->handleFor($addressCustomerTypeId, $addressCustomerTypeForm);
+            $result = $addressCustomerTypeFormHandler->handleFor($addressCustomerTypeId, $addressCustomerTypeForm);
 
             if ($result->isSubmitted()) {
                 if ($result->isValid()) {
@@ -123,6 +169,43 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
         }
         unset($addressCustomerType);
         return $this->redirectToRoute(self::INDEX_ROUTE);
+    }
+
+    /**
+     * Get errors that can be used to translate exceptions into user friendly messages
+     *
+     * @return array
+     */
+    private function getErrorMessages(Exception $e)
+    {
+        return [
+            AddressCustomerTypeNotFoundException::class => $this->trans(
+                'This order status does not exist.',
+                'Admin.Notifications.Error'
+            ),
+            DuplicateAddressCustomerTypeNameException::class => $this->trans(
+                'An order status with the same name already exists: %s',
+                'Admin.Shopparameters.Notification',
+                [$e instanceof DuplicateAddressCustomerTypeNameException ? $e->getName()->getValue() : '']
+            ),
+            AddressCustomerTypeConstraintException::class => [
+                AddressCustomerTypeConstraintException::INVALID_NAME => $this->trans(
+                    'The %s field is invalid.',
+                    'Admin.Notifications.Error',
+                    [sprintf('"%s"', $this->trans('Name', 'Admin.Global'))]
+                ),
+            ],
+            MissingAddressCustomerTypeRequiredFieldsException::class => $this->trans(
+                'The %s field is required.',
+                'Admin.Notifications.Error',
+                [
+                    implode(
+                        ',',
+                        $e instanceof MissingAddressCustomerTypeRequiredFieldsException ? $e->getMissingRequiredFields() : []
+                    ),
+                ]
+            ),
+        ];
     }
 
 }

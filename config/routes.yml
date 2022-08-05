@@ -6,6 +6,14 @@ admin_address_customer_type:
     _legacy_controller: 'AdminAddressCustomerTypeController'
     _legacy_link: 'AdminAddressCustomerTypeController'
 
+admin_address_customer_type_create:
+  path: /address-customer-type/new
+  methods: [ GET, POST ]
+  defaults:
+    _controller: 'cdigruttola\Module\Einvoice\Controller\Admin\AdminAddressCustomerTypeController::createAction'
+    _legacy_controller: 'AdminAddressCustomerTypeController'
+    _legacy_link: 'AdminAddressCustomerTypeController:add'
+
 admin_address_customer_type_edit:
   path: /address-customer-type/edit/{addressCustomerTypeId}
   methods: [ GET, POST ]
@@ -26,7 +34,7 @@ admin_address_customer_type_filter:
 
 admin_address_customer_type_delete:
   path: /address-customer-type/delete/{addressCustomerTypeId}
-  methods: [POST]
+  methods: [ POST ]
   defaults:
     _controller: 'cdigruttola\Module\Einvoice\Controller\Admin\AdminAddressCustomerTypeController::deleteAction'
     _legacy_controller: 'AdminAddressCustomerTypeController'

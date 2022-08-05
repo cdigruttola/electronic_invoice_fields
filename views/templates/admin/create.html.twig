@@ -23,30 +23,19 @@
 * #}
 
 {% set enableSidebar = true %}
-{% set layoutTitle = 'Customer Type'|trans({}, 'Modules.Einvoice.Einvoice') %}
-{% set layoutHeaderToolbarBtn = {
-    'add': {
-        'href': path('admin_address_customer_type_create'),
-        'desc': 'Add new address customer type'|trans({}, 'Modules.Einvoice.Einvoice'),
-        'icon': 'add_circle_outline'
-    }
-} %}
+{% set layoutTitle = 'Address Customer Types'|trans({}, 'Modules.Einvoice.Einvoice') %}
 
 {% extends 'PrestaShopBundle:Admin:layout.html.twig' %}
 
 {% block content %}
-    {% block address_customer_type_listing %}
-        <div class="row">
-            <div class="col-12">
-                {% embed '@PrestaShop/Admin/Common/Grid/grid_panel.html.twig' with {'grid': addressCustomerTypeGrid} %}
-                {% endembed %}
-            </div>
+    <div class="row justify-content-center">
+        <div class="col">
+            {% include '@Modules/einvoice/views/templates/admin/form.html.twig' %}
         </div>
-    {% endblock %}
+    </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('../modules/einvoice/views/js/address_customer_type.bundle.js') }}"></script>
-    <script src="{{ asset('themes/default/js/bundle/pagination.js') }}"></script>
+
 {% endblock %}
