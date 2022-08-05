@@ -81,13 +81,13 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
         $addressCustomerType = new Addresscustomertype($addressCustomerTypeId);
         $errors = [];
         if (Addresscustomertype::checkAssociatedAddressToAddressCustomerType($addressCustomerTypeId)) {
-            $errors[] = ['key' => 'Could not delete #%i, there is at least one address associated',
+            $errors[] = ['key' => 'Could not delete %i%, there is at least one address associated',
                 'domain' => 'Modules.Einvoice.Einvoice',
-                'parameters' => [$addressCustomerTypeId],];
+                'parameters' => ['%i%' => $addressCustomerTypeId],];
         } else if (!$addressCustomerType->delete()) {
-            $errors[] = ['key' => 'Could not delete #%i',
-                'domain' => 'Admin.Catalog.Notification',
-                'parameters' => [$addressCustomerTypeId],];
+            $errors[] = ['key' => 'Could not delete %i%',
+                'domain' => 'Modules.Einvoice.Einvoice',
+                'parameters' => ['%i%' => $addressCustomerTypeId],];
         }
 
         if (0 === count($errors)) {
