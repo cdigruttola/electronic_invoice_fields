@@ -26,19 +26,19 @@
 namespace cdigruttola\Module\Einvoice\Controller\Admin;
 
 use Addresscustomertype;
-use cdigruttola\Module\Einvoice\Core\Grid\Definition\Factory\AddressCustomerTypeGridDefinitionFactory;
+use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeException;
+use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Query\GetAddressCustomerTypeForEditing;
 use cdigruttola\Module\Einvoice\Core\Search\Filters\AddressCustomerTypeFilters;
-use http\Exception\RuntimeException;
-use PrestaShop\PrestaShop\Core\Exception\DatabaseException;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use PrestaShopBundle\Security\Annotation\AdminSecurity;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
 {
+    const INDEX_ROUTE = 'admin_address_customer_type';
+
     /**
      * @param Request $request
      * @param AddressCustomerTypeFilters $filters
@@ -66,7 +66,33 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
      */
     public function editAction(int $addressCustomerTypeId, Request $request)
     {
+        $addressCustomerTypeForm = $this->get('cdigruttola.module.einvoice.core.form.identifiable_object.builder.address_customer_type_form_builder')->getFormFor($addressCustomerTypeId);
+        $addressCustomerTypeForm->handleRequest($request);
 
+        $orderReturnStateFormHandler = $this->get('cdigruttola.module.einvoice.core.form.identifiable_object.handler.address_customer_type_form_handler');
+
+        try {
+            $result = $orderReturnStateFormHandler->handleFor($addressCustomerTypeId, $addressCustomerTypeForm);
+
+            if ($result->isSubmitted()) {
+                if ($result->isValid()) {
+                    $this->addFlash('success', $this->trans('Successful update.', 'Admin.Notifications.Success'));
+                } else {
+                    $this->addFlashFormErrors($addressCustomerTypeForm);
+                }
+
+                return $this->redirectToRoute(self::INDEX_ROUTE);
+            }
+        } catch (AddressCustomerTypeException $e) {
+            $this->addFlash('error', $this->getErrorMessageForException($e, $this->getErrorMessages($e)));
+        }
+
+        return $this->render('@Modules/einvoice/views/templates/admin/edit.html.twig', [
+            'addressCustomerTypeForm' => $addressCustomerTypeForm->createView(),
+            'help_link' => $this->generateSidebarLink($request->attributes->get('_legacy_controller')),
+            'editableAddressCustomerType' => $this->getQueryBus()->handle(new GetAddressCustomerTypeForEditing((int)$addressCustomerTypeId)),
+            'contextLangId' => $this->getContextLangId(),
+        ]);
     }
 
     /**
@@ -96,7 +122,7 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
             $this->flashErrors($errors);
         }
         unset($addressCustomerType);
-        return $this->redirectToRoute('admin_address_customer_type');
+        return $this->redirectToRoute(self::INDEX_ROUTE);
     }
 
 }

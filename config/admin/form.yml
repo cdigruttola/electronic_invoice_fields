@@ -1,0 +1,33 @@
+services:
+  _defaults:
+    public: true
+
+  cdigruttola.module.einvoice.bundle.form.admin.address_customer_type:
+    class: 'cdigruttola\Module\Einvoice\Form\Admin\AddressCustomerTypeType'
+    parent: 'form.type.translatable.aware'
+    public: true
+    tags:
+      - { name: form.type }
+
+  cdigruttola.module.einvoice.core.form.identifiable_object.builder.address_customer_type_form_builder:
+    class: 'PrestaShop\PrestaShop\Core\Form\IdentifiableObject\Builder\FormBuilder'
+    factory: 'prestashop.core.form.builder.form_builder_factory:create'
+    arguments:
+      - 'cdigruttola\Module\Einvoice\Form\Admin\AddressCustomerTypeType'
+      - '@cdigruttola.module.einvoice.core.form.identifiable_object.data_provider.address_customer_type_form_data_provider'
+
+  cdigruttola.module.einvoice.core.form.identifiable_object.data_provider.address_customer_type_form_data_provider:
+    class: 'cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\AddressCustomerTypeFormDataProvider'
+    arguments:
+      - '@prestashop.core.query_bus'
+
+  cdigruttola.module.einvoice.core.form.identifiable_object.handler.address_customer_type_form_handler:
+    class: 'PrestaShop\PrestaShop\Core\Form\IdentifiableObject\Handler\FormHandler'
+    factory: 'prestashop.core.form.identifiable_object.handler.form_handler_factory:create'
+    arguments:
+      - '@cdigruttola.module.einvoice.core.form.identifiable_object.data_handler.address_customer_type_form_data_handler'
+
+  cdigruttola.module.einvoice.core.form.identifiable_object.data_handler.address_customer_type_form_data_handler:
+    class: 'cdigruttola\Module\Einvoice\Form\DataHandler\AddressCustomerTypeFormDataHandler'
+    arguments:
+      - '@prestashop.core.command_bus'

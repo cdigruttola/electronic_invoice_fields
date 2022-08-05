@@ -29,7 +29,7 @@ class Addresscustomertype extends ObjectModel
     /** @var int id_addresscustomertype */
     public int $id_addresscustomertype;
 
-    /** @var string name */
+    /** @var array<string> name */
     public $name;
 
     /**

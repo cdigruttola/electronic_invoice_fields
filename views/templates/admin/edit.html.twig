@@ -1,5 +1,4 @@
-<?php
-/**
+{# **
 * 2007-2022 Carmine Di Gruttola
 *
 * NOTICE OF LICENSE
@@ -21,14 +20,24 @@
 *  @author    cdigruttola <c.digruttola@hotmail.it>
 *  @copyright 2007-2022 Carmine Di Gruttola
 *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
-*/
+* #}
 
-header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+{% set enableSidebar = true %}
+{% set layoutTitle = 'Edit: %name%'|trans({
+    '%name%': editableAddressCustomerType.localizedNames[contextLangId]
+}, 'Admin.Actions') %}
 
-header('Cache-Control: no-store, no-cache, must-revalidate');
-header('Cache-Control: post-check=0, pre-check=0', false);
-header('Pragma: no-cache');
+{% extends 'PrestaShopBundle:Admin:layout.html.twig' %}
 
-header('Location: ../');
-exit;
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col">
+            {% include '@Modules/einvoice/views/templates/admin/form.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+{% endblock %}
