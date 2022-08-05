@@ -25,9 +25,11 @@
 
 namespace cdigruttola\Module\Einvoice\Controller\Admin;
 
+use Addresscustomertype;
 use cdigruttola\Module\Einvoice\Core\Grid\Definition\Factory\AddressCustomerTypeGridDefinitionFactory;
 use cdigruttola\Module\Einvoice\Core\Search\Filters\AddressCustomerTypeFilters;
 use http\Exception\RuntimeException;
+use PrestaShop\PrestaShop\Core\Exception\DatabaseException;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use PrestaShopBundle\Security\Annotation\AdminSecurity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -65,6 +67,36 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
     public function editAction(int $addressCustomerTypeId, Request $request)
     {
 
+    }
+
+    /**
+     * @AdminSecurity("is_granted('delete', request.get('_legacy_controller'))", message="Access denied.")
+     *
+     * @param int $addressCustomerTypeId
+     *
+     * @return RedirectResponse
+     */
+    public function deleteAction($addressCustomerTypeId)
+    {
+        $addressCustomerType = new Addresscustomertype($addressCustomerTypeId);
+        $errors = [];
+        if (Addresscustomertype::checkAssociatedAddressToAddressCustomerType($addressCustomerTypeId)) {
+            $errors[] = ['key' => 'Could not delete #%i, there is at least one address associated',
+                'domain' => 'Modules.Einvoice.Einvoice',
+                'parameters' => [$addressCustomerTypeId],];
+        } else if (!$addressCustomerType->delete()) {
+            $errors[] = ['key' => 'Could not delete #%i',
+                'domain' => 'Admin.Catalog.Notification',
+                'parameters' => [$addressCustomerTypeId],];
+        }
+
+        if (0 === count($errors)) {
+            $this->addFlash('success', $this->trans('Successful deletion.', 'Admin.Notifications.Success'));
+        } else {
+            $this->flashErrors($errors);
+        }
+        unset($addressCustomerType);
+        return $this->redirectToRoute('admin_address_customer_type');
     }
 
 }

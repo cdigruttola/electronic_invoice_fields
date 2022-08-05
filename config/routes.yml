@@ -23,3 +23,11 @@ admin_address_customer_type_filter:
     gridDefinitionFactoryServiceId: cdigruttola.module.einvoice.core.grid.definition.factory.address_customer_type
     redirectRoute: admin_address_customer_type
     _legacy_link: 'AdminAddressCustomerTypeController:submitFiltertype'
+
+admin_address_customer_type_delete:
+  path: /delete/{addressCustomerTypeId}
+  methods: [POST]
+  defaults:
+    _controller: 'cdigruttola\Module\Einvoice\Controller\Admin\AdminAddressCustomerTypeController::deleteAction'
+    _legacy_controller: 'AdminAddressCustomerTypeController'
+    _legacy_link: 'AdminAddressCustomerTypeController:delete'

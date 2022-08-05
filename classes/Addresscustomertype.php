@@ -80,4 +80,24 @@ class Addresscustomertype extends ObjectModel
         return $choices;
     }
 
+    /**
+     * @param $addressCustomerTypeId
+     * @return bool
+     */
+    public static function checkAssociatedAddressToAddressCustomerType($addressCustomerTypeId): bool
+    {
+        $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
+		SELECT COUNT(DISTINCT a.id_address)
+		FROM `' . _DB_PREFIX_ . 'einvoice_customer_type` c
+		JOIN `' . _DB_PREFIX_ . 'einvoice_address` a ON a.`id_addresscustomertype` = c.`id_addresscustomertype` 
+		WHERE c.`id_addresscustomertype` = ' . $addressCustomerTypeId);
+
+        PrestaShopLogger::addLog('SELECT COUNT(DISTINCT a.id_address)
+		FROM `' . _DB_PREFIX_ . 'einvoice_customer_type` c
+		JOIN `' . _DB_PREFIX_ . 'einvoice_address` a ON a.`id_addresscustomertype` = c.`id_addresscustomertype` 
+		WHERE c.`id_addresscustomertype` = ' . $addressCustomerTypeId . ' -> result ' . $result);
+
+        return $result > 0;
+    }
+
 }
