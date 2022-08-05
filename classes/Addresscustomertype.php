@@ -53,7 +53,6 @@ class Addresscustomertype extends ObjectModel
      */
     public static function getAddressCustomerType($idLang): array
     {
-        PrestaShopLogger::addLog('getAddressCustomerType');
         $customerTypes = [];
         $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
 		SELECT c.*, cl.`name`

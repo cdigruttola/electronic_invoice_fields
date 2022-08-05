@@ -25,6 +25,10 @@ class ComposerStaticInitc37d6450b0d4011af3ce091ac26f26d8
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'EInvoiceAddress' => __DIR__ . '/../..' . '/classes/EInvoiceAddress.php',
         'Einvoice' => __DIR__ . '/../..' . '/einvoice.php',
+        'cdigruttola\\Module\\Einvoice\\Controller\\Admin\\AdminAddressCustomerTypeController' => __DIR__ . '/../..' . '/src/Controller/Admin/AdminAddressCustomerTypeController.php',
+        'cdigruttola\\Module\\Einvoice\\Core\\Grid\\Definition\\Factory\\AddressCustomerTypeGridDefinitionFactory' => __DIR__ . '/../..' . '/src/Core/Grid/Definition/Factory/AddressCustomerTypeGridDefinitionFactory.php',
+        'cdigruttola\\Module\\Einvoice\\Core\\Grid\\Query\\AddressCustomerTypeQueryBuilder' => __DIR__ . '/../..' . '/src/Core/Grid/Query/AddressCustomerTypeQueryBuilder.php',
+        'cdigruttola\\Module\\Einvoice\\Core\\Search\\Filters\\AddressCustomerTypeFilters' => __DIR__ . '/../..' . '/src/Core/Search/Filters/AddressCustomerTypeFilters.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

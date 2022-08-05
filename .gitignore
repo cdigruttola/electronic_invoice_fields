@@ -41,3 +41,5 @@ upload/
 **/.php-cs-fixer.dist.php
 
 .idea
+
+**/node_modules/

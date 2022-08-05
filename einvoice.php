@@ -36,6 +36,18 @@ class Einvoice extends Module
     public const EINVOICE_SDI_REQUIRED = 'EINVOICE_SDI_REQUIRED';
     protected $config_form = false;
 
+    public $tabs = [
+        [
+            'name' => 'Setting Address Customer Type',
+            'class_name' => 'AdminAddressCustomerType',
+            'visible' => true,
+            'route_name' => 'admin_address_customer_type',
+            'parent_class_name' => 'ShopParameters',
+            'wording' => 'Setting Address Customer Type',
+            'wording_domain' => 'Modules.Einvoice.Einvoice',
+        ],
+    ];
+
     public function __construct()
     {
         $this->name = 'einvoice';

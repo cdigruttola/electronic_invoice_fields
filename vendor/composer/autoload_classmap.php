@@ -10,4 +10,8 @@ return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'EInvoiceAddress' => $baseDir . '/classes/EInvoiceAddress.php',
     'Einvoice' => $baseDir . '/einvoice.php',
+    'cdigruttola\\Module\\Einvoice\\Controller\\Admin\\AdminAddressCustomerTypeController' => $baseDir . '/src/Controller/Admin/AdminAddressCustomerTypeController.php',
+    'cdigruttola\\Module\\Einvoice\\Core\\Grid\\Definition\\Factory\\AddressCustomerTypeGridDefinitionFactory' => $baseDir . '/src/Core/Grid/Definition/Factory/AddressCustomerTypeGridDefinitionFactory.php',
+    'cdigruttola\\Module\\Einvoice\\Core\\Grid\\Query\\AddressCustomerTypeQueryBuilder' => $baseDir . '/src/Core/Grid/Query/AddressCustomerTypeQueryBuilder.php',
+    'cdigruttola\\Module\\Einvoice\\Core\\Search\\Filters\\AddressCustomerTypeFilters' => $baseDir . '/src/Core/Search/Filters/AddressCustomerTypeFilters.php',
 );

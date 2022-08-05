@@ -1,0 +1,25 @@
+admin_address_customer_type:
+  path: /address-customer-type
+  methods: [ GET ]
+  defaults:
+    _controller: 'cdigruttola\Module\Einvoice\Controller\Admin\AdminAddressCustomerTypeController::indexAction'
+    _legacy_controller: 'AdminAddressCustomerTypeController'
+    _legacy_link: 'AdminAddressCustomerTypeController'
+
+admin_address_customer_type_edit:
+  path: /address-customer-type/{addressCustomerTypeId}/edit
+  methods: [ GET, POST ]
+  defaults:
+    _controller: 'cdigruttola\Module\Einvoice\Controller\Admin\AdminAddressCustomerTypeController::editAction'
+    _legacy_controller: 'AdminAddressCustomerTypeController'
+    _legacy_link: 'AdminAddressCustomerTypeController:edit'
+
+admin_address_customer_type_filter:
+  path: /address-customer-type
+  methods: [ POST ]
+  defaults:
+    _controller: 'PrestaShopBundle:Admin\Common:searchGrid'
+    _legacy_controller: 'AdminAddressCustomerTypeController'
+    gridDefinitionFactoryServiceId: cdigruttola.module.einvoice.core.grid.definition.factory.address_customer_type
+    redirectRoute: admin_address_customer_type
+    _legacy_link: 'AdminAddressCustomerTypeController:submitFiltertype'
