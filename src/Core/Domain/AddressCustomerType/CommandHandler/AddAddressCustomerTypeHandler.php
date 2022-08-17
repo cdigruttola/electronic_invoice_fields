@@ -44,22 +44,24 @@ final class AddAddressCustomerTypeHandler extends AbstractAddressCustomerTypeHan
      */
     public function handle(AddAddressCustomerTypeCommand $command)
     {
-        $AddressCustomerType = new Addresscustomertype();
+        $addressCustomerType = new Addresscustomertype();
 
-        $this->fillAddressCustomerTypeWithCommandData($AddressCustomerType, $command);
-        $this->assertRequiredFieldsAreNotMissing($AddressCustomerType);
+        $this->fillAddressCustomerTypeWithCommandData($addressCustomerType, $command);
+        $this->assertRequiredFieldsAreNotMissing($addressCustomerType);
 
-        if (false === $AddressCustomerType->validateFields(false)) {
+        if (false === $addressCustomerType->validateFields(false)) {
             throw new AddressCustomerTypeException('Address customer type contains invalid field values');
         }
 
-        $AddressCustomerType->add();
+        $addressCustomerType->add();
 
-        return new AddressCustomerTypeId((int)$AddressCustomerType->id);
+        return new AddressCustomerTypeId((int)$addressCustomerType->id);
     }
 
-    private function fillAddressCustomerTypeWithCommandData(AddressCustomerType $AddressCustomerType, AddAddressCustomerTypeCommand $command)
+    private function fillAddressCustomerTypeWithCommandData(Addresscustomertype $addressCustomerType, AddAddressCustomerTypeCommand $command)
     {
-        $AddressCustomerType->name = $command->getLocalizedNames();
+        $addressCustomerType->name = $command->getLocalizedNames();
+        $addressCustomerType->active = $command->getActive();
+        $addressCustomerType->removable = true;
     }
 }

@@ -48,6 +48,10 @@ class EditAddressCustomerTypeCommand
      * @var array<string>|null
      */
     private $name;
+    /**
+     * @var bool
+     */
+    private $active;
 
     /**
      * @param int $addressCustomerTypeId
@@ -68,7 +72,7 @@ class EditAddressCustomerTypeCommand
     /**
      * @return array<string>|null
      */
-    public function getName()
+    public function getName(): ?array
     {
         return $this->name;
     }
@@ -78,10 +82,26 @@ class EditAddressCustomerTypeCommand
      *
      * @return self
      */
-    public function setName($name)
+    public function setName(array $name): EditAddressCustomerTypeCommand
     {
         $this->name = $name;
+        return $this;
+    }
 
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param bool $active
+     */
+    public function setActive(bool $active): EditAddressCustomerTypeCommand
+    {
+        $this->active = $active;
         return $this;
     }
 

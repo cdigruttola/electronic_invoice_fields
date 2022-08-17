@@ -25,19 +25,12 @@
 
 declare(strict_types=1);
 
+
 namespace cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception;
 
 /**
- * Is thrown when address customer type constraint is violated
+ * Is thrown when cannot toggle address customer type.
  */
-class AddressCustomerTypeConstraintException extends AddressCustomerTypeException
+class CannotToggleStatusAddressCustomerTypeException extends AddressCustomerTypeException
 {
-    /**
-     * @var int Code is used when invalid name is provided for address customer type
-     */
-    public const INVALID_NAME = 1;
-    /**
-     * @var int Code is used when empty name is provided for address customer type
-     */
-    public const EMPTY_NAME = 2;
 }

@@ -42,4 +42,8 @@
         <li><a href="#" target="_blank">{l s='Italian' d='Modules.Einvoice.Configure'}</a></li>
     </ul>
     </p>
+    <p>
+        &raquo; {l s='To configure address customer type, use this' d='Modules.Einvoice.Configure'} <a
+                href="{$url_type_config|escape:'htmlall':'UTF-8'}">link</a><br/>
+    </p>
 </div>

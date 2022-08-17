@@ -34,11 +34,13 @@ use PrestaShop\PrestaShop\Core\Grid\Action\Row\Type\SubmitRowAction;
 use PrestaShop\PrestaShop\Core\Grid\Action\Type\SimpleGridAction;
 use PrestaShop\PrestaShop\Core\Grid\Column\ColumnCollection;
 use PrestaShop\PrestaShop\Core\Grid\Column\Type\Common\ActionColumn;
+use PrestaShop\PrestaShop\Core\Grid\Column\Type\Common\ToggleColumn;
 use PrestaShop\PrestaShop\Core\Grid\Column\Type\DataColumn;
 use PrestaShop\PrestaShop\Core\Grid\Definition\Factory\AbstractFilterableGridDefinitionFactory;
 use PrestaShop\PrestaShop\Core\Grid\Filter\Filter;
 use PrestaShop\PrestaShop\Core\Grid\Filter\FilterCollection;
 use PrestaShopBundle\Form\Admin\Type\SearchAndResetType;
+use PrestaShopBundle\Form\Admin\Type\YesAndNoChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -84,6 +86,17 @@ final class AddressCustomerTypeGridDefinitionFactory extends AbstractFilterableG
                     'field' => 'name'
                 ])
             )
+            ->add(
+                (new ToggleColumn('active'))
+                    ->setName($this->trans('Active', [], 'Admin.Global'))
+                    ->setOptions([
+                        'field' => 'active',
+                        'primary_field' => 'id_addresscustomertype',
+                        'route' => 'admin_address_customer_type_toggle_status',
+                        'route_param_name' => 'addressCustomerTypeId',
+                        'sortable' => false,
+                    ])
+            )
             ->add((new ActionColumn('actions'))
                 ->setName($this->trans('Actions', [], 'Admin.Global'))
                 ->setOptions([
@@ -101,7 +114,7 @@ final class AddressCustomerTypeGridDefinitionFactory extends AbstractFilterableG
                         )
                         ->add(
                             (new SubmitRowAction('delete'))
-                                ->setName('Delete')
+                                ->setName($this->trans('Delete', [], 'Admin.Actions'))
                                 ->setIcon('delete')
                                 ->setOptions([
                                     'confirm_message' => 'Delete selected item?',
@@ -139,6 +152,14 @@ final class AddressCustomerTypeGridDefinitionFactory extends AbstractFilterableG
                         'required' => false,
                     ])
                     ->setAssociatedColumn('name')
+            )
+            ->add(
+                (new Filter('active', YesAndNoChoiceType::class))
+                    ->setTypeOptions([
+                        'required' => false,
+                        'choice_translation_domain' => false,
+                    ])
+                    ->setAssociatedColumn('active')
             )
             ->add(
                 (new Filter('actions', SearchAndResetType::class))

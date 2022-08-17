@@ -52,13 +52,14 @@ final class AddressCustomerTypeFormDataProvider implements FormDataProviderInter
     /**
      * {@inheritdoc}
      */
-    public function getData($orderStateId)
+    public function getData($id)
     {
         /** @var EditableAddressCustomerType $editableAddressCustomerType */
-        $editableAddressCustomerType = $this->queryBus->handle(new GetAddressCustomerTypeForEditing((int)$orderStateId));
+        $editableAddressCustomerType = $this->queryBus->handle(new GetAddressCustomerTypeForEditing((int)$id));
 
         return [
             'name' => $editableAddressCustomerType->getLocalizedNames(),
+            'active' => $editableAddressCustomerType->isActive(),
         ];
     }
 

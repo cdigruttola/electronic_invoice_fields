@@ -130,6 +130,7 @@ final class AddressCustomerTypeQueryBuilder extends AbstractDoctrineQueryBuilder
         $allowedFilters = [
             'id_addresscustomertype',
             'name',
+            'active'
         ];
 
         foreach ($filters as $filterName => $filterValue) {
@@ -137,13 +138,13 @@ final class AddressCustomerTypeQueryBuilder extends AbstractDoctrineQueryBuilder
                 continue;
             }
 
-            if (in_array($filterName, ['id_addresscustomertype'])) {
+            if (in_array($filterName, ['id_addresscustomertype', 'active'])) {
                 $qb->andWhere('c.`' . $filterName . '` = :' . $filterName);
                 $qb->setParameter($filterName, $filterValue);
                 continue;
             }
 
-            if (in_array($filterName, ['name', 'template'])) {
+            if ($filterName == 'name') {
                 $qb->andWhere('cl.`' . $filterName . '` LIKE :' . $filterName);
                 $qb->setParameter($filterName, '%' . $filterValue . '%');
             }

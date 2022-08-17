@@ -26,11 +26,24 @@
 // the name isn't in UpperCamelCase because of AddressFormat::_checkLiableAssociation calls on _checkValidateClassField
 class Addresscustomertype extends ObjectModel
 {
-    /** @var int id_addresscustomertype */
-    public int $id_addresscustomertype;
-
     /** @var array<string> name */
     public $name;
+    /**
+     * @var bool
+     */
+    public $removable;
+    /**
+     * @var bool
+     */
+    public $active;
+    /**
+     * @var string
+     */
+    public $date_add;
+    /**
+     * @var string
+     */
+    public $date_upd;
 
     /**
      * @see ObjectModel::$definition
@@ -43,21 +56,42 @@ class Addresscustomertype extends ObjectModel
         'fields' => [
             /* Lang fields */
             'name' => ['type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'required' => true, 'size' => 40],
+            'removable' => ['type' => self::TYPE_BOOL, 'required' => true, 'validate' => 'isBool'],
+            'active' => ['type' => self::TYPE_BOOL, 'required' => true, 'validate' => 'isBool'],
+            'date_add' => ['type' => self::TYPE_DATE, 'validate' => 'isDate'],
+            'date_upd' => ['type' => self::TYPE_DATE, 'validate' => 'isDate'],
         ],
     ];
 
     /**
      * @param $idLang
+     * @return array|bool|mysqli_result|PDOStatement|resource|null
+     * @throws PrestaShopDatabaseException
+     */
+    public static function getAddressCustomerTypes($idLang)
+    {
+        return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
+        SELECT *
+		FROM `' . _DB_PREFIX_ . 'einvoice_customer_type` c
+		LEFT JOIN `' . _DB_PREFIX_ . 'einvoice_customer_type_lang` cl ON (c.`id_addresscustomertype` = cl.`id_addresscustomertype` AND cl.`id_lang` = ' . (int)$idLang . ')');
+    }
+
+    /**
+     * @param $idLang
+     * @param bool $activeOnly
      * @return array
      * @throws PrestaShopDatabaseException
      */
-    public static function getAddressCustomerType($idLang): array
+    public static function getAddressCustomerType($idLang, bool $activeOnly = true): array
     {
         $customerTypes = [];
-        $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
-		SELECT c.*, cl.`name`
+        $sql = 'SELECT c.*, cl.`name`
 		FROM `' . _DB_PREFIX_ . 'einvoice_customer_type` c
-		LEFT JOIN `' . _DB_PREFIX_ . 'einvoice_customer_type_lang` cl ON (c.`id_addresscustomertype` = cl.`id_addresscustomertype` AND cl.`id_lang` = ' . (int)$idLang . ')');
+		LEFT JOIN `' . _DB_PREFIX_ . 'einvoice_customer_type_lang` cl ON (c.`id_addresscustomertype` = cl.`id_addresscustomertype` AND cl.`id_lang` = ' . (int)$idLang . ')';
+        if ($activeOnly) {
+            $sql .= ' WHERE c.`active` = 1 ';
+        }
+        $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
 
         foreach ($result as $row) {
             $customerTypes[$row['id_addresscustomertype']] = $row;
@@ -91,11 +125,6 @@ class Addresscustomertype extends ObjectModel
 		FROM `' . _DB_PREFIX_ . 'einvoice_customer_type` c
 		JOIN `' . _DB_PREFIX_ . 'einvoice_address` a ON a.`id_addresscustomertype` = c.`id_addresscustomertype` 
 		WHERE c.`id_addresscustomertype` = ' . $addressCustomerTypeId);
-
-        PrestaShopLogger::addLog('SELECT COUNT(DISTINCT a.id_address)
-		FROM `' . _DB_PREFIX_ . 'einvoice_customer_type` c
-		JOIN `' . _DB_PREFIX_ . 'einvoice_address` a ON a.`id_addresscustomertype` = c.`id_addresscustomertype` 
-		WHERE c.`id_addresscustomertype` = ' . $addressCustomerTypeId . ' -> result ' . $result);
 
         return $result > 0;
     }

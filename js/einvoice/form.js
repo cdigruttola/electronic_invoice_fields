@@ -1,4 +1,3 @@
-<?php
 /**
  * 2007-2022 Carmine Di Gruttola
  *
@@ -18,26 +17,16 @@
  * versions in the future. If you wish to customize PrestaShop for your
  * needs please refer to http://www.prestashop.com for more information.
  *
- * @author    cdigruttola <c.digruttola@hotmail.it>
- * @copyright 2007-2022 Carmine Di Gruttola
- * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ *  @author    cdigruttola <c.digruttola@hotmail.it>
+ *  @copyright 2007-2022 Carmine Di Gruttola
+ *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ *
  */
 
-declare(strict_types=1);
+import TranslatableInput from '@PSJs/components/translatable-input';
 
-namespace cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception;
+const {$} = window;
 
-/**
- * Is thrown when address customer type constraint is violated
- */
-class AddressCustomerTypeConstraintException extends AddressCustomerTypeException
-{
-    /**
-     * @var int Code is used when invalid name is provided for address customer type
-     */
-    public const INVALID_NAME = 1;
-    /**
-     * @var int Code is used when empty name is provided for address customer type
-     */
-    public const EMPTY_NAME = 2;
-}
+$(() => {
+    new TranslatableInput();
+});

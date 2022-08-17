@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="admin-dev" source-language="it-IT" target-language="it-IT" datatype="plaintext">
+  <file original="admin572dvxgfc" source-language="it-IT" target-language="it-IT" datatype="plaintext">
     <body>
+      <trans-unit id="23e5335a085e876e329c5db1c92bb23b">
+        <source>Setting Address Customer Type</source>
+        <target>Impostazioni tipo utente</target>
+        <note>Line: </note>
+      </trans-unit>
       <trans-unit id="9c7fefd47b9952a16ba0e87c697fbfb4">
         <source>Electronic Invoice - fields</source>
         <target>Fatturazione Elettronica - Campi</target>
@@ -72,26 +77,6 @@
         <target>Indirizzo PEC</target>
         <note>Line: </note>
       </trans-unit>
-      <trans-unit id="47f9082fc380ca62d531096aa1d110f1">
-        <source>Private</source>
-        <target>Privato</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="1b8796f1634e01bc82017ed10d91df99">
-        <source>Company/Professional</source>
-        <target>Azienda/Libero professionista</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="61d458d8946b919c7c2590e9d6cc0a57">
-        <source>Association</source>
-        <target>Associazione</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="77955a7ee779f87ea883e701892a3468">
-        <source>Public Administration</source>
-        <target>Pubblica Amministrazione</target>
-        <note>Line: </note>
-      </trans-unit>
       <trans-unit id="0d3c0ff62d24aa52e90ca7f9b1f733c8">
         <source>Customer Type</source>
         <target>Tipo</target>
@@ -117,9 +102,64 @@
         <target>Formato codice SDI non valido</target>
         <note>Line: </note>
       </trans-unit>
+      <trans-unit id="47f9082fc380ca62d531096aa1d110f1">
+        <source>Private</source>
+        <target>Privato</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="1b8796f1634e01bc82017ed10d91df99">
+        <source>Company/Professional</source>
+        <target>Azienda/Libero professionista</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="61d458d8946b919c7c2590e9d6cc0a57">
+        <source>Association</source>
+        <target>Associazione</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="77955a7ee779f87ea883e701892a3468">
+        <source>Public Administration</source>
+        <target>Pubblica Amministrazione</target>
+        <note>Line: </note>
+      </trans-unit>
       <trans-unit id="c04965cf9c9f0e08f96f03e36d5d07e3">
         <source>Customer type</source>
         <target>Tipo</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7b1d51c4a12266c5635f5c658846d996">
+        <source>Could not delete %i%, there is at least one address associated</source>
+        <target>Impossibile cancellare %i%, c'è almeno un indirizzo associato</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5ad9cce8e181d477bb7dade1f5aed0f9">
+        <source>Could not delete %i%</source>
+        <target>Impossibile cancellare %i%</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e473d73233ae49f44acd66cc52c4ab8f">
+        <source>Address Customer Type</source>
+        <target>Tipi utente</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9673b41f0af844f086e8b67db5a97083">
+        <source>Address Customer Types</source>
+        <target>Tipi utente</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="57dfc6ce21687b1bf79e7c20647bbe8f">
+        <source>Add new address customer type</source>
+        <target>Aggiungi un nuovo tipo utente</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c204882ef7bfd1baf041791c46761c4e">
+        <source>Address Customer Type name</source>
+        <target>Nome tipo utente</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a4bb440d400f4dc30f148b44d08680b4">
+        <source>Invalid characters: numbers and</source>
+        <target>Caratteri vietati: numeri e</target>
         <note>Line: </note>
       </trans-unit>
     </body>

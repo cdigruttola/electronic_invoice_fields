@@ -26,7 +26,8 @@
 namespace cdigruttola\Module\Einvoice\Controller\Admin;
 
 use Addresscustomertype;
-use AddressCustomerTypeConstraintException;
+use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Command\ToggleStatusAddressCustomerTypeCommand;
+use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeConstraintException;
 use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeException;
 use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeNotFoundException;
 use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\DuplicateAddressCustomerTypeNameException;
@@ -156,6 +157,10 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
             $errors[] = ['key' => 'Could not delete %i%, there is at least one address associated',
                 'domain' => 'Modules.Einvoice.Einvoice',
                 'parameters' => ['%i%' => $addressCustomerTypeId],];
+        } else if (!$addressCustomerType->removable) {
+            $errors[] = ['key' => 'Could not delete %i%',
+                'domain' => 'Modules.Einvoice.Einvoice',
+                'parameters' => ['%i%' => $addressCustomerTypeId],];
         } else if (!$addressCustomerType->delete()) {
             $errors[] = ['key' => 'Could not delete %i%',
                 'domain' => 'Modules.Einvoice.Einvoice',
@@ -170,6 +175,29 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
         unset($addressCustomerType);
         return $this->redirectToRoute(self::INDEX_ROUTE);
     }
+
+    /**
+     * @AdminSecurity("is_granted('update', request.get('_legacy_controller'))", message="Access denied.")
+     *
+     * @param int $addressCustomerTypeId
+     *
+     * @return RedirectResponse
+     */
+    public function toggleStatusAction(int $addressCustomerTypeId): RedirectResponse
+    {
+        try {
+            $this->getCommandBus()->handle(new ToggleStatusAddressCustomerTypeCommand($addressCustomerTypeId));
+            $this->addFlash(
+                'success',
+                $this->trans('The status has been successfully updated.', 'Admin.Notifications.Success')
+            );
+        } catch (AddressCustomerTypeException $e) {
+            $this->addFlash('error', $this->getErrorMessageForException($e, $this->getErrorMessages($e)));
+        }
+
+        return $this->redirectToRoute(self::INDEX_ROUTE);
+    }
+
 
     /**
      * Get errors that can be used to translate exceptions into user friendly messages

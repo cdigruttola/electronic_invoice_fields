@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="admin-dev" source-language="it-IT" target-language="it-IT" datatype="plaintext">
+  <file original="admin572dvxgfc" source-language="it-IT" target-language="it-IT" datatype="plaintext">
     <body>
       <trans-unit id="9c7fefd47b9952a16ba0e87c697fbfb4">
         <source>Electronic Invoice - fields</source>
@@ -35,6 +35,11 @@
       <trans-unit id="4be8e06d27bca7e1828f2fa9a49ca985">
         <source>Italian</source>
         <target>Italiano</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="28572bb7b545515c66b7ec98041ec56e">
+        <source>To configure address customer type, use this</source>
+        <target>Per configurare i tipi utente, usa questo</target>
         <note>Line: </note>
       </trans-unit>
     </body>

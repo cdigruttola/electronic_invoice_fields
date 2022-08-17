@@ -36,23 +36,11 @@ class Einvoice extends Module
     public const EINVOICE_SDI_REQUIRED = 'EINVOICE_SDI_REQUIRED';
     protected $config_form = false;
 
-    public $tabs = [
-        [
-            'name' => 'Setting Address Customer Type',
-            'class_name' => 'AdminAddressCustomerType',
-            'visible' => true,
-            'route_name' => 'admin_address_customer_type',
-            'parent_class_name' => 'ShopParameters',
-            'wording' => 'Setting Address Customer Type',
-            'wording_domain' => 'Modules.Einvoice.Einvoice',
-        ],
-    ];
-
     public function __construct()
     {
         $this->name = 'einvoice';
         $this->tab = 'administration';
-        $this->version = '1.1.1';
+        $this->version = '2.0.0';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
 
@@ -60,6 +48,23 @@ class Einvoice extends Module
          * Set $this->bootstrap to true if your module is compliant with bootstrap (PrestaShop 1.6)
          */
         $this->bootstrap = true;
+
+        $tabNames = [];
+        foreach (Language::getLanguages() as $lang) {
+            $tabNames[$lang['locale']] = $this->trans('Setting Address Customer Type', [], 'Modules.Einvoice.Einvoice', $lang['locale']);
+        }
+
+        $this->tabs = [
+            [
+                'name' => $tabNames,
+                'class_name' => 'AdminAddressCustomerType',
+                'visible' => true,
+                'route_name' => 'admin_address_customer_type',
+                'parent_class_name' => 'ShopParameters',
+                'wording' => 'Setting Address Customer Type',
+                'wording_domain' => 'Modules.Einvoice.Einvoice',
+            ],
+        ];
 
         parent::__construct();
 
@@ -143,6 +148,9 @@ class Einvoice extends Module
         }
 
         $this->context->smarty->assign('module_dir', $this->_path);
+        $link = new Link();
+        $symfonyUrl = $link->getAdminLink('AdminAddressCustomerType', true, array('route' => 'admin_address_customer_type'));
+        $this->context->smarty->assign('url_type_config', $symfonyUrl);
 
         $output = $this->context->smarty->fetch($this->local_path . 'views/templates/admin/configure.tpl');
 
@@ -613,9 +621,14 @@ class Einvoice extends Module
     private function insertAddressCustomerType(): bool
     {
         $sql = [];
-        $sql[] = 'INSERT INTO `' . _DB_PREFIX_ . 'einvoice_customer_type` (`id_addresscustomertype`) VALUES (1), (2), (3), (4);';
+        $sql[] = 'INSERT INTO `' . _DB_PREFIX_ . 'einvoice_customer_type` (`id_addresscustomertype`,`removable`,`date_add`,`date_upd`) VALUES 
+        (1, 0, NOW(), NOW()),
+        (2, 0, NOW(), NOW()),
+        (3, 0, NOW(), NOW()),
+        (4, 0, NOW(), NOW());';
 
-        foreach (Language::getLanguages(false) as $lang) {
+        foreach (Language::getLanguages() as $lang) {
+            PrestaShopLogger::addLog('insertAddressCustomerType ' . $lang['id_lang']);
             $sql[] = 'INSERT INTO ' . _DB_PREFIX_ . 'einvoice_customer_type_lang (`id_addresscustomertype`, `id_lang`, `name`) VALUES '
                 . '(1, ' . $lang['id_lang'] . ", '" . $this->trans('Private', [], 'Modules.Einvoice.Einvoice', $lang['locale']) . "'),"
                 . '(2, ' . $lang['id_lang'] . ", '" . $this->trans('Company/Professional', [], 'Modules.Einvoice.Einvoice', $lang['locale']) . "'),"

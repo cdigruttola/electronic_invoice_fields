@@ -1,13 +1,14 @@
 <?php
 /**
- * 2007-2022 Carmine Di Gruttola
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Academic Free License (AFL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.md.
  * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/afl-3.0.php
+ * https://opensource.org/licenses/OSL-3.0
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@prestashop.com so we can send you a copy immediately.
@@ -16,23 +17,23 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://devdocs.prestashop.com/ for more information.
  *
- * @author    cdigruttola <c.digruttola@hotmail.it>
- * @copyright 2007-2022 Carmine Di Gruttola
- * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ * @author    PrestaShop SA and Contributors <contact@prestashop.com>
+ * @copyright Since 2007 PrestaShop SA and Contributors
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  */
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Query;
+namespace cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Command;
 
 use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
 
 /**
- * Gets address customer type information for editing.
+ * Class ToggleZoneStatusCommand is responsible for toggling address customer type status
  */
-class GetAddressCustomerTypeForEditing
+class ToggleStatusAddressCustomerTypeCommand
 {
     /**
      * @var AddressCustomerTypeId
@@ -42,7 +43,7 @@ class GetAddressCustomerTypeForEditing
     /**
      * @param int $addressCustomerTypeId
      */
-    public function __construct($addressCustomerTypeId)
+    public function __construct(int $addressCustomerTypeId)
     {
         $this->addressCustomerTypeId = new AddressCustomerTypeId($addressCustomerTypeId);
     }
@@ -50,7 +51,7 @@ class GetAddressCustomerTypeForEditing
     /**
      * @return AddressCustomerTypeId
      */
-    public function getAddressCustomerTypeId()
+    public function getAddressCustomerTypeId(): AddressCustomerTypeId
     {
         return $this->addressCustomerTypeId;
     }

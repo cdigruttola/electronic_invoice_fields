@@ -27,7 +27,7 @@ declare(strict_types=1);
 
 namespace cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Command;
 
-use AddressCustomerTypeConstraintException;
+use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeConstraintException;
 
 /**
  * Adds new address customer type with provided data
@@ -38,11 +38,16 @@ class AddAddressCustomerTypeCommand
      * @var string[]
      */
     private $localizedNames;
+    /**
+     * @var bool
+     */
+    private $active;
 
     public function __construct(
-        array $localizedNames)
+        array $localizedNames, bool $active)
     {
         $this->setLocalizedNames($localizedNames);
+        $this->setActive($active);
     }
 
     /**
@@ -51,6 +56,14 @@ class AddAddressCustomerTypeCommand
     public function getLocalizedNames()
     {
         return $this->localizedNames;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
 
     /**
@@ -69,6 +82,14 @@ class AddAddressCustomerTypeCommand
         $this->localizedNames = $localizedNames;
 
         return $this;
+    }
+
+    /**
+     * @param bool $active
+     */
+    public function setActive(bool $active): void
+    {
+        $this->active = $active;
     }
 
 }

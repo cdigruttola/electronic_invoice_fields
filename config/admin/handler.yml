@@ -19,3 +19,9 @@ services:
     tags:
       - name: tactician.handler
         command: 'cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Command\EditAddressCustomerTypeCommand'
+
+  cdigruttola.module.einvoice.core.domain.command_handler.toggle_status_address_customer_type_handler:
+    class: 'cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\CommandHandler\ToggleStatusAddressCustomerTypeHandler'
+    tags:
+      - name: tactician.handler
+        command: 'cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Command\ToggleStatusAddressCustomerTypeCommand'

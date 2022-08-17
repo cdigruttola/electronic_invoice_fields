@@ -45,7 +45,7 @@ final class AddressCustomerTypeFilters extends Filters
             'limit' => 50,
             'offset' => 0,
             'orderBy' => 'id_addresscustomertype',
-            'sortOrder' => 'DESC',
+            'sortOrder' => 'ASC',
             'filters' => [],
         ];
     }

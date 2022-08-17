@@ -25,61 +25,18 @@
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\QueryResult;
+namespace cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\CommandHandler;
 
+use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Command\ToggleStatusAddressCustomerTypeCommand;
 use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
 
 /**
- * Stores editable data for address customer type
+ * Interface for service that handles command that toggle status of address customer type
  */
-class EditableAddressCustomerType
+interface ToggleStatusAddressCustomerTypeHandlerInterface
 {
-    /**
-     * @var AddressCustomerTypeId
-     */
-    private $addressCustomerTypeId;
-    /**
-     * @var array
-     */
-    private $localizedNames;
-    /**
-     * @var bool
-     */
-    private $active;
-
-    public function __construct(
-        AddressCustomerTypeId $addressCustomerTypeId,
-        array                 $name,
-        bool                  $active
-    )
-    {
-        $this->addressCustomerTypeId = $addressCustomerTypeId;
-        $this->localizedNames = $name;
-        $this->active = $active;
-    }
-
     /**
      * @return AddressCustomerTypeId
      */
-    public function getAddressCustomerTypeId()
-    {
-        return $this->addressCustomerTypeId;
-    }
-
-    /**
-     * @return array
-     */
-    public function getLocalizedNames()
-    {
-        return $this->localizedNames;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isActive(): bool
-    {
-        return $this->active;
-    }
-
+    public function handle(ToggleStatusAddressCustomerTypeCommand $command);
 }

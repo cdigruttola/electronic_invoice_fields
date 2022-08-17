@@ -39,3 +39,15 @@ admin_address_customer_type_delete:
     _controller: 'cdigruttola\Module\Einvoice\Controller\Admin\AdminAddressCustomerTypeController::deleteAction'
     _legacy_controller: 'AdminAddressCustomerTypeController'
     _legacy_link: 'AdminAddressCustomerTypeController:delete'
+
+admin_address_customer_type_toggle_status:
+  path: /address-customer-type/toggle-status/{addressCustomerTypeId}
+  methods: POST
+  defaults:
+    _controller: 'cdigruttola\Module\Einvoice\Controller\Admin\AdminAddressCustomerTypeController::toggleStatusAction'
+    _legacy_controller: 'AdminAddressCustomerTypeController'
+    _legacy_link: 'AdminAddressCustomerTypeController:enableSelection'
+    _legacy_parameters:
+      id_zone: addressCustomerTypeId
+  requirements:
+    addressCustomerTypeId: \d+

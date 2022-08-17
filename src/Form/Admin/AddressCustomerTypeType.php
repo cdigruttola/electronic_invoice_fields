@@ -29,6 +29,7 @@ namespace cdigruttola\Module\Einvoice\Form\Admin;
 
 use PrestaShop\PrestaShop\Core\ConstraintValidator\Constraints\DefaultLanguage;
 use PrestaShop\PrestaShop\Core\ConstraintValidator\Constraints\TypedRegex;
+use PrestaShopBundle\Form\Admin\Type\SwitchType;
 use PrestaShopBundle\Form\Admin\Type\TranslatableType;
 use PrestaShopBundle\Form\Admin\Type\TranslatorAwareType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -58,6 +59,10 @@ class AddressCustomerTypeType extends TranslatorAwareType
                         ]),
                     ],
                 ],
+            ])
+            ->add('active', SwitchType::class, [
+                'label' => $this->getTranslator()->trans('Enabled', [], 'Admin.Global'),
+                'required' => false,
             ]);
     }
 

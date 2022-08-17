@@ -79,7 +79,8 @@ final class AddressCustomerTypeFormDataHandler implements FormDataHandlerInterfa
     private function buildAddressCustomerTypeAddCommandFromFormData(array $data)
     {
         $command = new AddAddressCustomerTypeCommand(
-            $data['name']
+            $data['name'],
+            $data['active'] ?? false
         );
 
         return $command;
@@ -93,6 +94,7 @@ final class AddressCustomerTypeFormDataHandler implements FormDataHandlerInterfa
     private function buildAddressCustomerTypeEditCommand($AddressCustomerTypeId, array $data)
     {
         return (new EditAddressCustomerTypeCommand($AddressCustomerTypeId))
-            ->setName($data['name']);
+            ->setName($data['name'])
+            ->setActive((bool)$data['active']);
     }
 }
