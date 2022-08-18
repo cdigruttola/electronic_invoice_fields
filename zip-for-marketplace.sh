@@ -14,5 +14,7 @@ cp -R index.php tmp/einvoice
 cp -R logo.png tmp/einvoice
 cp -R einvoice.php tmp/einvoice
 cp -R config.xml tmp/einvoice
+cp -R LICENSE tmp/einvoice
+cp -R README.md tmp/einvoice
 cd tmp && find . -name ".DS_Store" -delete
 zip -r einvoice.zip . -x ".*" -x "__MACOSX"
