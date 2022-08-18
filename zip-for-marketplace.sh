@@ -2,6 +2,7 @@ rm -rf tmp
 mkdir -p tmp/einvoice
 cp -R classes tmp/einvoice
 cp -R config tmp/einvoice
+cp -R docs tmp/einvoice
 cp -R override tmp/einvoice
 cp -R sql tmp/einvoice
 cp -R src tmp/einvoice

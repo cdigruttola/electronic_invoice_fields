@@ -36,10 +36,12 @@
 <div class="panel">
     <h3><i class="icon icon-tags"></i> {l s='Documentation' d='Modules.Einvoice.Configure'}</h3>
     <p>
-        &raquo; {l s='You can get a PDF documentation to configure this module' d='Modules.Einvoice.Configure'} :
+        &raquo; {l s='You can get a PDF documentation to configure this module' d='Modules.Einvoice.Configure'}:
     <ul>
-        <li><a href="#" target="_blank">{l s='English' d='Modules.Einvoice.Configure'}</a></li>
-        <li><a href="#" target="_blank">{l s='Italian' d='Modules.Einvoice.Configure'}</a></li>
+        <li><a href="{$module_dir|escape:'htmlall':'UTF-8'}docs/Einvoice_readme_en.pdf"
+               target="_blank">{l s='English' d='Modules.Einvoice.Configure'}</a></li>
+        <li><a href="{$module_dir|escape:'htmlall':'UTF-8'}docs/Einvoice_readme_it.pdf"
+               target="_blank">{l s='Italian' d='Modules.Einvoice.Configure'}</a></li>
     </ul>
     </p>
     <p>
