@@ -101,6 +101,8 @@ class Einvoice extends Module
     {
         if (!$this->registerHook('header') ||
             !$this->registerHook('newOrder') ||
+            !$this->registerHook('displayPDFInvoice') ||
+            !$this->registerHook('displayPDFOrderSlip') ||
             !$this->registerHook('actionCustomerAddressFormBuilderModifier') ||
             !$this->registerHook('actionAdminAddressesFormModifier') ||
             !$this->registerHook('actionValidateCustomerAddressForm') ||
@@ -297,6 +299,17 @@ class Einvoice extends Module
                 'pec_required' => (int)$pec_required,
             ]
         );
+    }
+
+
+    public function hookDisplayPDFInvoice($params)
+    {
+        //return 'your content goes here.  You can also choose to use smarty and templates if it is complex';
+    }
+
+    public function hookDisplayPDFOrderSlip($params)
+    {
+        //return 'your content goes here.  You can also choose to use smarty and templates if it is complex';
     }
 
     /**
