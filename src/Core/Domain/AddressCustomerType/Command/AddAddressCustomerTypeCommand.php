@@ -25,9 +25,9 @@
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Command;
+namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command;
 
-use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeConstraintException;
+use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeConstraintException;
 
 /**
  * Adds new address customer type with provided data

@@ -25,9 +25,9 @@
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\CommandHandler;
+namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\CommandHandler;
 
-use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Command\EditAddressCustomerTypeCommand;
+use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\EditAddressCustomerTypeCommand;
 
 /**
  * Interface for service that handles order return  state editing command

@@ -25,12 +25,12 @@
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\CommandHandler;
+namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\CommandHandler;
 
 use Addresscustomertype;
-use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Command\ToggleStatusAddressCustomerTypeCommand;
-use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeNotFoundException;
-use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Exception\CannotToggleStatusAddressCustomerTypeException;
+use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\ToggleStatusAddressCustomerTypeCommand;
+use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeNotFoundException;
+use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\CannotToggleStatusAddressCustomerTypeException;
 use PrestaShopException;
 
 /**

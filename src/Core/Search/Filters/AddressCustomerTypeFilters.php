@@ -23,9 +23,9 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace cdigruttola\Module\Electronic_invoice_fields\Core\Search\Filters;
+namespace cdigruttola\Module\Electronicinvoicefields\Core\Search\Filters;
 
-use cdigruttola\Module\Electronic_invoice_fields\Core\Grid\Definition\Factory\AddressCustomerTypeGridDefinitionFactory;
+use cdigruttola\Module\Electronicinvoicefields\Core\Grid\Definition\Factory\AddressCustomerTypeGridDefinitionFactory;
 use PrestaShop\PrestaShop\Core\Search\Filters;
 
 /**

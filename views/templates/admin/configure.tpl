@@ -23,29 +23,29 @@
 *}
 
 <div class="panel">
-    <h3><i class="icon icon-credit-card"></i> {l s='Electronic Invoice - fields' d='Modules.Electronic_invoice_fields.Configure'}</h3>
+    <h3><i class="icon icon-credit-card"></i> {l s='Electronic Invoice - fields' d='Modules.Electronicinvoicefields.Configure'}</h3>
     <p>
-        <strong>{l s='EInvoice Module' d='Modules.Electronic_invoice_fields.Configure'}</strong><br/>
+        <strong>{l s='EInvoice Module' d='Modules.Electronicinvoicefields.Configure'}</strong><br/>
     </p>
     <br/>
     <p>
-        {l s='This module helps you to add SDI and PEC fields in addresses' d='Modules.Electronic_invoice_fields.Configure'}
+        {l s='This module helps you to add SDI and PEC fields in addresses' d='Modules.Electronicinvoicefields.Configure'}
     </p>
 </div>
 
 <div class="panel">
-    <h3><i class="icon icon-tags"></i> {l s='Documentation' d='Modules.Electronic_invoice_fields.Configure'}</h3>
+    <h3><i class="icon icon-tags"></i> {l s='Documentation' d='Modules.Electronicinvoicefields.Configure'}</h3>
     <p>
-        &raquo; {l s='You can get a PDF documentation to configure this module' d='Modules.Electronic_invoice_fields.Configure'}:
+        &raquo; {l s='You can get a PDF documentation to configure this module' d='Modules.Electronicinvoicefields.Configure'}:
     <ul>
         <li><a href="{$module_dir|escape:'htmlall':'UTF-8'}docs/readme_en.pdf"
-               target="_blank">{l s='English' d='Modules.Electronic_invoice_fields.Configure'}</a></li>
+               target="_blank">{l s='English' d='Modules.Electronicinvoicefields.Configure'}</a></li>
         <li><a href="{$module_dir|escape:'htmlall':'UTF-8'}docs/readme_it.pdf"
-               target="_blank">{l s='Italian' d='Modules.Electronic_invoice_fields.Configure'}</a></li>
+               target="_blank">{l s='Italian' d='Modules.Electronicinvoicefields.Configure'}</a></li>
     </ul>
     </p>
     <p>
-        &raquo; {l s='To configure address customer type, use this' d='Modules.Electronic_invoice_fields.Configure'} <a
+        &raquo; {l s='To configure address customer type, use this' d='Modules.Electronicinvoicefields.Configure'} <a
                 href="{$url_type_config|escape:'htmlall':'UTF-8'}">link</a><br/>
     </p>
 </div>

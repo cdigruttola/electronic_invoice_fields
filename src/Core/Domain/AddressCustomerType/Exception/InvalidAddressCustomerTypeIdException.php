@@ -26,7 +26,7 @@
 declare(strict_types=1);
 
 
-namespace cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Exception;
+namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception;
 
 /**
  * Class InvalidAddressCustomerTypeIdException is thrown when AddressCustomerTypeId with invalid value is being created.

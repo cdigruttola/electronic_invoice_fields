@@ -25,7 +25,7 @@
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Electronic_invoice_fields\Form\Admin;
+namespace cdigruttola\Module\Electronicinvoicefields\Form\Admin;
 
 use PrestaShop\PrestaShop\Core\ConstraintValidator\Constraints\DefaultLanguage;
 use PrestaShop\PrestaShop\Core\ConstraintValidator\Constraints\TypedRegex;
@@ -73,7 +73,7 @@ class AddressCustomerTypeType extends TranslatorAwareType
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'Modules.Electronic_invoice_fields.Einvoice',
+                'translation_domain' => 'Modules.Electronicinvoicefields.Einvoice',
             ]);
     }
 }

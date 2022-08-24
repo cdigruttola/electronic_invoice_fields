@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
-    <name>electronic_invoice_fields</name>
+    <name>electronicinvoicefields</name>
     <displayName><![CDATA[Electronic Invoice - fields]]></displayName>
     <version><![CDATA[2.0.0]]></version>
     <description><![CDATA[This module adds the new fields for E-Invoice in Customer Address]]></description>

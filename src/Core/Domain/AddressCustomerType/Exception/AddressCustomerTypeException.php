@@ -25,7 +25,7 @@
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Exception;
+namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception;
 
 use PrestaShop\PrestaShop\Core\Domain\Exception\DomainException;
 

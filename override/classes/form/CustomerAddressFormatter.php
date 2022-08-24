@@ -62,7 +62,7 @@ class CustomerAddressFormatter extends CustomerAddressFormatterCore
      */
     public function getFormat()
     {
-        $einvoice = Module::getInstanceByName('electronic_invoice_fields');
+        $einvoice = Module::getInstanceByName('electronicinvoicefields');
         if ($einvoice->active) {
             $fields = AddressFormat::getOrderedAddressFields(
                 $this->country->id,
@@ -202,7 +202,7 @@ class CustomerAddressFormatter extends CustomerAddressFormatterCore
         // same label regardless of which field is used for mapping.
         $field = explode(':', $field)[0];
 
-        $einvoice = Module::getInstanceByName('electronic_invoice_fields');
+        $einvoice = Module::getInstanceByName('electronicinvoicefields');
 
         switch ($field) {
             case 'alias':
@@ -236,11 +236,11 @@ class CustomerAddressFormatter extends CustomerAddressFormatterCore
             case 'other':
                 return $this->translator->trans('Other', [], 'Shop.Forms.Labels');
             case 'Addresscustomertype':
-                return $einvoice->getTranslator()->trans('Customer type', [], 'Modules.Electronic_invoice_fields.Einvoice');
+                return $einvoice->getTranslator()->trans('Customer type', [], 'Modules.Electronicinvoicefields.Einvoice');
             case 'sdi':
-                return $einvoice->getTranslator()->trans('SDI Code', [], 'Modules.Electronic_invoice_fields.Einvoice');
+                return $einvoice->getTranslator()->trans('SDI Code', [], 'Modules.Electronicinvoicefields.Einvoice');
             case 'pec':
-                return $einvoice->getTranslator()->trans('PEC Email', [], 'Modules.Electronic_invoice_fields.Einvoice');
+                return $einvoice->getTranslator()->trans('PEC Email', [], 'Modules.Electronicinvoicefields.Einvoice');
             default:
                 return $field;
         }
