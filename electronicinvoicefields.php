@@ -74,7 +74,7 @@ class Electronicinvoicefields extends Module
 
         $this->confirmUninstall = $this->trans('Are you sure you want to uninstall?', [], 'Modules.Electronicinvoicefields.Einvoice');
 
-        $this->ps_versions_compliancy = ['min' => '1.6', 'max' => _PS_VERSION_];
+        $this->ps_versions_compliancy = ['min' => '1.7.7', 'max' => _PS_VERSION_];
     }
 
     public function isUsingNewTranslationSystem(): bool
