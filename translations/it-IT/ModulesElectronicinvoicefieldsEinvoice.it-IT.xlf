@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="admin572dvxgfc" source-language="it-IT" target-language="it-IT" datatype="plaintext">
+  <file original="admin358ddidam" source-language="it-IT" target-language="it-IT" datatype="plaintext">
     <body>
       <trans-unit id="23e5335a085e876e329c5db1c92bb23b">
         <source>Setting Address Customer Type</source>
@@ -140,6 +140,11 @@
       <trans-unit id="e473d73233ae49f44acd66cc52c4ab8f">
         <source>Address Customer Type</source>
         <target>Tipi utente</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="be23874a92f9769914df718f5254254b">
+        <source>Need Invoice</source>
+        <target>Richiesta fattura</target>
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="9673b41f0af844f086e8b67db5a97083">

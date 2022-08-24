@@ -40,7 +40,7 @@ class Electronicinvoicefields extends Module
     {
         $this->name = 'electronicinvoicefields';
         $this->tab = 'administration';
-        $this->version = '2.0.0';
+        $this->version = '2.1.0';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
         $this->module_key = '313961649878a2c1b5c13a42d213c3e9';

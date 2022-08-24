@@ -32,12 +32,23 @@ if (!defined('_PS_VERSION_')) {
  * usefull when you modify your database, or register a new hook ...
  * Don't forget to create one file per version.
  */
-function upgrade_module_1_1_0($module)
+function upgrade_module_2_1_0($module)
 {
-    /*
-     * Do everything you want right there,
-     * You could add a column in one of your module's tables
-     */
+    $list_fields = Db::getInstance()->executeS('SHOW FIELDS FROM `' . _DB_PREFIX_ . 'einvoice_customer_type`');
+
+    if (is_array($list_fields)) {
+        $isFieldDefaultExist = false;
+
+        foreach ($list_fields as $k => $field) {
+            if ($field['Field'] === 'need_invoice') {
+                $isFieldDefaultExist = true;
+            }
+        }
+
+        if (!$isFieldDefaultExist) {
+            return (bool)Db::getInstance()->execute('ALTER TABLE `' . _DB_PREFIX_ . 'einvoice_customer_type` ADD COLUMN `need_invoice` tinyint(1) unsigned DEFAULT 0 NOT NULL');
+        }
+    }
 
     return true;
 }
