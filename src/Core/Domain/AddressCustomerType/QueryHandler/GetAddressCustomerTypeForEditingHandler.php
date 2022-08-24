@@ -25,12 +25,12 @@
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\QueryHandler;
+namespace cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\QueryHandler;
 
 use Addresscustomertype;
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeNotFoundException;
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Query\GetAddressCustomerTypeForEditing;
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\QueryResult\EditableAddressCustomerType;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeNotFoundException;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Query\GetAddressCustomerTypeForEditing;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\QueryResult\EditableAddressCustomerType;
 
 /**
  * Handles command that gets orderReturnState for editing

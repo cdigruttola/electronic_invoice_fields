@@ -1,5 +1,5 @@
 {
-  "name": "cdigruttola/einvoice",
+  "name": "cdigruttola/electronic_invoice_fields",
   "description": "Electronic Invoice - fields",
   "authors": [
     {
@@ -12,10 +12,10 @@
   },
   "autoload": {
     "psr-4": {
-      "cdigruttola\\Module\\Einvoice\\": "src/"
+      "cdigruttola\\Module\\Electronic_invoice_fields\\": "src/"
     },
     "classmap": [
-      "einvoice.php",
+      "electronic_invoice_fields.php",
       "classes/"
     ],
     "exclude-from-classmap": []
