@@ -64,7 +64,7 @@ final class AddressCustomerTypeGridDefinitionFactory extends AbstractFilterableG
      */
     protected function getName()
     {
-        return $this->trans('Address Customer Type', [], 'Modules.Electronic_invoice_fields.Electronic_invoice_fields');
+        return $this->trans('Address Customer Type', [], 'Modules.Electronic_invoice_fields.Einvoice');
     }
 
     /**
@@ -81,7 +81,7 @@ final class AddressCustomerTypeGridDefinitionFactory extends AbstractFilterableG
                     ])
             )
             ->add((new DataColumn('name'))
-                ->setName($this->trans('Customer Type', [], 'Modules.Electronic_invoice_fields.Electronic_invoice_fields'))
+                ->setName($this->trans('Customer Type', [], 'Modules.Electronic_invoice_fields.Einvoice'))
                 ->setOptions([
                     'field' => 'name'
                 ])

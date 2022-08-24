@@ -73,7 +73,7 @@ class AddressCustomerTypeType extends TranslatorAwareType
     {
         $resolver
             ->setDefaults([
-                'translation_domain' => 'Modules.Electronic_invoice_fields.Electronic_invoice_fields',
+                'translation_domain' => 'Modules.Electronic_invoice_fields.Einvoice',
             ]);
     }
 }

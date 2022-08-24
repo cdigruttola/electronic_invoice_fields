@@ -236,11 +236,11 @@ class CustomerAddressFormatter extends CustomerAddressFormatterCore
             case 'other':
                 return $this->translator->trans('Other', [], 'Shop.Forms.Labels');
             case 'Addresscustomertype':
-                return $einvoice->getTranslator()->trans('Customer type', [], 'Modules.Electronic_invoice_fields.Electronic_invoice_fields');
+                return $einvoice->getTranslator()->trans('Customer type', [], 'Modules.Electronic_invoice_fields.Einvoice');
             case 'sdi':
-                return $einvoice->getTranslator()->trans('SDI Code', [], 'Modules.Electronic_invoice_fields.Electronic_invoice_fields');
+                return $einvoice->getTranslator()->trans('SDI Code', [], 'Modules.Electronic_invoice_fields.Einvoice');
             case 'pec':
-                return $einvoice->getTranslator()->trans('PEC Email', [], 'Modules.Electronic_invoice_fields.Electronic_invoice_fields');
+                return $einvoice->getTranslator()->trans('PEC Email', [], 'Modules.Electronic_invoice_fields.Einvoice');
             default:
                 return $field;
         }
