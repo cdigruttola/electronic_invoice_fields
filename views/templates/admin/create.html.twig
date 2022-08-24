@@ -23,19 +23,19 @@
 * #}
 
 {% set enableSidebar = true %}
-{% set layoutTitle = 'Address Customer Types'|trans({}, 'Modules.Electronic_invoice_fields.Einvoice') %}
+{% set layoutTitle = 'Address Customer Types'|trans({}, 'Modules.Electronicinvoicefields.Einvoice') %}
 
 {% extends 'PrestaShopBundle:Admin:layout.html.twig' %}
 
 {% block content %}
     <div class="row justify-content-center">
         <div class="col">
-            {% include '@Modules/electronic_invoice_fields/views/templates/admin/form.html.twig' %}
+            {% include '@Modules/electronicinvoicefields/views/templates/admin/form.html.twig' %}
         </div>
     </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('../modules/electronic_invoice_fields/views/js/address_customer_type_form.bundle.js') }}"></script>
+    <script src="{{ asset('../modules/electronicinvoicefields/views/js/address_customer_type_form.bundle.js') }}"></script>
 {% endblock %}

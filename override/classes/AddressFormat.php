@@ -29,7 +29,7 @@ class AddressFormat extends AddressFormatCore
     {
         $tab = parent::getFormattedAddressFieldsValues($address, $addressFormat, $id_lang);
 
-        $einvoice = Module::getInstanceByName('electronic_invoice_fields');
+        $einvoice = Module::getInstanceByName('electronicinvoicefields');
         if (isset($einvoice) && isset($einvoice->active) && $einvoice->active) {
             if (isset($tab['sdi'])) {
                 if (in_array((string)$tab['sdi'], ['000000', '0000000', 'XXXXXX', 'XXXXXXX'])) {
@@ -44,7 +44,7 @@ class AddressFormat extends AddressFormatCore
     public static function getFieldsRequired()
     {
         $address = new CustomerAddress();
-        $einvoice = Module::getInstanceByName('electronic_invoice_fields');
+        $einvoice = Module::getInstanceByName('electronicinvoicefields');
         if ($einvoice->active) {
             $id_shop = (int)Context::getContext()->shop->id;
             if ((int)Configuration::get('EINVOICE_PEC_REQUIRED', null, null, $id_shop)) {

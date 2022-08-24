@@ -2,7 +2,7 @@ admin_address_customer_type:
   path: /address-customer-type
   methods: [ GET ]
   defaults:
-    _controller: 'cdigruttola\Module\Electronic_invoice_fields\Controller\Admin\AdminAddressCustomerTypeController::indexAction'
+    _controller: 'cdigruttola\Module\Electronicinvoicefields\Controller\Admin\AdminAddressCustomerTypeController::indexAction'
     _legacy_controller: 'AdminAddressCustomerTypeController'
     _legacy_link: 'AdminAddressCustomerTypeController'
 
@@ -10,7 +10,7 @@ admin_address_customer_type_create:
   path: /address-customer-type/new
   methods: [ GET, POST ]
   defaults:
-    _controller: 'cdigruttola\Module\Electronic_invoice_fields\Controller\Admin\AdminAddressCustomerTypeController::createAction'
+    _controller: 'cdigruttola\Module\Electronicinvoicefields\Controller\Admin\AdminAddressCustomerTypeController::createAction'
     _legacy_controller: 'AdminAddressCustomerTypeController'
     _legacy_link: 'AdminAddressCustomerTypeController:add'
 
@@ -18,7 +18,7 @@ admin_address_customer_type_edit:
   path: /address-customer-type/edit/{addressCustomerTypeId}
   methods: [ GET, POST ]
   defaults:
-    _controller: 'cdigruttola\Module\Electronic_invoice_fields\Controller\Admin\AdminAddressCustomerTypeController::editAction'
+    _controller: 'cdigruttola\Module\Electronicinvoicefields\Controller\Admin\AdminAddressCustomerTypeController::editAction'
     _legacy_controller: 'AdminAddressCustomerTypeController'
     _legacy_link: 'AdminAddressCustomerTypeController:edit'
 
@@ -28,7 +28,7 @@ admin_address_customer_type_filter:
   defaults:
     _controller: 'PrestaShopBundle:Admin\Common:searchGrid'
     _legacy_controller: 'AdminAddressCustomerTypeController'
-    gridDefinitionFactoryServiceId: cdigruttola.module.electronic_invoice_fields.core.grid.definition.factory.address_customer_type
+    gridDefinitionFactoryServiceId: cdigruttola.module.electronicinvoicefields.core.grid.definition.factory.address_customer_type
     redirectRoute: admin_address_customer_type
     _legacy_link: 'AdminAddressCustomerTypeController:submitFiltertype'
 
@@ -36,7 +36,7 @@ admin_address_customer_type_delete:
   path: /address-customer-type/delete/{addressCustomerTypeId}
   methods: [ POST ]
   defaults:
-    _controller: 'cdigruttola\Module\Electronic_invoice_fields\Controller\Admin\AdminAddressCustomerTypeController::deleteAction'
+    _controller: 'cdigruttola\Module\Electronicinvoicefields\Controller\Admin\AdminAddressCustomerTypeController::deleteAction'
     _legacy_controller: 'AdminAddressCustomerTypeController'
     _legacy_link: 'AdminAddressCustomerTypeController:delete'
 
@@ -44,7 +44,7 @@ admin_address_customer_type_toggle_status:
   path: /address-customer-type/toggle-status/{addressCustomerTypeId}
   methods: POST
   defaults:
-    _controller: 'cdigruttola\Module\Electronic_invoice_fields\Controller\Admin\AdminAddressCustomerTypeController::toggleStatusAction'
+    _controller: 'cdigruttola\Module\Electronicinvoicefields\Controller\Admin\AdminAddressCustomerTypeController::toggleStatusAction'
     _legacy_controller: 'AdminAddressCustomerTypeController'
     _legacy_link: 'AdminAddressCustomerTypeController:enableSelection'
     _legacy_parameters:

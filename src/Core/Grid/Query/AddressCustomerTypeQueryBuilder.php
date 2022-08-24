@@ -25,7 +25,7 @@
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Electronic_invoice_fields\Core\Grid\Query;
+namespace cdigruttola\Module\Electronicinvoicefields\Core\Grid\Query;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;

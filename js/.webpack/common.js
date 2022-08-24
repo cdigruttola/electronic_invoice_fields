@@ -35,8 +35,8 @@ const psJsDir = path.resolve(psRootDir, 'js');
 
 module.exports = {
     entry: {
-        address_customer_type: '../js/electronic_invoice_fields/index',
-        address_customer_type_form: '../js/electronic_invoice_fields/form',
+        address_customer_type: '../js/electronicinvoicefields/index',
+        address_customer_type_form: '../js/electronicinvoicefields/form',
     }, output: {
         path: path.resolve(__dirname, '../../views/js'), filename: '[name].bundle.js', publicPath: 'public',
     }, // devtool: 'source-map', // uncomment me to build source maps (really slow)

@@ -23,11 +23,11 @@
 * #}
 
 {% set enableSidebar = true %}
-{% set layoutTitle = 'Customer Type'|trans({}, 'Modules.Electronic_invoice_fields.Einvoice') %}
+{% set layoutTitle = 'Customer Type'|trans({}, 'Modules.Electronicinvoicefields.Einvoice') %}
 {% set layoutHeaderToolbarBtn = {
     'add': {
         'href': path('admin_address_customer_type_create'),
-        'desc': 'Add new address customer type'|trans({}, 'Modules.Electronic_invoice_fields.Einvoice'),
+        'desc': 'Add new address customer type'|trans({}, 'Modules.Electronicinvoicefields.Einvoice'),
         'icon': 'add_circle_outline'
     }
 } %}
@@ -47,6 +47,6 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('../modules/electronic_invoice_fields/views/js/address_customer_type.bundle.js') }}"></script>
+    <script src="{{ asset('../modules/electronicinvoicefields/views/js/address_customer_type.bundle.js') }}"></script>
     <script src="{{ asset('themes/default/js/bundle/pagination.js') }}"></script>
 {% endblock %}

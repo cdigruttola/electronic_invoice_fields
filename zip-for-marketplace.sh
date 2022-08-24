@@ -1,20 +1,20 @@
 rm -rf tmp
-mkdir -p tmp/electronic_invoice_fields
-cp -R classes tmp/electronic_invoice_fields
-cp -R config tmp/electronic_invoice_fields
-cp -R docs tmp/electronic_invoice_fields
-cp -R override tmp/electronic_invoice_fields
-cp -R sql tmp/electronic_invoice_fields
-cp -R src tmp/electronic_invoice_fields
-cp -R translations tmp/electronic_invoice_fields
-cp -R views tmp/electronic_invoice_fields
-cp -R upgrade tmp/electronic_invoice_fields
-cp -R vendor tmp/electronic_invoice_fields
-cp -R index.php tmp/electronic_invoice_fields
-cp -R logo.png tmp/electronic_invoice_fields
-cp -R electronic_invoice_fields.php tmp/electronic_invoice_fields
-cp -R config.xml tmp/electronic_invoice_fields
-cp -R LICENSE tmp/electronic_invoice_fields
-cp -R README.md tmp/electronic_invoice_fields
+mkdir -p tmp/electronicinvoicefields
+cp -R classes tmp/electronicinvoicefields
+cp -R config tmp/electronicinvoicefields
+cp -R docs tmp/electronicinvoicefields
+cp -R override tmp/electronicinvoicefields
+cp -R sql tmp/electronicinvoicefields
+cp -R src tmp/electronicinvoicefields
+cp -R translations tmp/electronicinvoicefields
+cp -R views tmp/electronicinvoicefields
+cp -R upgrade tmp/electronicinvoicefields
+cp -R vendor tmp/electronicinvoicefields
+cp -R index.php tmp/electronicinvoicefields
+cp -R logo.png tmp/electronicinvoicefields
+cp -R electronicinvoicefields.php tmp/electronicinvoicefields
+cp -R config.xml tmp/electronicinvoicefields
+cp -R LICENSE tmp/electronicinvoicefields
+cp -R README.md tmp/electronicinvoicefields
 cd tmp && find . -name ".DS_Store" -delete
-zip -r electronic_invoice_fields.zip . -x ".*" -x "__MACOSX"
+zip -r electronicinvoicefields.zip . -x ".*" -x "__MACOSX"

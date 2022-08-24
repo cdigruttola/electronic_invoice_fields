@@ -42,7 +42,7 @@ class Address extends AddressCore
     {
         parent::__construct($id_address, $id_lang);
 
-        $einvoice = Module::getInstanceByName('electronic_invoice_fields');
+        $einvoice = Module::getInstanceByName('electronicinvoicefields');
         if (isset($einvoice) && isset($einvoice->active) && $einvoice->active) {
             $eiaddress = new EInvoiceAddress($this->id);
             if ($eiaddress->id_address) {

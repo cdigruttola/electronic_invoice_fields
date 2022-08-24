@@ -25,11 +25,11 @@
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Electronic_invoice_fields\Form\DataHandler;
+namespace cdigruttola\Module\Electronicinvoicefields\Form\DataHandler;
 
-use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Command\AddAddressCustomerTypeCommand;
-use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Command\EditAddressCustomerTypeCommand;
-use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
+use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\AddAddressCustomerTypeCommand;
+use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\EditAddressCustomerTypeCommand;
+use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
 use PrestaShop\PrestaShop\Core\CommandBus\CommandBusInterface;
 use PrestaShop\PrestaShop\Core\Form\IdentifiableObject\DataHandler\FormDataHandlerInterface;
 

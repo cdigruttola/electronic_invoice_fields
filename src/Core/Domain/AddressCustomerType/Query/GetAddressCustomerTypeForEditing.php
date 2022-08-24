@@ -25,9 +25,9 @@
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Query;
+namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Query;
 
-use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
+use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
 
 /**
  * Gets address customer type information for editing.
