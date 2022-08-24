@@ -9,7 +9,7 @@ class ComposerStaticInitc37d6450b0d4011af3ce091ac26f26d8
     public static $prefixLengthsPsr4 = array (
         'c' => 
         array (
-            'cdigruttola\\Module\\Electronicinvoicefields\\' => 45,
+            'cdigruttola\\Module\\Electronicinvoicefields\\' => 43,
         ),
     );
 
@@ -24,7 +24,7 @@ class ComposerStaticInitc37d6450b0d4011af3ce091ac26f26d8
         'Addresscustomertype' => __DIR__ . '/../..' . '/classes/Addresscustomertype.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'EInvoiceAddress' => __DIR__ . '/../..' . '/classes/EInvoiceAddress.php',
-        'Electronicinvoicefields' => __DIR__ . '/../..',
+        'Electronicinvoicefields' => __DIR__ . '/../..' . '/electronicinvoicefields.php',
         'cdigruttola\\Module\\Electronicinvoicefields\\Controller\\Admin\\AdminAddressCustomerTypeController' => __DIR__ . '/../..' . '/src/Controller/Admin/AdminAddressCustomerTypeController.php',
         'cdigruttola\\Module\\Electronicinvoicefields\\Core\\Domain\\AddressCustomerType\\AddressCustomerTypeFormDataProvider' => __DIR__ . '/../..' . '/src/Core/Domain/AddressCustomerType/AddressCustomerTypeFormDataProvider.php',
         'cdigruttola\\Module\\Electronicinvoicefields\\Core\\Domain\\AddressCustomerType\\CommandHandler\\AbstractAddressCustomerTypeHandler' => __DIR__ . '/../..' . '/src/Core/Domain/AddressCustomerType/CommandHandler/AbstractAddressCustomerTypeHandler.php',
