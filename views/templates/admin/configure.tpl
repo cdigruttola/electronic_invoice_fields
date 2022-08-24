@@ -38,10 +38,17 @@
     <p>
         &raquo; {l s='You can get a PDF documentation to configure this module' d='Modules.Electronic_invoice_fields.Configure'}:
     <ul>
+<<<<<<< HEAD
         <li><a href="{$module_dir|escape:'htmlall':'UTF-8'}docs/Einvoice_readme_en.pdf"
                target="_blank">{l s='English' d='Modules.Electronic_invoice_fields.Configure'}</a></li>
         <li><a href="{$module_dir|escape:'htmlall':'UTF-8'}docs/Einvoice_readme_it.pdf"
                target="_blank">{l s='Italian' d='Modules.Electronic_invoice_fields.Configure'}</a></li>
+=======
+        <li><a href="{$module_dir|escape:'htmlall':'UTF-8'}docs/readme_en.pdf"
+               target="_blank">{l s='English' d='Modules.Einvoice.Configure'}</a></li>
+        <li><a href="{$module_dir|escape:'htmlall':'UTF-8'}docs/readme_it.pdf"
+               target="_blank">{l s='Italian' d='Modules.Einvoice.Configure'}</a></li>
+>>>>>>> 82147c8f7a883e27bd519460059ba4936c40aee0
     </ul>
     </p>
     <p>
