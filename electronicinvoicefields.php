@@ -86,9 +86,12 @@ class Electronicinvoicefields extends Module
      * Don't forget to create update methods if needed:
      * http://doc.prestashop.com/display/PS16/Enabling+the+Auto-Update
      */
-    public function install(): bool
+    public function install($reset = false): bool
     {
-        include dirname(__FILE__) . '/sql/install.php';
+        if (!$reset) {
+            $this->_clearCache('*');
+            include dirname(__FILE__) . '/sql/install.php';
+        }
 
         return parent::install() &&
             $this->registerHook('header') &&
@@ -122,9 +125,9 @@ class Electronicinvoicefields extends Module
         return true;
     }
 
-    public function uninstall($delete_params = true): bool
+    public function uninstall($reset = false): bool
     {
-        if ($delete_params) {
+        if (!$reset) {
             include dirname(__FILE__) . '/sql/uninstall.php';
         }
         Configuration::deleteByName(self::EINVOICE_PEC_REQUIRED);
@@ -133,9 +136,11 @@ class Electronicinvoicefields extends Module
         return parent::uninstall();
     }
 
-    public function reset(): bool
+    public function onclickOption($opt, $href)
     {
-        return $this->uninstall(false);
+        if ($opt == 'reset') {
+            return $this->uninstall(true) && $this->install(true);
+        }
     }
 
     /**
