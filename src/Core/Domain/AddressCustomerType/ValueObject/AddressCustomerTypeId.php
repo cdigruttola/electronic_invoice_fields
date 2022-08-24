@@ -25,9 +25,9 @@
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\ValueObject;
+namespace cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\ValueObject;
 
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeException;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeException;
 
 /**
  * Defines AddressCustomerType ID with it's constraints

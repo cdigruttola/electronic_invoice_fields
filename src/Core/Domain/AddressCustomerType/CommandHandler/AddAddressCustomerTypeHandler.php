@@ -25,12 +25,12 @@
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\CommandHandler;
+namespace cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\CommandHandler;
 
 use Addresscustomertype;
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Command\AddAddressCustomerTypeCommand;
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeException;
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Command\AddAddressCustomerTypeCommand;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeException;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
 
 /**
  * Handles command that adds new address customer type

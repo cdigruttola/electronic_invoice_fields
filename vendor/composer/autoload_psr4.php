@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'cdigruttola\\Module\\Einvoice\\' => array($baseDir . '/src'),
+    'cdigruttola\\Module\\Electronic_invoice_fields\\' => array($baseDir . '/src'),
 );

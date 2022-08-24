@@ -25,10 +25,10 @@
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\CommandHandler;
+namespace cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\CommandHandler;
 
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Command\ToggleStatusAddressCustomerTypeCommand;
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Command\ToggleStatusAddressCustomerTypeCommand;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
 
 /**
  * Interface for service that handles command that toggle status of address customer type

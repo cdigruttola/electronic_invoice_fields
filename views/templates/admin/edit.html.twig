@@ -32,12 +32,12 @@
 {% block content %}
     <div class="row justify-content-center">
         <div class="col">
-            {% include '@Modules/einvoice/views/templates/admin/form.html.twig' %}
+            {% include '@Modules/electronic_invoice_fields/views/templates/admin/form.html.twig' %}
         </div>
     </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('../modules/einvoice/views/js/address_customer_type_form.bundle.js') }}"></script>
+    <script src="{{ asset('../modules/electronic_invoice_fields/views/js/address_customer_type_form.bundle.js') }}"></script>
 {% endblock %}

@@ -2,26 +2,26 @@ services:
   _defaults:
     public: true
 
-  cdigruttola.module.einvoice.core.domain.command_handler.add_address_customer_type_handler:
-    class: 'cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\CommandHandler\AddAddressCustomerTypeHandler'
+  cdigruttola.module.electronic_invoice_fields.core.domain.command_handler.add_address_customer_type_handler:
+    class: 'cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\CommandHandler\AddAddressCustomerTypeHandler'
     tags:
       - name: tactician.handler
-        command: 'cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Command\AddAddressCustomerTypeCommand'
+        command: 'cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Command\AddAddressCustomerTypeCommand'
 
-  cdigruttola.module.einvoice.core.domain.query_handler.get_address_customer_type_for_editing:
-    class: '\cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\QueryHandler\GetAddressCustomerTypeForEditingHandler'
+  cdigruttola.module.electronic_invoice_fields.core.domain.query_handler.get_address_customer_type_for_editing:
+    class: '\cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\QueryHandler\GetAddressCustomerTypeForEditingHandler'
     tags:
       - name: tactician.handler
-        command: 'cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Query\GetAddressCustomerTypeForEditing'
+        command: 'cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Query\GetAddressCustomerTypeForEditing'
 
-  cdigruttola.module.einvoice.core.domain.command_handler.edit_address_customer_type_handler:
-    class: 'cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\CommandHandler\EditAddressCustomerTypeHandler'
+  cdigruttola.module.electronic_invoice_fields.core.domain.command_handler.edit_address_customer_type_handler:
+    class: 'cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\CommandHandler\EditAddressCustomerTypeHandler'
     tags:
       - name: tactician.handler
-        command: 'cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Command\EditAddressCustomerTypeCommand'
+        command: 'cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Command\EditAddressCustomerTypeCommand'
 
-  cdigruttola.module.einvoice.core.domain.command_handler.toggle_status_address_customer_type_handler:
-    class: 'cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\CommandHandler\ToggleStatusAddressCustomerTypeHandler'
+  cdigruttola.module.electronic_invoice_fields.core.domain.command_handler.toggle_status_address_customer_type_handler:
+    class: 'cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\CommandHandler\ToggleStatusAddressCustomerTypeHandler'
     tags:
       - name: tactician.handler
-        command: 'cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Command\ToggleStatusAddressCustomerTypeCommand'
+        command: 'cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Command\ToggleStatusAddressCustomerTypeCommand'

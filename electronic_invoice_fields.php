@@ -30,7 +30,7 @@ if (!defined('_PS_VERSION_')) {
 }
 require 'vendor/autoload.php';
 
-class Einvoice extends Module
+class Electronic_invoice_fields extends Module
 {
     public const EINVOICE_PEC_REQUIRED = 'EINVOICE_PEC_REQUIRED';
     public const EINVOICE_SDI_REQUIRED = 'EINVOICE_SDI_REQUIRED';
@@ -38,7 +38,7 @@ class Einvoice extends Module
 
     public function __construct()
     {
-        $this->name = 'einvoice';
+        $this->name = 'electronic_invoice_fields';
         $this->tab = 'administration';
         $this->version = '2.0.0';
         $this->author = 'cdigruttola';
@@ -52,7 +52,7 @@ class Einvoice extends Module
 
         $tabNames = [];
         foreach (Language::getLanguages() as $lang) {
-            $tabNames[$lang['locale']] = $this->trans('Setting Address Customer Type', [], 'Modules.Einvoice.Einvoice', $lang['locale']);
+            $tabNames[$lang['locale']] = $this->trans('Setting Address Customer Type', [], 'Modules.Electronic_invoice_fields.Einvoice', $lang['locale']);
         }
 
         $this->tabs = [
@@ -63,16 +63,16 @@ class Einvoice extends Module
                 'route_name' => 'admin_address_customer_type',
                 'parent_class_name' => 'ShopParameters',
                 'wording' => 'Setting Address Customer Type',
-                'wording_domain' => 'Modules.Einvoice.Einvoice',
+                'wording_domain' => 'Modules.Electronic_invoice_fields.Einvoice',
             ],
         ];
 
         parent::__construct();
 
-        $this->displayName = $this->trans('Electronic Invoice - fields', [], 'Modules.Einvoice.Einvoice');
-        $this->description = $this->trans('This module adds the new fields for E-Invoice in Customer Address', [], 'Modules.Einvoice.Einvoice');
+        $this->displayName = $this->trans('Electronic Invoice - fields', [], 'Modules.Electronic_invoice_fields.Einvoice');
+        $this->description = $this->trans('This module adds the new fields for E-Invoice in Customer Address', [], 'Modules.Electronic_invoice_fields.Einvoice');
 
-        $this->confirmUninstall = $this->trans('Are you sure you want to uninstall?', [], 'Modules.Einvoice.Einvoice');
+        $this->confirmUninstall = $this->trans('Are you sure you want to uninstall?', [], 'Modules.Electronic_invoice_fields.Einvoice');
 
         $this->ps_versions_compliancy = ['min' => '1.6', 'max' => _PS_VERSION_];
     }
@@ -196,51 +196,51 @@ class Einvoice extends Module
         return [
             'form' => [
                 'legend' => [
-                    'title' => $this->trans('Settings', [], 'Modules.Einvoice.Einvoice'),
+                    'title' => $this->trans('Settings', [], 'Modules.Electronic_invoice_fields.Einvoice'),
                     'icon' => 'icon-cogs',
                 ],
                 'input' => [
                     [
                         'type' => 'switch',
-                        'label' => $this->trans('PEC field required', [], 'Modules.Einvoice.Einvoice'),
+                        'label' => $this->trans('PEC field required', [], 'Modules.Electronic_invoice_fields.Einvoice'),
                         'name' => self::EINVOICE_PEC_REQUIRED,
                         'is_bool' => true,
-                        'desc' => $this->trans('This options set the PEC field mandatory only for Italian customer.', [], 'Modules.Einvoice.Einvoice'),
+                        'desc' => $this->trans('This options set the PEC field mandatory only for Italian customer.', [], 'Modules.Electronic_invoice_fields.Einvoice'),
                         'values' => [
                             [
                                 'id' => 'active_on',
                                 'value' => true,
-                                'label' => $this->trans('Enabled', [], 'Modules.Einvoice.Einvoice'),
+                                'label' => $this->trans('Enabled', [], 'Modules.Electronic_invoice_fields.Einvoice'),
                             ],
                             [
                                 'id' => 'active_off',
                                 'value' => false,
-                                'label' => $this->trans('Disabled', [], 'Modules.Einvoice.Einvoice'),
+                                'label' => $this->trans('Disabled', [], 'Modules.Electronic_invoice_fields.Einvoice'),
                             ],
                         ],
                     ],
                     [
                         'type' => 'switch',
-                        'label' => $this->trans('SDI field required', [], 'Modules.Einvoice.Einvoice'),
+                        'label' => $this->trans('SDI field required', [], 'Modules.Electronic_invoice_fields.Einvoice'),
                         'name' => self::EINVOICE_SDI_REQUIRED,
                         'is_bool' => true,
-                        'desc' => $this->trans('This options set the SDI field mandatory only for Italian customer.', [], 'Modules.Einvoice.Einvoice'),
+                        'desc' => $this->trans('This options set the SDI field mandatory only for Italian customer.', [], 'Modules.Electronic_invoice_fields.Einvoice'),
                         'values' => [
                             [
                                 'id' => 'active_on',
                                 'value' => true,
-                                'label' => $this->trans('Enabled', [], 'Modules.Einvoice.Einvoice'),
+                                'label' => $this->trans('Enabled', [], 'Modules.Electronic_invoice_fields.Einvoice'),
                             ],
                             [
                                 'id' => 'active_off',
                                 'value' => false,
-                                'label' => $this->trans('Disabled', [], 'Modules.Einvoice.Einvoice'),
+                                'label' => $this->trans('Disabled', [], 'Modules.Electronic_invoice_fields.Einvoice'),
                             ],
                         ],
                     ],
                 ],
                 'submit' => [
-                    'title' => $this->trans('Save', [], 'Modules.Einvoice.Einvoice'),
+                    'title' => $this->trans('Save', [], 'Modules.Electronic_invoice_fields.Einvoice'),
                 ],
             ],
         ];
@@ -336,13 +336,13 @@ class Einvoice extends Module
             'sdi',
             \Symfony\Component\Form\Extension\Core\Type\TextType::class,
             [
-                'label' => $this->trans('SDI Code', [], 'Modules.Einvoice.Einvoice'),
+                'label' => $this->trans('SDI Code', [], 'Modules.Electronic_invoice_fields.Einvoice'),
                 'required' => $sdi_required,
                 'constraints' => [
                     new PrestaShop\PrestaShop\Core\ConstraintValidator\Constraints\CleanHtml(),
                     new \Symfony\Component\Validator\Constraints\Length([
                         'max' => 7,
-                        'maxMessage' => $this->trans('Max caracters allowed : 7', [], 'Modules.Einvoice.Einvoice'),
+                        'maxMessage' => $this->trans('Max caracters allowed : 7', [], 'Modules.Electronic_invoice_fields.Einvoice'),
                     ]),
                 ],
             ]
@@ -354,7 +354,7 @@ class Einvoice extends Module
             'pec',
             PrestaShopBundle\Form\Admin\Type\EmailType::class,
             [
-                'label' => $this->trans('PEC Address', [], 'Modules.Einvoice.Einvoice'),
+                'label' => $this->trans('PEC Address', [], 'Modules.Electronic_invoice_fields.Einvoice'),
                 'required' => $pec_required,
                 'constraints' => [
                     new PrestaShop\PrestaShop\Core\ConstraintValidator\Constraints\CleanHtml(),
@@ -370,7 +370,7 @@ class Einvoice extends Module
             [
                 'choices' => Addresscustomertype::getAddressCustomerTypeChoice($this->context->language->id),
                 'required' => true,
-                'label' => $this->trans('Customer Type', [], 'Modules.Einvoice.Einvoice'),
+                'label' => $this->trans('Customer Type', [], 'Modules.Electronic_invoice_fields.Einvoice'),
             ]
         );
 
@@ -399,22 +399,22 @@ class Einvoice extends Module
         $fields = [
             [
                 'type' => 'text',
-                'label' => $this->trans('PEC Email', [], 'Modules.Einvoice.Einvoice'),
+                'label' => $this->trans('PEC Email', [], 'Modules.Electronic_invoice_fields.Einvoice'),
                 'name' => 'pec',
                 'prefix' => "<i class='icon-envelope-o'></i>",
                 'class' => 'fixed-width-xxl',
-                'hint' => $this->trans('Invalid characters:', [], 'Modules.Einvoice.Einvoice') . ' <>;=#{}',
+                'hint' => $this->trans('Invalid characters:', [], 'Modules.Electronic_invoice_fields.Einvoice') . ' <>;=#{}',
             ],
             [
                 'type' => 'text',
                 'label' => $this->trans('SDI Code'),
                 'name' => 'sdi',
                 'class' => 'fixed-width-xxl',
-                'hint' => $this->trans('Invalid characters:', [], 'Modules.Einvoice.Einvoice') . ' <>;=#{}',
+                'hint' => $this->trans('Invalid characters:', [], 'Modules.Electronic_invoice_fields.Einvoice') . ' <>;=#{}',
             ],
             [
                 'type' => $switch,
-                'label' => $this->trans('Customer Type', [], 'Modules.Einvoice.Einvoice'),
+                'label' => $this->trans('Customer Type', [], 'Modules.Electronic_invoice_fields.Einvoice'),
                 'name' => 'id_addresscustomertype',
                 'class' => 't',
                 'is_bool' => true,
@@ -447,7 +447,7 @@ class Einvoice extends Module
             $pec_value = $pec->getValue();
             if (!empty($pec_value) && !Validate::isEmail($pec_value)) {
                 $is_valid &= false;
-                $pec->addError($this->trans('Invalid email address format', [], 'Modules.Einvoice.Einvoice'));
+                $pec->addError($this->trans('Invalid email address format', [], 'Modules.Electronic_invoice_fields.Einvoice'));
             }
         }
 
@@ -456,7 +456,7 @@ class Einvoice extends Module
             $sdi_value = $sdi->getValue();
             if (!empty($sdi_value) && Tools::strlen($sdi_value) != 7) {
                 $is_valid &= false;
-                $sdi->addError($this->trans('Invalid SDI Code', [], 'Modules.Einvoice.Einvoice'));
+                $sdi->addError($this->trans('Invalid SDI Code', [], 'Modules.Electronic_invoice_fields.Einvoice'));
             }
         }
 
@@ -518,7 +518,7 @@ class Einvoice extends Module
 
     public function hookAddWebserviceResources($params)
     {
-        if (Module::isEnabled('einvoice')) {
+        if (Module::isEnabled('electronic_invoice_fields')) {
             $def = [
                 'pec' => ['type' => ObjectModel::TYPE_STRING, 'validate' => 'isGenericName'],
                 'sdi' => ['type' => ObjectModel::TYPE_STRING, 'validate' => 'isGenericName'],
@@ -644,10 +644,10 @@ class Einvoice extends Module
         foreach (Language::getLanguages() as $lang) {
             PrestaShopLogger::addLog('insertAddressCustomerType ' . $lang['id_lang']);
             $sql[] = 'INSERT INTO ' . _DB_PREFIX_ . 'einvoice_customer_type_lang (`id_addresscustomertype`, `id_lang`, `name`) VALUES '
-                . '(1, ' . $lang['id_lang'] . ", '" . $this->trans('Private', [], 'Modules.Einvoice.Einvoice', $lang['locale']) . "'),"
-                . '(2, ' . $lang['id_lang'] . ", '" . $this->trans('Company/Professional', [], 'Modules.Einvoice.Einvoice', $lang['locale']) . "'),"
-                . '(3, ' . $lang['id_lang'] . ", '" . $this->trans('Association', [], 'Modules.Einvoice.Einvoice', $lang['locale']) . "'),"
-                . '(4, ' . $lang['id_lang'] . ", '" . $this->trans('Public Administration', [], 'Modules.Einvoice.Einvoice', $lang['locale']) . "');";
+                . '(1, ' . $lang['id_lang'] . ", '" . $this->trans('Private', [], 'Modules.Electronic_invoice_fields.Einvoice', $lang['locale']) . "'),"
+                . '(2, ' . $lang['id_lang'] . ", '" . $this->trans('Company/Professional', [], 'Modules.Electronic_invoice_fields.Einvoice', $lang['locale']) . "'),"
+                . '(3, ' . $lang['id_lang'] . ", '" . $this->trans('Association', [], 'Modules.Electronic_invoice_fields.Einvoice', $lang['locale']) . "'),"
+                . '(4, ' . $lang['id_lang'] . ", '" . $this->trans('Public Administration', [], 'Modules.Electronic_invoice_fields.Einvoice', $lang['locale']) . "');";
         }
 
         foreach ($sql as $query) {

@@ -25,9 +25,9 @@
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\QueryHandler;
+namespace cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\QueryHandler;
 
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Query\GetAddressCustomerTypeForEditing;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Query\GetAddressCustomerTypeForEditing;
 use PrestaShop\PrestaShop\Core\Domain\OrderReturnState\QueryResult\EditableOrderReturnState;
 
 /**

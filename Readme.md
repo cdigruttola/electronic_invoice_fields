@@ -1,4 +1,4 @@
-# einvoice
+# electronic_invoice_fields
 
 Prestashop Module to add Electronic Invoice fields in addresses.
 

@@ -26,9 +26,9 @@
 
 declare(strict_types=1);
 
-namespace cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Command;
+namespace cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Command;
 
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
 
 /**
  * Class ToggleZoneStatusCommand is responsible for toggling address customer type status

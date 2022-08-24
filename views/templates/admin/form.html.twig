@@ -29,15 +29,15 @@
     <div class="card">
         <h3 class="card-header">
             <i class="material-icons">schedule</i>
-            {{ 'Address Customer Types'|trans({}, 'Modules.Einvoice.Einvoice') }}
+            {{ 'Address Customer Types'|trans({}, 'Modules.Electronic_invoice_fields.Einvoice') }}
         </h3>
         <div class="card-block row">
             <div class="card-text">
                 {{ form_errors(addressCustomerTypeForm) }}
 
                 {{ ps.form_group_row(addressCustomerTypeForm.name, {}, {
-                    'label': 'Address Customer Type name'|trans({}, 'Modules.Einvoice.Einvoice'),
-                    'help': 'Invalid characters: numbers and'|trans({}, 'Modules.Einvoice.Einvoice')
+                    'label': 'Address Customer Type name'|trans({}, 'Modules.Electronic_invoice_fields.Einvoice'),
+                    'help': 'Invalid characters: numbers and'|trans({}, 'Modules.Electronic_invoice_fields.Einvoice')
                     ~ ' !<>,;?=+()@#"{}_$%:'
                 }) }}
 

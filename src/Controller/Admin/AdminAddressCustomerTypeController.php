@@ -23,17 +23,17 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace cdigruttola\Module\Einvoice\Controller\Admin;
+namespace cdigruttola\Module\Electronic_invoice_fields\Controller\Admin;
 
 use Addresscustomertype;
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Command\ToggleStatusAddressCustomerTypeCommand;
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeConstraintException;
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeException;
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeNotFoundException;
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\DuplicateAddressCustomerTypeNameException;
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Exception\MissingAddressCustomerTypeRequiredFieldsException;
-use cdigruttola\Module\Einvoice\Core\Domain\AddressCustomerType\Query\GetAddressCustomerTypeForEditing;
-use cdigruttola\Module\Einvoice\Core\Search\Filters\AddressCustomerTypeFilters;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Command\ToggleStatusAddressCustomerTypeCommand;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeConstraintException;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeException;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeNotFoundException;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Exception\DuplicateAddressCustomerTypeNameException;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Exception\MissingAddressCustomerTypeRequiredFieldsException;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Domain\AddressCustomerType\Query\GetAddressCustomerTypeForEditing;
+use cdigruttola\Module\Electronic_invoice_fields\Core\Search\Filters\AddressCustomerTypeFilters;
 use Exception;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use PrestaShopBundle\Security\Annotation\AdminSecurity;
@@ -56,10 +56,10 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
     public function indexAction(Request $request, AddressCustomerTypeFilters $filters)
     {
         $legacyController = $request->attributes->get('_legacy_controller');
-        $addressCustomerTypeGridFactory = $this->get('cdigruttola.module.einvoice.core.grid.factory.address_customer_type');
+        $addressCustomerTypeGridFactory = $this->get('cdigruttola.module.electronic_invoice_fields.core.grid.factory.address_customer_type');
         $addressCustomerTypeGrid = $addressCustomerTypeGridFactory->getGrid($filters);
 
-        return $this->render('@Modules/einvoice/views/templates/admin/index.html.twig', [
+        return $this->render('@Modules/electronic_invoice_fields/views/templates/admin/index.html.twig', [
             'addressCustomerTypeGrid' => $this->presentGrid($addressCustomerTypeGrid),
             'help_link' => $this->generateSidebarLink($legacyController),
         ]);
@@ -74,10 +74,10 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
      */
     public function createAction(Request $request)
     {
-        $addressCustomerTypeForm = $this->get('cdigruttola.module.einvoice.core.form.identifiable_object.builder.address_customer_type_form_builder')->getForm();
+        $addressCustomerTypeForm = $this->get('cdigruttola.module.electronic_invoice_fields.core.form.identifiable_object.builder.address_customer_type_form_builder')->getForm();
         $addressCustomerTypeForm->handleRequest($request);
 
-        $addressCustomerTypeFormHandler = $this->get('cdigruttola.module.einvoice.core.form.identifiable_object.handler.address_customer_type_form_handler');
+        $addressCustomerTypeFormHandler = $this->get('cdigruttola.module.electronic_invoice_fields.core.form.identifiable_object.handler.address_customer_type_form_handler');
 
         try {
             $result = $addressCustomerTypeFormHandler->handle($addressCustomerTypeForm);
@@ -91,7 +91,7 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
             $this->addFlash('error', $this->getErrorMessageForException($e, $this->getErrorMessages($e)));
         }
 
-        return $this->render('@Modules/einvoice/views/templates/admin/create.html.twig', [
+        return $this->render('@Modules/electronic_invoice_fields/views/templates/admin/create.html.twig', [
             'addressCustomerTypeForm' => $addressCustomerTypeForm->createView(),
             'help_link' => $this->generateSidebarLink($request->attributes->get('_legacy_controller')),
             'contextLangId' => $this->getContextLangId(),
@@ -113,10 +113,10 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
      */
     public function editAction(int $addressCustomerTypeId, Request $request)
     {
-        $addressCustomerTypeForm = $this->get('cdigruttola.module.einvoice.core.form.identifiable_object.builder.address_customer_type_form_builder')->getFormFor($addressCustomerTypeId);
+        $addressCustomerTypeForm = $this->get('cdigruttola.module.electronic_invoice_fields.core.form.identifiable_object.builder.address_customer_type_form_builder')->getFormFor($addressCustomerTypeId);
         $addressCustomerTypeForm->handleRequest($request);
 
-        $addressCustomerTypeFormHandler = $this->get('cdigruttola.module.einvoice.core.form.identifiable_object.handler.address_customer_type_form_handler');
+        $addressCustomerTypeFormHandler = $this->get('cdigruttola.module.electronic_invoice_fields.core.form.identifiable_object.handler.address_customer_type_form_handler');
 
         try {
             $result = $addressCustomerTypeFormHandler->handleFor($addressCustomerTypeId, $addressCustomerTypeForm);
@@ -134,7 +134,7 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
             $this->addFlash('error', $this->getErrorMessageForException($e, $this->getErrorMessages($e)));
         }
 
-        return $this->render('@Modules/einvoice/views/templates/admin/edit.html.twig', [
+        return $this->render('@Modules/electronic_invoice_fields/views/templates/admin/edit.html.twig', [
             'addressCustomerTypeForm' => $addressCustomerTypeForm->createView(),
             'help_link' => $this->generateSidebarLink($request->attributes->get('_legacy_controller')),
             'editableAddressCustomerType' => $this->getQueryBus()->handle(new GetAddressCustomerTypeForEditing((int)$addressCustomerTypeId)),
@@ -155,15 +155,15 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
         $errors = [];
         if (Addresscustomertype::checkAssociatedAddressToAddressCustomerType($addressCustomerTypeId)) {
             $errors[] = ['key' => 'Could not delete %i%, there is at least one address associated',
-                'domain' => 'Modules.Einvoice.Einvoice',
+                'domain' => 'Modules.Electronic_invoice_fields.Einvoice',
                 'parameters' => ['%i%' => $addressCustomerTypeId],];
         } else if (!$addressCustomerType->removable) {
             $errors[] = ['key' => 'Could not delete %i%',
-                'domain' => 'Modules.Einvoice.Einvoice',
+                'domain' => 'Modules.Electronic_invoice_fields.Einvoice',
                 'parameters' => ['%i%' => $addressCustomerTypeId],];
         } else if (!$addressCustomerType->delete()) {
             $errors[] = ['key' => 'Could not delete %i%',
-                'domain' => 'Modules.Einvoice.Einvoice',
+                'domain' => 'Modules.Electronic_invoice_fields.Einvoice',
                 'parameters' => ['%i%' => $addressCustomerTypeId],];
         }
 
