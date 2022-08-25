@@ -30,7 +30,7 @@ $(document).ready(function () {
     needInvoice(chk).then((result) => {
         if (result) {
             need_invoice = result.need_invoice;
-            toggleCustomerType();
+            toggleCustomerType(need_invoice);
         }
     });
 
