@@ -23,7 +23,6 @@
  *
  */
 
-
 const path = require('path');
 const webpack = require('webpack');
 const keepLicense = require('uglify-save-license');
@@ -37,6 +36,7 @@ module.exports = {
     entry: {
         address_customer_type: '../js/electronicinvoicefields/index',
         address_customer_type_form: '../js/electronicinvoicefields/form',
+        front: '../js/front/front',
     }, output: {
         path: path.resolve(__dirname, '../../views/js'), filename: '[name].bundle.js', publicPath: 'public',
     }, // devtool: 'source-map', // uncomment me to build source maps (really slow)

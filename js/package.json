@@ -1,6 +1,6 @@
 {
-  "name": "prestashop/demo_grid",
-  "version": "1.0.0",
+  "name": "cdigruttola/electronicsinvoicefields",
+  "version": "2.1.0",
   "description": "",
   "scripts": {
     "build": "webpack --progress --mode=production",
