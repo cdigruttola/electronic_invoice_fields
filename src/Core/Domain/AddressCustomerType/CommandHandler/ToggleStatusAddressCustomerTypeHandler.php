@@ -48,7 +48,7 @@ final class ToggleStatusAddressCustomerTypeHandler extends AbstractAddressCustom
     public function handle(ToggleStatusAddressCustomerTypeCommand $command)
     {
         $addressCustomerTypeId = $command->getAddressCustomerTypeId();
-        $addressCustomerType = new AddressCustomerType($addressCustomerTypeId->getValue());
+        $addressCustomerType = new Addresscustomertype($addressCustomerTypeId->getValue());
 
         $this->assertAddressCustomerTypeWasFound($addressCustomerTypeId, $addressCustomerType);
 

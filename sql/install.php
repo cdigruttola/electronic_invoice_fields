@@ -38,6 +38,7 @@ $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'einvoice_customer_type`
     `id_addresscustomertype` int(10) NOT NULL AUTO_INCREMENT,
     `removable` tinyint(1) unsigned DEFAULT 1 NOT NULL,
     `active` tinyint(1) unsigned DEFAULT 1 NOT NULL,
+    `need_invoice` tinyint(1) unsigned DEFAULT 0 NOT NULL,
     `date_add` datetime NOT NULL,
     `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id_addresscustomertype`)

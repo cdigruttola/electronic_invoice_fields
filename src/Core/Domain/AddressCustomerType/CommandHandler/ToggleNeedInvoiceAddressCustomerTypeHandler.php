@@ -27,46 +27,36 @@ declare(strict_types=1);
 
 namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\CommandHandler;
 
-use AddressCustomerType;
-use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\EditAddressCustomerTypeCommand;
-use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeException;
+use Addresscustomertype;
+use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\ToggleNeedInvoiceAddressCustomerTypeCommand;
+use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeNotFoundException;
+use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\CannotToggleStatusAddressCustomerTypeException;
+use PrestaShopException;
 
 /**
- * Handles commands which edits given address customer type with provided data.
+ * Handles command that toggle status of address customer type
  *
  * @internal
  */
-final class EditAddressCustomerTypeHandler extends AbstractAddressCustomerTypeHandler implements EditAddressCustomerTypeHandlerInterface
+final class ToggleNeedInvoiceAddressCustomerTypeHandler extends AbstractAddressCustomerTypeHandler implements ToggleNeedInvoiceAddressCustomerTypeHandlerInterface
 {
     /**
      * {@inheritdoc}
+     * @throws PrestaShopException
+     * @throws CannotToggleStatusAddressCustomerTypeException|AddressCustomerTypeNotFoundException
      */
-    public function handle(EditAddressCustomerTypeCommand $command)
+
+    public function handle(ToggleNeedInvoiceAddressCustomerTypeCommand $command)
     {
         $addressCustomerTypeId = $command->getAddressCustomerTypeId();
         $addressCustomerType = new AddressCustomerType($addressCustomerTypeId->getValue());
 
         $this->assertAddressCustomerTypeWasFound($addressCustomerTypeId, $addressCustomerType);
 
-        $this->updateAddressCustomerTypeWithCommandData($addressCustomerType, $command);
-
-        $this->assertRequiredFieldsAreNotMissing($addressCustomerType);
-
-        if (false === $addressCustomerType->validateFields(false)) {
-            throw new AddressCustomerTypeException('addressCustomerType contains invalid field values');
-        }
-
+        $addressCustomerType->need_invoice = !(int)$addressCustomerType->need_invoice;
         if (false === $addressCustomerType->update()) {
-            throw new AddressCustomerTypeException('Failed to update address customer type');
+            throw new CannotToggleStatusAddressCustomerTypeException(sprintf('Unable to toggle need invoice of address customer type with id "%d"', $addressCustomerTypeId->getValue()));
         }
     }
 
-    private function updateAddressCustomerTypeWithCommandData(AddressCustomerType $addressCustomerType, EditAddressCustomerTypeCommand $command)
-    {
-        if (null !== $command->getName()) {
-            $addressCustomerType->name = $command->getName();
-        }
-        $addressCustomerType->active = $command->isActive();
-        $addressCustomerType->need_invoice = $command->isNeedInvoice();
-    }
 }

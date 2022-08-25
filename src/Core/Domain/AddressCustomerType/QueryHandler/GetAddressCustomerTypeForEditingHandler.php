@@ -54,7 +54,8 @@ final class GetAddressCustomerTypeForEditingHandler implements GetAddressCustome
         return new EditableAddressCustomerType(
             $addressCustomerTypeId,
             $addressCustomerType->name,
-            (bool)$addressCustomerType->active
+            (bool)$addressCustomerType->active,
+            (bool)$addressCustomerType->need_invoice
         );
     }
 }

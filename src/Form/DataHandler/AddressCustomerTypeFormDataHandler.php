@@ -80,7 +80,8 @@ final class AddressCustomerTypeFormDataHandler implements FormDataHandlerInterfa
     {
         $command = new AddAddressCustomerTypeCommand(
             $data['name'],
-            $data['active'] ?? false
+            $data['active'] ?? false,
+            $data['need_invoice'] ?? false
         );
 
         return $command;
@@ -95,6 +96,7 @@ final class AddressCustomerTypeFormDataHandler implements FormDataHandlerInterfa
     {
         return (new EditAddressCustomerTypeCommand($AddressCustomerTypeId))
             ->setName($data['name'])
-            ->setActive((bool)$data['active']);
+            ->setActive((bool)$data['active'])
+            ->setNeedInvoice((bool)$data['need_invoice']);
     }
 }

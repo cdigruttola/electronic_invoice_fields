@@ -46,16 +46,22 @@ class EditableAddressCustomerType
      * @var bool
      */
     private $active;
+    /**
+     * @var bool
+     */
+    private $need_invoice;
 
     public function __construct(
         AddressCustomerTypeId $addressCustomerTypeId,
         array                 $name,
-        bool                  $active
+        bool                  $active,
+        bool                  $need_invoice
     )
     {
         $this->addressCustomerTypeId = $addressCustomerTypeId;
         $this->localizedNames = $name;
         $this->active = $active;
+        $this->need_invoice = $need_invoice;
     }
 
     /**
@@ -80,6 +86,14 @@ class EditableAddressCustomerType
     public function isActive(): bool
     {
         return $this->active;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNeedInvoice(): bool
+    {
+        return $this->need_invoice;
     }
 
 }

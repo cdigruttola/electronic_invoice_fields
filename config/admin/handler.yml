@@ -9,7 +9,7 @@ services:
         command: 'cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\AddAddressCustomerTypeCommand'
 
   cdigruttola.module.electronicinvoicefields.core.domain.query_handler.get_address_customer_type_for_editing:
-    class: '\cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\QueryHandler\GetAddressCustomerTypeForEditingHandler'
+    class: 'cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\QueryHandler\GetAddressCustomerTypeForEditingHandler'
     tags:
       - name: tactician.handler
         command: 'cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Query\GetAddressCustomerTypeForEditing'
@@ -25,3 +25,9 @@ services:
     tags:
       - name: tactician.handler
         command: 'cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\ToggleStatusAddressCustomerTypeCommand'
+
+  cdigruttola.module.electronicinvoicefields.core.domain.command_handler.toggle_need_invoice_address_customer_type_handler:
+    class: 'cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\CommandHandler\ToggleNeedInvoiceAddressCustomerTypeHandler'
+    tags:
+      - name: tactician.handler
+        command: 'cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\ToggleNeedInvoiceAddressCustomerTypeCommand'

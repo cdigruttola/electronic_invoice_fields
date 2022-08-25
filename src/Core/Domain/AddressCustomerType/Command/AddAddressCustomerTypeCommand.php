@@ -42,12 +42,17 @@ class AddAddressCustomerTypeCommand
      * @var bool
      */
     private $active;
+    /**
+     * @var bool
+     */
+    private $need_invoice;
 
     public function __construct(
-        array $localizedNames, bool $active)
+        array $localizedNames, bool $active, bool $need_invoice)
     {
         $this->setLocalizedNames($localizedNames);
         $this->setActive($active);
+        $this->setNeedInvoice($need_invoice);
     }
 
     /**
@@ -64,6 +69,14 @@ class AddAddressCustomerTypeCommand
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNeedInvoice(): bool
+    {
+        return $this->need_invoice;
     }
 
     /**
@@ -90,6 +103,14 @@ class AddAddressCustomerTypeCommand
     public function setActive(bool $active): void
     {
         $this->active = $active;
+    }
+
+    /**
+     * @param bool $need_invoice
+     */
+    public function setNeedInvoice(bool $need_invoice): void
+    {
+        $this->need_invoice = $need_invoice;
     }
 
 }

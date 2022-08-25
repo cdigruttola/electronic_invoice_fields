@@ -51,3 +51,15 @@ admin_address_customer_type_toggle_status:
       id_zone: addressCustomerTypeId
   requirements:
     addressCustomerTypeId: \d+
+
+admin_address_customer_type_toggle_need_invoice:
+  path: /address-customer-type/toggle-need-invoice/{addressCustomerTypeId}
+  methods: POST
+  defaults:
+    _controller: 'cdigruttola\Module\Electronicinvoicefields\Controller\Admin\AdminAddressCustomerTypeController::toggleNeedInvoiceAction'
+    _legacy_controller: 'AdminAddressCustomerTypeController'
+    _legacy_link: 'AdminAddressCustomerTypeController:enableInvoiceSelection'
+    _legacy_parameters:
+      id_zone: addressCustomerTypeId
+  requirements:
+    addressCustomerTypeId: \d+

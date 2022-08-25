@@ -37,6 +37,10 @@ class Addresscustomertype extends ObjectModel
      */
     public $active;
     /**
+     * @var bool
+     */
+    public $need_invoice;
+    /**
      * @var string
      */
     public $date_add;
@@ -58,6 +62,7 @@ class Addresscustomertype extends ObjectModel
             'name' => ['type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'required' => true, 'size' => 40],
             'removable' => ['type' => self::TYPE_BOOL, 'required' => true, 'validate' => 'isBool'],
             'active' => ['type' => self::TYPE_BOOL, 'required' => true, 'validate' => 'isBool'],
+            'need_invoice' => ['type' => self::TYPE_BOOL, 'required' => true, 'validate' => 'isBool'],
             'date_add' => ['type' => self::TYPE_DATE, 'validate' => 'isDate'],
             'date_upd' => ['type' => self::TYPE_DATE, 'validate' => 'isDate'],
         ],

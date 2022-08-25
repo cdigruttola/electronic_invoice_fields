@@ -26,6 +26,7 @@
 namespace cdigruttola\Module\Electronicinvoicefields\Controller\Admin;
 
 use Addresscustomertype;
+use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\ToggleNeedInvoiceAddressCustomerTypeCommand;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\ToggleStatusAddressCustomerTypeCommand;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeConstraintException;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeException;
@@ -198,6 +199,27 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
         return $this->redirectToRoute(self::INDEX_ROUTE);
     }
 
+    /**
+     * @AdminSecurity("is_granted('update', request.get('_legacy_controller'))", message="Access denied.")
+     *
+     * @param int $addressCustomerTypeId
+     *
+     * @return RedirectResponse
+     */
+    public function toggleNeedInvoiceAction(int $addressCustomerTypeId): RedirectResponse
+    {
+        try {
+            $this->getCommandBus()->handle(new ToggleNeedInvoiceAddressCustomerTypeCommand($addressCustomerTypeId));
+            $this->addFlash(
+                'success',
+                $this->trans('The status has been successfully updated.', 'Admin.Notifications.Success')
+            );
+        } catch (AddressCustomerTypeException $e) {
+            $this->addFlash('error', $this->getErrorMessageForException($e, $this->getErrorMessages($e)));
+        }
+
+        return $this->redirectToRoute(self::INDEX_ROUTE);
+    }
 
     /**
      * Get errors that can be used to translate exceptions into user friendly messages

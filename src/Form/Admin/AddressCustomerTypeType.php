@@ -63,6 +63,10 @@ class AddressCustomerTypeType extends TranslatorAwareType
             ->add('active', SwitchType::class, [
                 'label' => $this->getTranslator()->trans('Enabled', [], 'Admin.Global'),
                 'required' => false,
+            ])
+            ->add('need_invoice', SwitchType::class, [
+                'label' => $this->getTranslator()->trans('Need Invoice', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                'required' => false,
             ]);
     }
 

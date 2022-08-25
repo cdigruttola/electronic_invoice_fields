@@ -52,6 +52,10 @@ class EditAddressCustomerTypeCommand
      * @var bool
      */
     private $active;
+    /**
+     * @var bool
+     */
+    private $need_invoice;
 
     /**
      * @param int $addressCustomerTypeId
@@ -104,5 +108,23 @@ class EditAddressCustomerTypeCommand
         $this->active = $active;
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isNeedInvoice(): bool
+    {
+        return $this->need_invoice;
+    }
+
+    /**
+     * @param bool $need_invoice
+     */
+    public function setNeedInvoice(bool $need_invoice): EditAddressCustomerTypeCommand
+    {
+        $this->need_invoice = $need_invoice;
+        return $this;
+    }
+
 
 }

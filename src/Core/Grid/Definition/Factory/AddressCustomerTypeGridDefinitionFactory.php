@@ -97,6 +97,17 @@ final class AddressCustomerTypeGridDefinitionFactory extends AbstractFilterableG
                         'sortable' => false,
                     ])
             )
+            ->add(
+                (new ToggleColumn('need_invoice'))
+                    ->setName($this->trans('Need Invoice', [], 'Modules.Electronicinvoicefields.Einvoice'))
+                    ->setOptions([
+                        'field' => 'need_invoice',
+                        'primary_field' => 'id_addresscustomertype',
+                        'route' => 'admin_address_customer_type_toggle_need_invoice',
+                        'route_param_name' => 'addressCustomerTypeId',
+                        'sortable' => false,
+                    ])
+            )
             ->add((new ActionColumn('actions'))
                 ->setName($this->trans('Actions', [], 'Admin.Global'))
                 ->setOptions([
@@ -160,6 +171,14 @@ final class AddressCustomerTypeGridDefinitionFactory extends AbstractFilterableG
                         'choice_translation_domain' => false,
                     ])
                     ->setAssociatedColumn('active')
+            )
+            ->add(
+                (new Filter('need_invoice', YesAndNoChoiceType::class))
+                    ->setTypeOptions([
+                        'required' => false,
+                        'choice_translation_domain' => false,
+                    ])
+                    ->setAssociatedColumn('need_invoice')
             )
             ->add(
                 (new Filter('actions', SearchAndResetType::class))

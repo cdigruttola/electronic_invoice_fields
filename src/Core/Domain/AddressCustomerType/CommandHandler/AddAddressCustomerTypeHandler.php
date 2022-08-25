@@ -62,6 +62,7 @@ final class AddAddressCustomerTypeHandler extends AbstractAddressCustomerTypeHan
     {
         $addressCustomerType->name = $command->getLocalizedNames();
         $addressCustomerType->active = $command->getActive();
+        $addressCustomerType->need_invoice = $command->isNeedInvoice();
         $addressCustomerType->removable = true;
     }
 }

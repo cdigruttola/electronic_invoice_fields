@@ -60,6 +60,7 @@ final class AddressCustomerTypeFormDataProvider implements FormDataProviderInter
         return [
             'name' => $editableAddressCustomerType->getLocalizedNames(),
             'active' => $editableAddressCustomerType->isActive(),
+            'need_invoice' => $editableAddressCustomerType->isNeedInvoice(),
         ];
     }
 
