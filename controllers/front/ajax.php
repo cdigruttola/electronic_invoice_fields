@@ -41,10 +41,11 @@ class ElectronicinvoicefieldsAjaxModuleFrontController extends ModuleFrontContro
         if (!empty($value)) {
             header('Content-Type: application/json');
             $addressCustomerType = new Addresscustomertype((int)$value);
-            $this->ajaxRender(json_encode([
-                'need_invoice' => (bool)$addressCustomerType->need_invoice,
-            ]));
+            $this->ajaxRender(json_encode(['need_invoice' => (bool)$addressCustomerType->need_invoice,]));
             unset($addressCustomerType);
+        } else {
+            $this->ajaxRender(json_encode(['need_invoice' => false,]));
+
         }
     }
 }

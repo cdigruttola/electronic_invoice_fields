@@ -25,110 +25,120 @@
  */
 
 $(document).ready(function () {
-    toggleCustomerType();
+    var chk = $('select[name=id_addresscustomertype] option:selected').val();
+    var need_invoice = false;
+    needInvoice(chk).then((result) => {
+        if (result) {
+            need_invoice = result.need_invoice;
+            toggleCustomerType();
+        }
+    });
 
     $('select[name=id_addresscustomertype]').change(function (e) {
         e.preventDefault();
-        toggleCustomerType();
+        chk = $('select[name=id_addresscustomertype] option:selected').val();
+        needInvoice(chk).then((result) => {
+            if (result) {
+                need_invoice = result.need_invoice;
+                toggleCustomerType(need_invoice);
+            }
+        });
     });
 });
 
-function toggleCustomerType() {
-    var chk = $('select[name=id_addresscustomertype] option:selected').val();
-
-    if (typeof chk !== 'undefined') {
-        var need_invoice = false;
+function needInvoice(chk) {
+    return new Promise((resolve) => {
         $.ajax({
             type: 'GET',
             url: ajax_link,
-            async: false,
             dataType: "json",
             headers: {Accept: "application/json"},
             data: {
                 id: chk
             },
             success: function (result) {
-                if (result) {
-                    need_invoice = result.need_invoice;
-                }
+                resolve(result);
             }
         });
+    });
+}
 
-        var obj_first_name = $('input[name=firstname]');
-        var obj_last_name = $('input[name=lastname]');
-        var obj_company = $('input[name=company]');
-        var obj_vat_number = $('input[name=vat_number]');
+function toggleCustomerType(need_invoice) {
+    var obj_first_name = $('input[name=firstname]');
+    var obj_last_name = $('input[name=lastname]');
+    var obj_company = $('input[name=company]');
+    var obj_vat_number = $('input[name=vat_number]');
 
-        var obj_sdi = $('input[name=sdi]');
-        var obj_pec = $('input[name=pec]');
-        var obj_dni = $('input[name=dni]');
+    var obj_sdi = $('input[name=sdi]');
+    var obj_pec = $('input[name=pec]');
+    var obj_dni = $('input[name=dni]');
 
-        if (need_invoice) {
-            obj_first_name.prop('required', false);
-            obj_first_name.closest('.form-group').hide(100);
-            obj_last_name.prop('required', false);
-            obj_last_name.closest('.form-group').hide(100);
+    let speed = 50;
+    if (need_invoice) {
+        obj_first_name.prop('required', false);
+        obj_first_name.closest('.form-group').hide(speed);
+        obj_last_name.prop('required', false);
+        obj_last_name.closest('.form-group').hide(speed);
 
-            obj_company.closest('.form-group').show(100);
-            obj_company.prop('required', true);
-            if (!obj_company.closest('.form-group').find('label.form-control-label').hasClass('required')) {
-                obj_company.closest('.form-group').find('label.form-control-label').addClass('required');
+        obj_company.closest('.form-group').show(speed);
+        obj_company.prop('required', true);
+        if (!obj_company.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+            obj_company.closest('.form-group').find('label.form-control-label').addClass('required');
+        }
+
+        obj_dni.closest('.form-group').hide(speed);
+
+        obj_company.closest('.form-group').find('.form-control-comment').html('');
+        obj_vat_number.closest('.form-group').show(speed);
+        obj_vat_number.prop('required', true);
+        if (!obj_vat_number.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+            obj_vat_number.closest('.form-group').find('label.form-control-label').addClass('required');
+        }
+        obj_vat_number.closest('.form-group').find('.form-control-comment').html('');
+        obj_sdi.closest('.form-group').show(speed);
+        if (sdi_required) {
+            obj_sdi.prop('required', true);
+            if (!obj_sdi.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+                obj_sdi.closest('.form-group').find('label.form-control-label').addClass('required');
             }
+            obj_sdi.closest('.form-group').find('.form-control-comment').html('');
+        }
+        obj_pec.closest('.form-group').show(speed);
+        if (pec_required) {
+            obj_pec.prop('required', true);
+            if (!obj_pec.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+                obj_pec.closest('.form-group').find('label.form-control-label').addClass('required');
+            }
+            obj_pec.closest('.form-group').find('.form-control-comment').html('');
+        }
+    } else {
+        obj_first_name.prop('required', true);
+        obj_first_name.closest('.form-group').show(speed);
+        obj_last_name.prop('required', true);
+        obj_last_name.closest('.form-group').show(speed);
 
-            obj_dni.closest('.form-group').hide(100);
+        obj_company.closest('.form-group').hide(speed);
+        obj_company.prop('required', false);
+        if (obj_company.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+            obj_company.closest('.form-group').find('label.form-control-label').removeClass('required');
+        }
 
-            obj_company.closest('.form-group').find('.form-control-comment').html('');
-            obj_vat_number.closest('.form-group').show(100);
-            obj_vat_number.prop('required', true);
-            if (!obj_vat_number.closest('.form-group').find('label.form-control-label').hasClass('required')) {
-                obj_vat_number.closest('.form-group').find('label.form-control-label').addClass('required');
-            }
-            obj_vat_number.closest('.form-group').find('.form-control-comment').html('');
-            obj_sdi.closest('.form-group').show(100);
-            if (sdi_required) {
-                obj_sdi.prop('required', true);
-                if (!obj_sdi.closest('.form-group').find('label.form-control-label').hasClass('required')) {
-                    obj_sdi.closest('.form-group').find('label.form-control-label').addClass('required');
-                }
-                obj_sdi.closest('.form-group').find('.form-control-comment').html('');
-            }
-            obj_pec.closest('.form-group').show(100);
-            if (pec_required) {
-                obj_pec.prop('required', true);
-                if (!obj_pec.closest('.form-group').find('label.form-control-label').hasClass('required')) {
-                    obj_pec.closest('.form-group').find('label.form-control-label').addClass('required');
-                }
-                obj_pec.closest('.form-group').find('.form-control-comment').html('');
-            }
-        } else {
-            obj_first_name.prop('required', true);
-            obj_first_name.closest('.form-group').show(100);
-            obj_last_name.prop('required', true);
-            obj_last_name.closest('.form-group').show(100);
+        obj_dni.closest('.form-group').show(speed);
 
-            obj_company.closest('.form-group').hide(100);
-            obj_company.prop('required', false);
-            if (obj_company.closest('.form-group').find('label.form-control-label').hasClass('required')) {
-                obj_company.closest('.form-group').find('label.form-control-label').removeClass('required');
-            }
-
-            obj_dni.closest('.form-group').show(100);
-
-            obj_vat_number.closest('.form-group').hide(100);
-            obj_vat_number.prop('required', false);
-            if (obj_vat_number.closest('.form-group').find('label.form-control-label').hasClass('required')) {
-                obj_vat_number.closest('.form-group').find('label.form-control-label').removeClass('required');
-            }
-            obj_sdi.closest('.form-group').hide(100);
-            obj_sdi.prop('required', false);
-            if (obj_sdi.closest('.form-group').find('label.form-control-label').hasClass('required')) {
-                obj_sdi.closest('.form-group').find('label.form-control-label').removeClass('required');
-            }
-            obj_pec.closest('.form-group').hide(100);
-            obj_pec.prop('required', false);
-            if (obj_pec.closest('.form-group').find('label.form-control-label').hasClass('required')) {
-                obj_pec.closest('.form-group').find('label.form-control-label').removeClass('required');
-            }
+        obj_vat_number.closest('.form-group').hide(speed);
+        obj_vat_number.prop('required', false);
+        if (obj_vat_number.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+            obj_vat_number.closest('.form-group').find('label.form-control-label').removeClass('required');
+        }
+        obj_sdi.closest('.form-group').hide(speed);
+        obj_sdi.prop('required', false);
+        if (obj_sdi.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+            obj_sdi.closest('.form-group').find('label.form-control-label').removeClass('required');
+        }
+        obj_pec.closest('.form-group').hide(speed);
+        obj_pec.prop('required', false);
+        if (obj_pec.closest('.form-group').find('label.form-control-label').hasClass('required')) {
+            obj_pec.closest('.form-group').find('label.form-control-label').removeClass('required');
         }
     }
 }
