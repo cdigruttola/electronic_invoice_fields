@@ -302,6 +302,7 @@ class Electronicinvoicefields extends Module
             [
                 'sdi_required' => (int)$sdi_required,
                 'pec_required' => (int)$pec_required,
+                'ajax_link' => $this->context->link->getModuleLink($this->name, 'ajax'),
             ]
         );
     }

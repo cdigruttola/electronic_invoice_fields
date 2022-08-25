@@ -37,6 +37,23 @@ function toggleCustomerType() {
     var chk = $('select[name=id_addresscustomertype] option:selected').val();
 
     if (typeof chk !== 'undefined') {
+        var need_invoice = false;
+        $.ajax({
+            type: 'GET',
+            url: ajax_link,
+            async: false,
+            dataType: "json",
+            headers: {Accept: "application/json"},
+            data: {
+                id: chk
+            },
+            success: function (result) {
+                if (result) {
+                    need_invoice = result.need_invoice;
+                }
+            }
+        });
+
         var obj_first_name = $('input[name=firstname]');
         var obj_last_name = $('input[name=lastname]');
         var obj_company = $('input[name=company]');
@@ -46,7 +63,7 @@ function toggleCustomerType() {
         var obj_pec = $('input[name=pec]');
         var obj_dni = $('input[name=dni]');
 
-        if (chk !== '1') {
+        if (need_invoice) {
             obj_first_name.prop('required', false);
             obj_first_name.closest('.form-group').hide(100);
             obj_last_name.prop('required', false);
