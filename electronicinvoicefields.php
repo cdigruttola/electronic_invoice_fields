@@ -641,11 +641,11 @@ class Electronicinvoicefields extends Module
     private function insertAddressCustomerType(): bool
     {
         $sql = [];
-        $sql[] = 'INSERT INTO `' . _DB_PREFIX_ . 'einvoice_customer_type` (`id_addresscustomertype`,`removable`,`date_add`,`date_upd`) VALUES 
-        (1, 0, NOW(), NOW()),
-        (2, 0, NOW(), NOW()),
-        (3, 0, NOW(), NOW()),
-        (4, 0, NOW(), NOW());';
+        $sql[] = 'INSERT INTO `' . _DB_PREFIX_ . 'einvoice_customer_type` (`id_addresscustomertype`,`removable`,`need_invoice`,`date_add`,`date_upd`) VALUES 
+        (1, 0, 0, NOW(), NOW()),
+        (2, 0, 1, NOW(), NOW()),
+        (3, 0, 1, NOW(), NOW()),
+        (4, 0, 1, NOW(), NOW());';
 
         foreach (Language::getLanguages() as $lang) {
             PrestaShopLogger::addLog('insertAddressCustomerType ' . $lang['id_lang']);
