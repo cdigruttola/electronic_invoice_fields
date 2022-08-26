@@ -648,7 +648,6 @@ class Electronicinvoicefields extends Module
         (4, 0, 1, NOW(), NOW());';
 
         foreach (Language::getLanguages() as $lang) {
-            PrestaShopLogger::addLog('insertAddressCustomerType ' . $lang['id_lang']);
             $sql[] = 'INSERT INTO ' . _DB_PREFIX_ . 'einvoice_customer_type_lang (`id_addresscustomertype`, `id_lang`, `name`) VALUES '
                 . '(1, ' . $lang['id_lang'] . ", '" . $this->trans('Private', [], 'Modules.Electronicinvoicefields.Einvoice', $lang['locale']) . "'),"
                 . '(2, ' . $lang['id_lang'] . ", '" . $this->trans('Company/Professional', [], 'Modules.Electronicinvoicefields.Einvoice', $lang['locale']) . "'),"
