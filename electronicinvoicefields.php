@@ -95,7 +95,6 @@ class Electronicinvoicefields extends Module
 
         return parent::install() &&
             $this->registerHook('header') &&
-            $this->registerHook('displayBackOfficeHeader') &&
             $this->registerHooks() &&
             $this->insertAddressCustomerType();
     }
@@ -151,8 +150,13 @@ class Electronicinvoicefields extends Module
         /*
          * If values have been submitted in the form, process.
          */
-        if (((bool)Tools::isSubmit('submitEinvoiceModule')) == true) {
-            $this->postProcess();
+        $output = '';
+        if (((bool)Tools::isSubmit('submitEinvoiceModule'))) {
+            if ($this->postProcess()) {
+                $output .= $this->displayConfirmation($this->trans('Settings updated succesfully', [], 'Modules.Electronicinvoicefields.Einvoice'));
+            } else {
+                $output .= $this->displayError($this->trans('Error occurred during settings update', [], 'Modules.Electronicinvoicefields.Einvoice'));
+            }
         }
 
         $this->context->smarty->assign('module_dir', $this->_path);
@@ -160,7 +164,7 @@ class Electronicinvoicefields extends Module
         $symfonyUrl = $link->getAdminLink('AdminAddressCustomerType', true, array('route' => 'admin_address_customer_type'));
         $this->context->smarty->assign('url_type_config', $symfonyUrl);
 
-        $output = $this->context->smarty->fetch($this->local_path . 'views/templates/admin/configure.tpl');
+        $output .= $this->context->smarty->fetch($this->local_path . 'views/templates/admin/configure.tpl');
 
         return $output . $this->renderForm();
     }
@@ -269,20 +273,12 @@ class Electronicinvoicefields extends Module
      */
     protected function postProcess()
     {
+        $res = true;
         $form_values = $this->getConfigFormValues();
-
         foreach (array_keys($form_values) as $key) {
-            Configuration::updateValue($key, Tools::getValue($key));
+            $res &= Configuration::updateValue($key, Tools::getValue($key));
         }
-    }
-
-    /**
-     * Add the CSS & JavaScript files you want to be loaded in the BO.
-     */
-    public function hookDisplayBackOfficeHeader()
-    {
-        $this->context->controller->addJS($this->_path . 'views/js/back.js');
-        $this->context->controller->addCSS($this->_path . 'views/css/back.css');
+        return $res;
     }
 
     /**
@@ -290,6 +286,9 @@ class Electronicinvoicefields extends Module
      */
     public function hookHeader()
     {
+        if (!$this->active) {
+            return;
+        }
         $id_shop = (int)$this->context->shop->id;
 
         $sdi_required = (int)Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop);
@@ -310,11 +309,17 @@ class Electronicinvoicefields extends Module
 
     public function hookDisplayPDFInvoice($params)
     {
+        if (!$this->active) {
+            return;
+        }
         //return 'your content goes here.  You can also choose to use smarty and templates if it is complex';
     }
 
     public function hookDisplayPDFOrderSlip($params)
     {
+        if (!$this->active) {
+            return;
+        }
         //return 'your content goes here.  You can also choose to use smarty and templates if it is complex';
     }
 
@@ -388,6 +393,9 @@ class Electronicinvoicefields extends Module
 
     public function hookActionAdminAddressesFormModifier($params)
     {
+        if (!$this->active) {
+            return;
+        }
         $switch = 'radio';
         if (version_compare(_PS_VERSION_, '1.6', '>=') === true) {
             $switch = 'switch';
@@ -514,6 +522,9 @@ class Electronicinvoicefields extends Module
 
     public function hookActionObjectAddressDeleteAfter($params)
     {
+        if (!$this->active) {
+            return;
+        }
         $id_address = (int)$params['object']->id;
         $address = new Address((int)$id_address);
         if (!$address->isUsed()) {
@@ -539,6 +550,9 @@ class Electronicinvoicefields extends Module
 
     private function setAddressParams($params)
     {
+        if (!$this->active) {
+            return;
+        }
         if (!$params['object']->id) {
             return;
         }
@@ -590,6 +604,9 @@ class Electronicinvoicefields extends Module
      */
     private function retrieveValuesFromHttpMethod($params): void
     {
+        if (!$this->active) {
+            return;
+        }
         $id_addresscustomertype = (int)Tools::getValue('id_addresscustomertype');
         $sdi = (string)Tools::getValue('sdi');
         $pec = (string)Tools::getValue('pec');
@@ -608,6 +625,9 @@ class Electronicinvoicefields extends Module
      */
     private function retrieveValuesFromFormData($params): void
     {
+        if (!$this->active) {
+            return;
+        }
         if (version_compare(_PS_VERSION_, '1.7.7', '>=')) {
             if (!isset($params['object'])) {
                 $params['object'] = (object)null;
@@ -629,6 +649,9 @@ class Electronicinvoicefields extends Module
      */
     private function retrieveValuesFromCustomerAddress($params): void
     {
+        if (!$this->active) {
+            return;
+        }
         $customer_address = Tools::getValue('customer_address');
         if (isset($customer_address) && !empty($customer_address)) {
             $params['object']->id_addresscustomertype = (int)$customer_address['id_addresscustomertype'];

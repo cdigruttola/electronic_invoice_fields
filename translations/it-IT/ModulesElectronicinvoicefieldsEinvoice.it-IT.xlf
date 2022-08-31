@@ -22,6 +22,16 @@
         <target>Vuoi disinstallare questo modulo?</target>
         <note>Line: </note>
       </trans-unit>
+      <trans-unit id="e316b4398212d473f7f53c7728fe1c37">
+        <source>Settings updated succesfully</source>
+        <target>Impostazioni aggiornate con successo</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="003b06dcfe67596f17e3de26e6a436c8">
+        <source>Error occurred during settings update</source>
+        <target>È avvenuto un errore durante l'aggiornamento delle impostazioni</target>
+        <note>Line: </note>
+      </trans-unit>
       <trans-unit id="f4f70727dc34561dfde1a3c529b6205c">
         <source>Settings</source>
         <target>Impostazioni</target>
