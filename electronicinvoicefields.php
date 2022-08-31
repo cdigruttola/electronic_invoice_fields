@@ -664,14 +664,13 @@ class Electronicinvoicefields extends Module
     private function insertAddressCustomerType(): bool
     {
         $sql = [];
-        $sql[] = 'INSERT INTO `' . _DB_PREFIX_ . 'einvoice_customer_type` (`id_addresscustomertype`,`removable`,`date_add`,`date_upd`) VALUES 
-        (1, 0, NOW(), NOW()),
-        (2, 0, NOW(), NOW()),
-        (3, 0, NOW(), NOW()),
-        (4, 0, NOW(), NOW());';
+        $sql[] = 'INSERT INTO `' . _DB_PREFIX_ . 'einvoice_customer_type` (`id_addresscustomertype`,`removable`,`need_invoice`,`date_add`,`date_upd`) VALUES 
+        (1, 0, 0, NOW(), NOW()),
+        (2, 0, 1, NOW(), NOW()),
+        (3, 0, 1, NOW(), NOW()),
+        (4, 0, 1, NOW(), NOW());';
 
         foreach (Language::getLanguages() as $lang) {
-            PrestaShopLogger::addLog('insertAddressCustomerType ' . $lang['id_lang']);
             $sql[] = 'INSERT INTO ' . _DB_PREFIX_ . 'einvoice_customer_type_lang (`id_addresscustomertype`, `id_lang`, `name`) VALUES '
                 . '(1, ' . $lang['id_lang'] . ", '" . $this->trans('Private', [], 'Modules.Electronicinvoicefields.Einvoice', $lang['locale']) . "'),"
                 . '(2, ' . $lang['id_lang'] . ", '" . $this->trans('Company/Professional', [], 'Modules.Electronicinvoicefields.Einvoice', $lang['locale']) . "'),"
