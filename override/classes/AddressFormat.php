@@ -47,10 +47,11 @@ class AddressFormat extends AddressFormatCore
         $einvoice = Module::getInstanceByName('electronicinvoicefields');
         if ($einvoice->active) {
             $id_shop = (int)Context::getContext()->shop->id;
-            if ((int)Configuration::get('EINVOICE_PEC_REQUIRED', null, null, $id_shop)) {
+            $type = new Addresscustomertype($address->id_addresscustomertype);
+            if ($type->need_invoice && (int)Configuration::get('EINVOICE_PEC_REQUIRED', null, null, $id_shop)) {
                 AddressFormat::$requireFormFieldsList[] = 'pec';
             }
-            if ((int)Configuration::get('EINVOICE_SDI_REQUIRED', null, null, $id_shop)) {
+            if ($type->need_invoice && (int)Configuration::get('EINVOICE_SDI_REQUIRED', null, null, $id_shop)) {
                 AddressFormat::$requireFormFieldsList[] = 'sdi';
             }
         }

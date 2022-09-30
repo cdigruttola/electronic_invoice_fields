@@ -40,9 +40,10 @@ class Electronicinvoicefields extends Module
     {
         $this->name = 'electronicinvoicefields';
         $this->tab = 'administration';
-        $this->version = '2.1.0';
+        $this->version = '2.1.1';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
+        $this->module_key = '313961649878a2c1b5c13a42d213c3e9';
 
         /*
          * Set $this->bootstrap to true if your module is compliant with bootstrap (PrestaShop 1.6)
@@ -290,8 +291,8 @@ class Electronicinvoicefields extends Module
         }
         $id_shop = (int)$this->context->shop->id;
 
-        $sdi_required = (int)Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop);
-        $pec_required = (int)Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop);
+        $sdi_required = (int)Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop);
+        $pec_required = (int)Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop);
 
         $this->context->controller->addJS($this->_path . '/views/js/front.js');
         $this->context->controller->addCSS($this->_path . '/views/css/front.css');
@@ -335,7 +336,7 @@ class Electronicinvoicefields extends Module
         $id_shop = $this->context->shop->id;
 
         $sdi_required = Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop);
-        $pec_required = Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop);
+        $pec_required = Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop);
 
         $id_address = isset($params['id']) ? (int)$params['id'] : null;
         $obj = new EInvoiceAddress($id_address);
