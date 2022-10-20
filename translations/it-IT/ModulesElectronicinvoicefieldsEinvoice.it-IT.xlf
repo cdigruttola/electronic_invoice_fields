@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="admin358ddidam" source-language="it-IT" target-language="it-IT" datatype="plaintext">
+  <file original="admin528l3nsyb" source-language="it-IT" target-language="it-IT" datatype="plaintext">
     <body>
+      <trans-unit id="7b1d51c4a12266c5635f5c658846d996">
+        <source>Could not delete %i%, there is at least one address associated</source>
+        <target>Impossibile cancellare %i%, c'è almeno un indirizzo associato</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5ad9cce8e181d477bb7dade1f5aed0f9">
+        <source>Could not delete %i%</source>
+        <target>Impossibile cancellare %i%</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e473d73233ae49f44acd66cc52c4ab8f">
+        <source>Address Customer Type</source>
+        <target>Tipi utente</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="0d3c0ff62d24aa52e90ca7f9b1f733c8">
+        <source>Customer Type</source>
+        <target>Tipo</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="be23874a92f9769914df718f5254254b">
+        <source>Need Invoice</source>
+        <target>Richiesta fattura</target>
+        <note>Line: </note>
+      </trans-unit>
       <trans-unit id="23e5335a085e876e329c5db1c92bb23b">
         <source>Setting Address Customer Type</source>
         <target>Impostazioni tipo utente</target>
@@ -72,6 +97,11 @@
         <target>Salva</target>
         <note>Line: </note>
       </trans-unit>
+      <trans-unit id="5637ddd814b8bc7095f215decfc4e928">
+        <source>Courtesy page, you'll receive the invoice in XML format via the revenue agency exchange system.</source>
+        <target>Copia di cortesia, riceverai la fattura in formato XML tramite il sistema di interscambio dell'Agenzia delle Entrate.</target>
+        <note>Line: </note>
+      </trans-unit>
       <trans-unit id="7fda6cc43a4a19bf3f8d0002ad6aeec2">
         <source>SDI Code</source>
         <target>Codice SDI</target>
@@ -85,11 +115,6 @@
       <trans-unit id="e9ec03a37e87ae90ea3584705bcbff3a">
         <source>PEC Address</source>
         <target>Indirizzo PEC</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="0d3c0ff62d24aa52e90ca7f9b1f733c8">
-        <source>Customer Type</source>
-        <target>Tipo</target>
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="4848bb854546641a9af5e5b61bb18092">
@@ -137,34 +162,9 @@
         <target>Tipo</target>
         <note>Line: </note>
       </trans-unit>
-      <trans-unit id="7b1d51c4a12266c5635f5c658846d996">
-        <source>Could not delete %i%, there is at least one address associated</source>
-        <target>Impossibile cancellare %i%, c'è almeno un indirizzo associato</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="5ad9cce8e181d477bb7dade1f5aed0f9">
-        <source>Could not delete %i%</source>
-        <target>Impossibile cancellare %i%</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="e473d73233ae49f44acd66cc52c4ab8f">
-        <source>Address Customer Type</source>
-        <target>Tipi utente</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="be23874a92f9769914df718f5254254b">
-        <source>Need Invoice</source>
-        <target>Richiesta fattura</target>
-        <note>Line: </note>
-      </trans-unit>
       <trans-unit id="9673b41f0af844f086e8b67db5a97083">
         <source>Address Customer Types</source>
         <target>Tipi utente</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="57dfc6ce21687b1bf79e7c20647bbe8f">
-        <source>Add new address customer type</source>
-        <target>Aggiungi un nuovo tipo utente</target>
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="c204882ef7bfd1baf041791c46761c4e">
@@ -175,6 +175,11 @@
       <trans-unit id="a4bb440d400f4dc30f148b44d08680b4">
         <source>Invalid characters: numbers and</source>
         <target>Caratteri vietati: numeri e</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="57dfc6ce21687b1bf79e7c20647bbe8f">
+        <source>Add new address customer type</source>
+        <target>Aggiungi un nuovo tipo utente</target>
         <note>Line: </note>
       </trans-unit>
     </body>

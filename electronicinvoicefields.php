@@ -310,17 +310,17 @@ class Electronicinvoicefields extends Module
     public function hookDisplayPDFInvoice($params)
     {
         if (!$this->active) {
-            return;
+            return '';
         }
-        //return 'your content goes here.  You can also choose to use smarty and templates if it is complex';
+        return $this->trans('Courtesy page, you\'ll receive the invoice in XML format via the revenue agency exchange system.', [], 'Modules.Electronicinvoicefields.Einvoice');
     }
 
     public function hookDisplayPDFOrderSlip($params)
     {
         if (!$this->active) {
-            return;
+            return '';
         }
-        //return 'your content goes here.  You can also choose to use smarty and templates if it is complex';
+        return $this->trans('Courtesy page, you\'ll receive the invoice in XML format via the revenue agency exchange system.', [], 'Modules.Electronicinvoicefields.Einvoice');
     }
 
     /**
