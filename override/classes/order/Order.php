@@ -11,7 +11,6 @@ class Order extends OrderCore
     public function addressNeedInvoice(): bool
     {
         $invoice_address = new Address((int)$this->id_address_invoice);
-        $address_type = new Addresscustomertype($invoice_address->id_addresscustomertype);
-        return (bool)$address_type->need_invoice;
+        return (bool)$invoice_address->needInvoice();
     }
 }

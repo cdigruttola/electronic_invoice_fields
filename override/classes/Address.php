@@ -53,4 +53,15 @@ class Address extends AddressCore
             unset($eiaddress);
         }
     }
+
+    /**
+     * @return bool
+     * @throws PrestaShopDatabaseException
+     * @throws PrestaShopException
+     */
+    public function needInvoice(): bool
+    {
+        $address_type = new Addresscustomertype($this->id_addresscustomertype);
+        return (bool)$address_type->need_invoice;
+    }
 }

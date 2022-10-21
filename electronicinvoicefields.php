@@ -102,7 +102,6 @@ class Electronicinvoicefields extends Module
     public function registerHooks(): bool
     {
         if (!$this->registerHook('header') ||
-            !$this->registerHook('newOrder') ||
             !$this->registerHook('displayPDFInvoice') ||
             !$this->registerHook('displayPDFOrderSlip') ||
             !$this->registerHook('actionCustomerAddressFormBuilderModifier') ||
