@@ -303,6 +303,11 @@ class Electronicinvoicefields extends Module
                 'ajax_link' => $this->context->link->getModuleLink($this->name, 'ajax'),
             ]
         );
+
+        Media::addJsDefL('receipt', $this->trans('The receipt is valid for exercising the right of withdrawal and guarantee (where possible), but not for tax purposes.', [], 'Modules.Electronicinvoicefields.Einvoice'));
+        Media::addJsDefL('receipt_virtual', $this->trans('The selected address will be used as your personal address (for receipt)', [], 'Modules.Electronicinvoicefields.Einvoice'));
+        Media::addJsDefL('receipt_no_virtual', $this->trans('The selected address will be used both as your personal address (for receipt) and as your delivery address.', [], 'Modules.Electronicinvoicefields.Einvoice'));
+        Media::addJsDefL('address_delivery_as_receipt', $this->trans('Use this address for receipt too', [], 'Modules.Electronicinvoicefields.Einvoice'));
     }
 
 
