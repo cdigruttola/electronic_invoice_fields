@@ -102,6 +102,16 @@
         <target>Copia di cortesia, riceverai la fattura in formato XML tramite il sistema di interscambio dell'Agenzia delle Entrate.</target>
         <note>Line: </note>
       </trans-unit>
+      <trans-unit id="3ed9a188154d12d72231f5e25886e087">
+        <source>Courtesy page, you'll receive the receipt with your pack.</source>
+        <target>Copia di cortesia, riceverai la ricevuta di acquisto insieme al tuo pacco.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c9f050b1942e8f479ea76a633e43412d">
+        <source>Courtesy page, you'll receive the credit slip in XML format via the revenue agency exchange system.</source>
+        <target>Copia di cortesia, riceverai la nota di credito in formato XML tramite il sistema di interscambio dell'Agenzia delle Entrate.</target>
+        <note>Line: </note>
+      </trans-unit>
       <trans-unit id="7fda6cc43a4a19bf3f8d0002ad6aeec2">
         <source>SDI Code</source>
         <target>Codice SDI</target>
@@ -155,6 +165,16 @@
       <trans-unit id="77955a7ee779f87ea883e701892a3468">
         <source>Public Administration</source>
         <target>Pubblica Amministrazione</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d6d7c5a3f130174a472f0768c912a796">
+        <source>Receipt</source>
+        <target>Ricevuta</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="fb5a9e398bd4710797769fe4ff94a5b2">
+        <source>Credit slip on receipt</source>
+        <target>Nota di credito</target>
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="c04965cf9c9f0e08f96f03e36d5d07e3">

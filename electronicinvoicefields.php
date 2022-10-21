@@ -40,7 +40,7 @@ class Electronicinvoicefields extends Module
     {
         $this->name = 'electronicinvoicefields';
         $this->tab = 'administration';
-        $this->version = '2.1.1';
+        $this->version = '2.2.0';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
         $this->module_key = '313961649878a2c1b5c13a42d213c3e9';
@@ -312,7 +312,11 @@ class Electronicinvoicefields extends Module
         if (!$this->active) {
             return '';
         }
-        return $this->trans('Courtesy page, you\'ll receive the invoice in XML format via the revenue agency exchange system.', [], 'Modules.Electronicinvoicefields.Einvoice');
+        if ($params['object']->getOrder()->addressNeedInvoice()) {
+            return $this->trans('Courtesy page, you\'ll receive the invoice in XML format via the revenue agency exchange system.', [], 'Modules.Electronicinvoicefields.Einvoice');
+        } else {
+            return $this->trans('Courtesy page, you\'ll receive the receipt with your pack.', [], 'Modules.Electronicinvoicefields.Einvoice');
+        }
     }
 
     public function hookDisplayPDFOrderSlip($params)
@@ -320,7 +324,9 @@ class Electronicinvoicefields extends Module
         if (!$this->active) {
             return '';
         }
-        return $this->trans('Courtesy page, you\'ll receive the invoice in XML format via the revenue agency exchange system.', [], 'Modules.Electronicinvoicefields.Einvoice');
+        if ($params['object']->getOrder()->addressNeedInvoice()) {
+            return $this->trans('Courtesy page, you\'ll receive the credit slip in XML format via the revenue agency exchange system.', [], 'Modules.Electronicinvoicefields.Einvoice');
+        }
     }
 
     /**
