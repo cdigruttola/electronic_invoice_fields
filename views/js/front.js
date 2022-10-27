@@ -135,8 +135,11 @@ function toggleCustomerType(need_invoice) {
 
     let speed = 50;
     if (need_invoice) {
-        address_form_message.text(invoice_no_virtual);
-        address_receipt.text(address_delivery_as_invoice);
+        if (!address_form_message.find('button')) {
+            address_form_message.text(invoice_no_virtual);
+            address_receipt.text(address_delivery_as_invoice);
+        }
+
         obj_first_name.prop('required', false);
         obj_first_name.closest('.form-group').hide(speed);
         obj_last_name.prop('required', false);
@@ -174,8 +177,10 @@ function toggleCustomerType(need_invoice) {
             obj_pec.closest('.form-group').find('.form-control-comment').html('');
         }
     } else {
-        address_form_message.text(receipt_no_virtual).append("<br/><span>" + receipt + "</span>");
-        address_receipt.text(address_delivery_as_receipt);
+        if (!address_form_message.find('button')) {
+            address_form_message.text(receipt_no_virtual).append("<br/><span>" + receipt + "</span>");
+            address_receipt.text(address_delivery_as_receipt);
+        }
         obj_first_name.prop('required', true);
         obj_first_name.closest('.form-group').show(speed);
         obj_last_name.prop('required', true);
