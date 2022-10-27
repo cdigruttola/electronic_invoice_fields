@@ -44,7 +44,14 @@ class ElectronicinvoicefieldsAjaxModuleFrontController extends ModuleFrontContro
             $json_encode = json_encode(['need_invoice' => (bool)$addressCustomerType->need_invoice,]);
             unset($addressCustomerType);
         } else {
-            $json_encode = json_encode(['need_invoice' => false,]);
+            $value = Tools::getValue('id_address');
+            if (!empty($value)) {
+                $address = new Address((int)$value);
+                $json_encode = json_encode(['need_invoice' => (bool)$address->needInvoice(),]);
+                unset($address);
+            } else {
+                $json_encode = json_encode(['need_invoice' => false,]);
+            }
         }
         $this->ajaxRender($json_encode);
     }

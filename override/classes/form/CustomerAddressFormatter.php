@@ -143,6 +143,7 @@ class CustomerAddressFormatter extends CustomerAddressFormatterCore
                     } elseif ($entity === 'Addresscustomertype') {
                         $customerTypes = Addresscustomertype::getAddressCustomerType($this->country->getAssociatedLanguage()->id);
                         $formField->setType('select');
+                        $formField->setRequired(true);
                         foreach ($customerTypes as $customerType) {
                             $formField->addAvailableValue($customerType['id_addresscustomertype'], $customerType[$entityField]);
                         }

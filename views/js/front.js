@@ -25,7 +25,10 @@
  */
 
 $(document).ready(function () {
+    var address_delivery_checked = $('#checkout-addresses-step div.js-address-form #delivery-addresses input[name=id_address_delivery]:checked').val();
+    var address_invoice_checked = $('#checkout-addresses-step div.js-address-form #invoice-addresses input[name=id_address_invoice]:checked').val();
     var chk = $('select[name=id_addresscustomertype] option:selected').val();
+
     var need_invoice = false;
     needInvoice(chk).then((result) => {
         if (result) {
@@ -34,10 +37,48 @@ $(document).ready(function () {
         }
     });
 
+    if (address_delivery_checked != null && address_delivery_checked != 'undefined') {
+        addressNeedInvoice(address_delivery_checked).then((result) => {
+            if (result) {
+                need_invoice = result.need_invoice;
+                toggleCustomerType(need_invoice);
+            }
+        });
+    }
+
+    if (address_invoice_checked != null && address_invoice_checked != 'undefined') {
+        addressNeedInvoice(address_invoice_checked).then((result) => {
+            if (result) {
+                need_invoice = result.need_invoice;
+                toggleCustomerType(need_invoice);
+            }
+        });
+    }
+
     $('select[name=id_addresscustomertype]').change(function (e) {
         e.preventDefault();
         chk = $('select[name=id_addresscustomertype] option:selected').val();
         needInvoice(chk).then((result) => {
+            if (result) {
+                need_invoice = result.need_invoice;
+                toggleCustomerType(need_invoice);
+            }
+        });
+    });
+    $('#checkout-addresses-step div.js-address-form #delivery-addresses input[name=id_address_delivery]').change(function (e) {
+        e.preventDefault();
+        chk = $('#checkout-addresses-step div.js-address-form #delivery-addresses input[name=id_address_delivery]:checked').val();
+        addressNeedInvoice(chk).then((result) => {
+            if (result) {
+                need_invoice = result.need_invoice;
+                toggleCustomerType(need_invoice);
+            }
+        });
+    });
+    $('#checkout-addresses-step div.js-address-form #invoice-addresses input[name=id_address_invoice]').change(function (e) {
+        e.preventDefault();
+        chk = $('#checkout-addresses-step div.js-address-form #invoice-addresses input[name=id_address_invoice]:checked').val();
+        addressNeedInvoice(chk).then((result) => {
             if (result) {
                 need_invoice = result.need_invoice;
                 toggleCustomerType(need_invoice);
@@ -63,6 +104,23 @@ function needInvoice(chk) {
     });
 }
 
+function addressNeedInvoice(address) {
+    return new Promise((resolve) => {
+        $.ajax({
+            type: 'GET',
+            url: ajax_link,
+            dataType: "json",
+            headers: {Accept: "application/json"},
+            data: {
+                id_address: address
+            },
+            success: function (result) {
+                resolve(result);
+            }
+        });
+    });
+}
+
 function toggleCustomerType(need_invoice) {
     var obj_first_name = $('input[name=firstname]');
     var obj_last_name = $('input[name=lastname]');
@@ -72,9 +130,13 @@ function toggleCustomerType(need_invoice) {
     var obj_sdi = $('input[name=sdi]');
     var obj_pec = $('input[name=pec]');
     var obj_dni = $('input[name=dni]');
+    var address_form_message = $('#checkout-addresses-step div.js-address-form p').first();
+    var address_receipt = $('#checkout-addresses-step input[name=use_same_address]').parent().find('label,p');
 
     let speed = 50;
     if (need_invoice) {
+        address_form_message.text(invoice_no_virtual);
+        address_receipt.text(address_delivery_as_invoice);
         obj_first_name.prop('required', false);
         obj_first_name.closest('.form-group').hide(speed);
         obj_last_name.prop('required', false);
@@ -112,6 +174,8 @@ function toggleCustomerType(need_invoice) {
             obj_pec.closest('.form-group').find('.form-control-comment').html('');
         }
     } else {
+        address_form_message.text(receipt_no_virtual).append("<br/><span>" + receipt + "</span>");
+        address_receipt.text(address_delivery_as_receipt);
         obj_first_name.prop('required', true);
         obj_first_name.closest('.form-group').show(speed);
         obj_last_name.prop('required', true);
