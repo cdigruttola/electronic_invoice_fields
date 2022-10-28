@@ -296,8 +296,12 @@ class Electronicinvoicefields extends Module
         $this->context->controller->addJS($this->_path . '/views/js/front.js');
         $this->context->controller->addCSS($this->_path . '/views/css/front.css');
 
+        if (isset($this->context->cart)) {
+            $virtual = $this->context->cart->isVirtualCart();
+        }
         Media::addJsDef(
             [
+                'virtual' => $virtual ?? false,
                 'sdi_required' => (int)$sdi_required,
                 'pec_required' => (int)$pec_required,
                 'ajax_link' => $this->context->link->getModuleLink($this->name, 'ajax'),
