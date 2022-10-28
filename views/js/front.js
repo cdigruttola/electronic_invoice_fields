@@ -130,17 +130,19 @@ function toggleCustomerType(need_invoice) {
     var obj_sdi = $('input[name=sdi]');
     var obj_pec = $('input[name=pec]');
     var obj_dni = $('input[name=dni]');
-    var address_form_message = $('#checkout-addresses-step div.js-address-form p').first().not('button');
+    var address_form_message = $('#checkout-addresses-step div.js-address-form p').first();
     var address_receipt = $('#checkout-addresses-step input[name=use_same_address]').parent().find('label,p');
 
     let speed = 50;
     if (need_invoice) {
-        if (virtual) {
-            address_form_message.text(invoice_virtual);
-        } else {
-            address_form_message.text(invoice_no_virtual);
+        if (!address_form_message.has('button').length) {
+            if (virtual) {
+                address_form_message.text(invoice_virtual);
+            } else {
+                address_form_message.text(invoice_no_virtual);
+            }
+            address_receipt.text(address_delivery_as_invoice);
         }
-        address_receipt.text(address_delivery_as_invoice);
 
         obj_first_name.prop('required', false);
         obj_first_name.closest('.form-group').hide(speed);
@@ -179,13 +181,15 @@ function toggleCustomerType(need_invoice) {
             obj_pec.closest('.form-group').find('.form-control-comment').html('');
         }
     } else {
-        if (virtual) {
-            address_form_message.text(receipt_virtual);
-        } else {
-            address_form_message.text(receipt_no_virtual);
+        if (!address_form_message.has('button').length) {
+            if (virtual) {
+                address_form_message.text(receipt_virtual);
+            } else {
+                address_form_message.text(receipt_no_virtual);
+            }
+            address_form_message.append("<br/><span>" + receipt + "</span>");
+            address_receipt.text(address_delivery_as_receipt);
         }
-        address_form_message.append("<br/><span>" + receipt + "</span>");
-        address_receipt.text(address_delivery_as_receipt);
 
         obj_first_name.prop('required', true);
         obj_first_name.closest('.form-group').show(speed);
