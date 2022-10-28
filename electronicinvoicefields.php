@@ -34,13 +34,16 @@ class Electronicinvoicefields extends Module
 {
     public const EINVOICE_PEC_REQUIRED = 'EINVOICE_PEC_REQUIRED';
     public const EINVOICE_SDI_REQUIRED = 'EINVOICE_SDI_REQUIRED';
+    public const EINVOICE_DNI_VALIDATE = 'EINVOICE_DNI_VALIDATE';
+    public const EINVOICE_CHECK_USER_AGE = 'EINVOICE_CHECK_USER_AGE';
+    public const EINVOICE_MINIMUM_USER_AGE = 'EINVOICE_MINIMUM_USER_AGE';
     protected $config_form = false;
 
     public function __construct()
     {
         $this->name = 'electronicinvoicefields';
         $this->tab = 'administration';
-        $this->version = '2.2.0';
+        $this->version = '2.3.0';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
         $this->module_key = '313961649878a2c1b5c13a42d213c3e9';
@@ -115,6 +118,7 @@ class Electronicinvoicefields extends Module
             !$this->registerHook('actionSubmitCustomerAddressForm') ||
             !$this->registerHook('actionAfterUpdateCustomerAddressFormHandler') ||
             !$this->registerHook('actionAfterCreateCustomerAddressFormHandler') ||
+            !$this->registerHook('additionalCustomerFormFields') ||
             !$this->registerHook('addWebserviceResources')
         ) {
             return false;
@@ -130,6 +134,9 @@ class Electronicinvoicefields extends Module
         }
         Configuration::deleteByName(self::EINVOICE_PEC_REQUIRED);
         Configuration::deleteByName(self::EINVOICE_SDI_REQUIRED);
+        Configuration::deleteByName(self::EINVOICE_DNI_VALIDATE);
+        Configuration::deleteByName(self::EINVOICE_CHECK_USER_AGE);
+        Configuration::deleteByName(self::EINVOICE_MINIMUM_USER_AGE);
 
         return parent::uninstall();
     }
@@ -246,6 +253,51 @@ class Electronicinvoicefields extends Module
                             ],
                         ],
                     ],
+                    [
+                        'type' => 'switch',
+                        'label' => $this->trans('DNI field validation', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                        'name' => self::EINVOICE_DNI_VALIDATE,
+                        'is_bool' => true,
+                        'desc' => $this->trans('This options set enable the DNI validation only for Italian customer.', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                        'values' => [
+                            [
+                                'id' => 'active_on',
+                                'value' => true,
+                                'label' => $this->trans('Enabled', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                            ],
+                            [
+                                'id' => 'active_off',
+                                'value' => false,
+                                'label' => $this->trans('Disabled', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                            ],
+                        ],
+                    ],
+                    [
+                        'type' => 'switch',
+                        'label' => $this->trans('Check user age', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                        'name' => self::EINVOICE_CHECK_USER_AGE,
+                        'is_bool' => true,
+                        'desc' => $this->trans('This options set enable the check of user age during registration.', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                        'values' => [
+                            [
+                                'id' => 'active_on',
+                                'value' => true,
+                                'label' => $this->trans('Enabled', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                            ],
+                            [
+                                'id' => 'active_off',
+                                'value' => false,
+                                'label' => $this->trans('Disabled', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                            ],
+                        ],
+                    ],
+                    [
+                        'type' => 'html',
+                        'label' => $this->trans('Minimum age for user', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                        'desc' => $this->trans('Minimum age for customer, if not set default is 16', [], 'Modules.Exportorderstodanea.Main'),
+                        'name' => self::EINVOICE_MINIMUM_USER_AGE,
+                        'html_content' => '<input type="number" name="EINVOICE_MINIMUM_USER_AGE" min="16" max="150" value="' . $this->getConfigFormValues()[self::EINVOICE_MINIMUM_USER_AGE] . '"/>',
+                    ],
                 ],
                 'submit' => [
                     'title' => $this->trans('Save', [], 'Modules.Electronicinvoicefields.Einvoice'),
@@ -264,6 +316,9 @@ class Electronicinvoicefields extends Module
         return [
             self::EINVOICE_PEC_REQUIRED => Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop),
             self::EINVOICE_SDI_REQUIRED => Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop),
+            self::EINVOICE_DNI_VALIDATE => Configuration::get(self::EINVOICE_DNI_VALIDATE, null, null, $id_shop),
+            self::EINVOICE_CHECK_USER_AGE => Configuration::get(self::EINVOICE_CHECK_USER_AGE, null, null, $id_shop),
+            self::EINVOICE_MINIMUM_USER_AGE => Configuration::get(self::EINVOICE_MINIMUM_USER_AGE, null, null, $id_shop, 16),
         ];
     }
 
@@ -491,7 +546,25 @@ class Electronicinvoicefields extends Module
             }
         }
 
+        $dni = $form->getField('dni');
+        $id_shop = $this->context->shop->id;
+        if (isset($dni) && Configuration::get(self::EINVOICE_DNI_VALIDATE, null, null, $id_shop)) {
+            $dni_value = $dni->getValue();
+            if (!$this->checkDNICode($dni_value)) {
+                $is_valid &= false;
+                $dni->addError($this->trans('Invalid DNI Code', [], 'Modules.Electronicinvoicefields.Einvoice'));
+            }
+        }
+
         return $is_valid;
+    }
+
+    public function hookAdditionalCustomerFormFields($params)
+    {
+        if ($this->active) {
+            $format = $params['fields'];
+            $format['birthday']->setRequired(true);
+        }
     }
 
     public function hookActionAfterUpdateCustomerAddressFormHandler($params)
@@ -702,4 +775,35 @@ class Electronicinvoicefields extends Module
         }
         return true;
     }
+
+    private function checkDNICode($dni)
+    {
+        $dni = Tools::strtoupper($dni);
+        $regex = '/^[a-zA-Z]{6}[0-9]{2}[AaBbCcDdEeHhLlMmPpRrSsTt][0-9]{2}[a-zA-Z][0-9LlQqUuMmRrVvNnSsPpTt]{3}[a-zA-Z]$/';
+        if (empty($dni) || Tools::strlen($dni) !== 16) {
+            return false;
+        }
+        if (!preg_match($regex, $dni)) {
+            return false;
+        }
+
+        $sum = 0;
+        for ($i = 0; $i < Tools::strlen($dni) - 1; $i++) {
+            $extracted = $dni[$i];
+            if ($i % 2 === 0) {
+                $sum += OddPositionTranslationTable::getValue($extracted);
+            } else {
+                $sum += EvenPositionAndControlCharTranslationTable::getValue($extracted);
+            }
+        }
+
+        $divisionRemainder = $sum % 26;
+        $controlChar = EvenPositionAndControlCharTranslationTable::fromOrdinal($divisionRemainder);
+        if ($controlChar !== $dni[Tools::strlen($dni) - 1]) {
+            return false;
+        }
+
+        return true;
+    }
+
 }

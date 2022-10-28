@@ -1,32 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="admin528l3nsyb" source-language="it-IT" target-language="it-IT" datatype="plaintext">
+  <file original="admin035xdgcoc" source-language="it-IT" target-language="it-IT" datatype="plaintext">
     <body>
-      <trans-unit id="7b1d51c4a12266c5635f5c658846d996">
-        <source>Could not delete %i%, there is at least one address associated</source>
-        <target>Impossibile cancellare %i%, c'è almeno un indirizzo associato</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="5ad9cce8e181d477bb7dade1f5aed0f9">
-        <source>Could not delete %i%</source>
-        <target>Impossibile cancellare %i%</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="e473d73233ae49f44acd66cc52c4ab8f">
-        <source>Address Customer Type</source>
-        <target>Tipi utente</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="0d3c0ff62d24aa52e90ca7f9b1f733c8">
-        <source>Customer Type</source>
-        <target>Tipo</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="be23874a92f9769914df718f5254254b">
-        <source>Need Invoice</source>
-        <target>Richiesta fattura</target>
-        <note>Line: </note>
-      </trans-unit>
       <trans-unit id="23e5335a085e876e329c5db1c92bb23b">
         <source>Setting Address Customer Type</source>
         <target>Impostazioni tipo utente</target>
@@ -39,7 +14,7 @@
       </trans-unit>
       <trans-unit id="25d061801a78bfb7bf93979e744a2cc3">
         <source>This module adds the new fields for E-Invoice in Customer Address</source>
-        <target>Questa modulo permette di aggiungere i campi PEC e SDI negli indirizzi</target>
+        <target>Questo modulo permette di aggiungere i campi PEC e SDI negli indirizzi</target>
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="876f23178c29dc2552c0b48bf23cd9bd">
@@ -90,6 +65,31 @@
       <trans-unit id="0bd486aa74948d7a7286896bcb542b68">
         <source>This options set the SDI field mandatory only for Italian customer.</source>
         <target>Questa opzione imposta il campo SDI obbligatorio solo per i clienti italiani.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="349d2d6601bf36ec7828a2b9371fff68">
+        <source>DNI field validation</source>
+        <target>Validazione Codice Fiscale</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="432fd305d8a2e862cd4b340d0058e0b2">
+        <source>This options set enable the DNI validation only for Italian customer.</source>
+        <target>Questa opzione abilita la validazione del campo Codice Fiscale solo per i clienti italiani.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f0fb2776238c2febd631d7a7badf0be0">
+        <source>Check user age</source>
+        <target>Controllo età utente</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ebc9a5a9ac9ca15525c0188aaee0829a">
+        <source>This options set enable the check of user age during registration.</source>
+        <target>Questa opzione abilita il controllo dell'età durante la registrazione al sito.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e4eb0ab07ad61488bc68ae01b5461f8c">
+        <source>Minimum age for user</source>
+        <target>Età minima per gli utenti</target>
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="c9cc8cce247e49bae79f15173ce97354">
@@ -147,6 +147,11 @@
         <target>Indirizzo PEC</target>
         <note>Line: </note>
       </trans-unit>
+      <trans-unit id="0d3c0ff62d24aa52e90ca7f9b1f733c8">
+        <source>Customer Type</source>
+        <target>Tipo</target>
+        <note>Line: </note>
+      </trans-unit>
       <trans-unit id="4848bb854546641a9af5e5b61bb18092">
         <source>PEC Email</source>
         <target>PEC</target>
@@ -165,6 +170,11 @@
       <trans-unit id="ff2655900b9e213cf65b502755f91d78">
         <source>Invalid SDI Code</source>
         <target>Formato codice SDI non valido</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="12b96bec930349d7abf42eef9c49d152">
+        <source>Invalid DNI Code</source>
+        <target>Codice Fiscale non valido</target>
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="47f9082fc380ca62d531096aa1d110f1">
@@ -187,6 +197,36 @@
         <target>Pubblica Amministrazione</target>
         <note>Line: </note>
       </trans-unit>
+      <trans-unit id="e473d73233ae49f44acd66cc52c4ab8f">
+        <source>Address Customer Type</source>
+        <target>Tipi utente</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="be23874a92f9769914df718f5254254b">
+        <source>Need Invoice</source>
+        <target>Richiesta fattura</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7b1d51c4a12266c5635f5c658846d996">
+        <source>Could not delete %i%, there is at least one address associated</source>
+        <target>Impossibile cancellare %i%, c'è almeno un indirizzo associato</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5ad9cce8e181d477bb7dade1f5aed0f9">
+        <source>Could not delete %i%</source>
+        <target>Impossibile cancellare %i%</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6b5ec0f96842e45ff712b549cca0f3f5">
+        <source>Format should be %s and your age must be greater then %s.</source>
+        <target>Il formato deve essere %s e devi avere almeno %s anni.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c04965cf9c9f0e08f96f03e36d5d07e3">
+        <source>Customer type</source>
+        <target>Tipo</target>
+        <note>Line: </note>
+      </trans-unit>
       <trans-unit id="d6d7c5a3f130174a472f0768c912a796">
         <source>Receipt</source>
         <target>Ricevuta</target>
@@ -195,11 +235,6 @@
       <trans-unit id="fb5a9e398bd4710797769fe4ff94a5b2">
         <source>Credit slip on receipt</source>
         <target>Nota di credito</target>
-        <note>Line: </note>
-      </trans-unit>
-      <trans-unit id="c04965cf9c9f0e08f96f03e36d5d07e3">
-        <source>Customer type</source>
-        <target>Tipo</target>
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="9673b41f0af844f086e8b67db5a97083">
