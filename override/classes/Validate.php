@@ -30,6 +30,7 @@ class Validate extends ValidateCore
 {
 
     const VIES_URL = 'https://ec.europa.eu/taxation_customs/vies/rest-api/ms/%iso%/vat/%vat%';
+    const MIOCODICEFISCALE_URL = 'http://api.miocodicefiscale.com/reverse?cf=%dni%&access_token=%api%';
     const VIES_COUNTRY = ['AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'FR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'XI'];
 
     /**
@@ -58,7 +59,7 @@ class Validate extends ValidateCore
     /**
      * @throws Exception
      */
-    public static function checkDNICode($dni)
+    public static function checkDNICode($dni, $api)
     {
         $dni = Tools::strtoupper($dni);
         $regex = '/^[a-zA-Z]{6}[0-9]{2}[AaBbCcDdEeHhLlMmPpRrSsTt][0-9]{2}[a-zA-Z][0-9LlQqUuMmRrVvNnSsPpTt]{3}[a-zA-Z]$/';
@@ -83,6 +84,20 @@ class Validate extends ValidateCore
         $controlChar = EvenPositionAndControlCharTranslationTable::fromOrdinal($divisionRemainder);
         if ($controlChar !== $dni[Tools::strlen($dni) - 1]) {
             return false;
+        }
+
+        if ($api !== '') {
+            $url = self::MIOCODICEFISCALE_URL;
+            $url = str_replace(['%api%', '%dni%',], [$api, $dni], $url);
+            try {
+                $client = new Client();
+                $response = $client->get($url);
+                $data = json_decode($response->getBody(), true);
+                return $data['status'];
+            } catch (ClientException $e) {
+                $response = $e->getResponse();
+                PrestaShopLogger::addLog('Status error ' . $response->getStatusCode() . ', reason ' . $response->getReasonPhrase());
+            }
         }
         return true;
     }

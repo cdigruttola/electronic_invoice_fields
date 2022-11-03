@@ -35,6 +35,7 @@ class Electronicinvoicefields extends Module
     public const EINVOICE_PEC_REQUIRED = 'EINVOICE_PEC_REQUIRED';
     public const EINVOICE_SDI_REQUIRED = 'EINVOICE_SDI_REQUIRED';
     public const EINVOICE_DNI_VALIDATE = 'EINVOICE_DNI_VALIDATE';
+    public const EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API = 'EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API';
     public const EINVOICE_CHECK_USER_AGE = 'EINVOICE_CHECK_USER_AGE';
     public const EINVOICE_MINIMUM_USER_AGE = 'EINVOICE_MINIMUM_USER_AGE';
     protected $config_form = false;
@@ -43,7 +44,7 @@ class Electronicinvoicefields extends Module
     {
         $this->name = 'electronicinvoicefields';
         $this->tab = 'administration';
-        $this->version = '2.3.1';
+        $this->version = '2.3.2';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
         $this->module_key = '313961649878a2c1b5c13a42d213c3e9';
@@ -135,6 +136,7 @@ class Electronicinvoicefields extends Module
         Configuration::deleteByName(self::EINVOICE_PEC_REQUIRED);
         Configuration::deleteByName(self::EINVOICE_SDI_REQUIRED);
         Configuration::deleteByName(self::EINVOICE_DNI_VALIDATE);
+        Configuration::deleteByName(self::EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API);
         Configuration::deleteByName(self::EINVOICE_CHECK_USER_AGE);
         Configuration::deleteByName(self::EINVOICE_MINIMUM_USER_AGE);
 
@@ -273,6 +275,12 @@ class Electronicinvoicefields extends Module
                         ],
                     ],
                     [
+                        'type' => 'text',
+                        'label' => $this->trans('Mio Codice Fiscale API Token', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                        'name' => self::EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API,
+                        'desc' => $this->trans('Use <a href="https://www.miocodicefiscale.com/it/api-rest-verifica-e-calcolo-codice-fiscale">Mio Codice Fiscale</a> API to validate DNI.', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                    ],
+                    [
                         'type' => 'switch',
                         'label' => $this->trans('Check user age', [], 'Modules.Electronicinvoicefields.Einvoice'),
                         'name' => self::EINVOICE_CHECK_USER_AGE,
@@ -317,6 +325,7 @@ class Electronicinvoicefields extends Module
             self::EINVOICE_PEC_REQUIRED => Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop),
             self::EINVOICE_SDI_REQUIRED => Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop),
             self::EINVOICE_DNI_VALIDATE => Configuration::get(self::EINVOICE_DNI_VALIDATE, null, null, $id_shop),
+            self::EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API => Configuration::get(self::EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API, null, null, $id_shop),
             self::EINVOICE_CHECK_USER_AGE => Configuration::get(self::EINVOICE_CHECK_USER_AGE, null, null, $id_shop),
             self::EINVOICE_MINIMUM_USER_AGE => Configuration::get(self::EINVOICE_MINIMUM_USER_AGE, null, null, $id_shop, 16),
         ];
@@ -553,7 +562,7 @@ class Electronicinvoicefields extends Module
             $id_shop = $this->context->shop->id;
             if (isset($dni) && Configuration::get(self::EINVOICE_DNI_VALIDATE, null, null, $id_shop)) {
                 $dni_value = $dni->getValue();
-                if (!Validate::checkDNICode($dni_value)) {
+                if (!Validate::checkDNICode($dni_value, Configuration::get(self::EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API, null, null, $id_shop))) {
                     $is_valid &= false;
                     $dni->addError($this->trans('Invalid DNI Code', [], 'Modules.Electronicinvoicefields.Einvoice'));
                 }
@@ -563,7 +572,7 @@ class Electronicinvoicefields extends Module
         $vat_number = $form->getField('vat_number');
         if (isset($vat_number)) {
             $vat_number_value = $vat_number->getValue();
-            if (!Validate::checkVatNumber($vat_number_value, $iso_country)) {
+            if (!empty($vat_number_value) && !Validate::checkVatNumber($vat_number_value, $iso_country)) {
                 $is_valid &= false;
                 $vat_number->addError($this->trans('Invalid VAT Code', [], 'Modules.Electronicinvoicefields.Einvoice'));
             }
