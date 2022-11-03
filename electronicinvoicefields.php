@@ -43,7 +43,7 @@ class Electronicinvoicefields extends Module
     {
         $this->name = 'electronicinvoicefields';
         $this->tab = 'administration';
-        $this->version = '2.3.0';
+        $this->version = '2.3.1';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
         $this->module_key = '313961649878a2c1b5c13a42d213c3e9';
@@ -526,33 +526,46 @@ class Electronicinvoicefields extends Module
     public function hookActionValidateCustomerAddressForm($params)
     {
         $is_valid = true;
-
         $form = $params['form'];
-        $pec = $form->getField('pec');
-        if (isset($pec)) {
-            $pec_value = $pec->getValue();
-            if (!empty($pec_value) && !Validate::isEmail($pec_value)) {
-                $is_valid &= false;
-                $pec->addError($this->trans('Invalid email address format', [], 'Modules.Electronicinvoicefields.Einvoice'));
+
+        $id_country = $form->getField('id_country')->getValue();
+        $iso_country = Country::getIsoById($id_country);
+        if ($iso_country === 'IT') {
+            $pec = $form->getField('pec');
+            if (isset($pec)) {
+                $pec_value = $pec->getValue();
+                if (!empty($pec_value) && !Validate::isEmail($pec_value)) {
+                    $is_valid &= false;
+                    $pec->addError($this->trans('Invalid email address format', [], 'Modules.Electronicinvoicefields.Einvoice'));
+                }
+            }
+
+            $sdi = $form->getField('sdi');
+            if (isset($sdi)) {
+                $sdi_value = $sdi->getValue();
+                if (!empty($sdi_value) && Tools::strlen($sdi_value) != 7) {
+                    $is_valid &= false;
+                    $sdi->addError($this->trans('Invalid SDI Code', [], 'Modules.Electronicinvoicefields.Einvoice'));
+                }
+            }
+
+            $dni = $form->getField('dni');
+            $id_shop = $this->context->shop->id;
+            if (isset($dni) && Configuration::get(self::EINVOICE_DNI_VALIDATE, null, null, $id_shop)) {
+                $dni_value = $dni->getValue();
+                if (!Validate::checkDNICode($dni_value)) {
+                    $is_valid &= false;
+                    $dni->addError($this->trans('Invalid DNI Code', [], 'Modules.Electronicinvoicefields.Einvoice'));
+                }
             }
         }
 
-        $sdi = $form->getField('sdi');
-        if (isset($sdi)) {
-            $sdi_value = $sdi->getValue();
-            if (!empty($sdi_value) && Tools::strlen($sdi_value) != 7) {
+        $vat_number = $form->getField('vat_number');
+        if (isset($vat_number)) {
+            $vat_number_value = $vat_number->getValue();
+            if (!Validate::checkVatNumber($vat_number_value, $iso_country)) {
                 $is_valid &= false;
-                $sdi->addError($this->trans('Invalid SDI Code', [], 'Modules.Electronicinvoicefields.Einvoice'));
-            }
-        }
-
-        $dni = $form->getField('dni');
-        $id_shop = $this->context->shop->id;
-        if (isset($dni) && Configuration::get(self::EINVOICE_DNI_VALIDATE, null, null, $id_shop)) {
-            $dni_value = $dni->getValue();
-            if (!$this->checkDNICode($dni_value)) {
-                $is_valid &= false;
-                $dni->addError($this->trans('Invalid DNI Code', [], 'Modules.Electronicinvoicefields.Einvoice'));
+                $vat_number->addError($this->trans('Invalid VAT Code', [], 'Modules.Electronicinvoicefields.Einvoice'));
             }
         }
 
@@ -663,7 +676,7 @@ class Electronicinvoicefields extends Module
                 $address = new Address((int)$id_address);
                 if (isset($address) && $address->id) {
                     $country = new Country((int)$address->id_country);
-                    if (isset($country) && (string)$country->iso_code != 'IT') {
+                    if ($country->iso_code !== 'IT') {
                         if (!empty($address->company) || !empty($address->vat_number)) {
                             $sdi = 'XXXXXXX';
                         } else {
@@ -773,36 +786,6 @@ class Electronicinvoicefields extends Module
                 return false;
             }
         }
-        return true;
-    }
-
-    private function checkDNICode($dni)
-    {
-        $dni = Tools::strtoupper($dni);
-        $regex = '/^[a-zA-Z]{6}[0-9]{2}[AaBbCcDdEeHhLlMmPpRrSsTt][0-9]{2}[a-zA-Z][0-9LlQqUuMmRrVvNnSsPpTt]{3}[a-zA-Z]$/';
-        if (empty($dni) || Tools::strlen($dni) !== 16) {
-            return false;
-        }
-        if (!preg_match($regex, $dni)) {
-            return false;
-        }
-
-        $sum = 0;
-        for ($i = 0; $i < Tools::strlen($dni) - 1; $i++) {
-            $extracted = $dni[$i];
-            if ($i % 2 === 0) {
-                $sum += OddPositionTranslationTable::getValue($extracted);
-            } else {
-                $sum += EvenPositionAndControlCharTranslationTable::getValue($extracted);
-            }
-        }
-
-        $divisionRemainder = $sum % 26;
-        $controlChar = EvenPositionAndControlCharTranslationTable::fromOrdinal($divisionRemainder);
-        if ($controlChar !== $dni[Tools::strlen($dni) - 1]) {
-            return false;
-        }
-
         return true;
     }
 

@@ -23,8 +23,15 @@
  *
  */
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+
 class Validate extends ValidateCore
 {
+
+    const VIES_URL = 'https://ec.europa.eu/taxation_customs/vies/rest-api/ms/%iso%/vat/%vat%';
+    const VIES_COUNTRY = ['AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'FR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'XI'];
+
     /**
      * @throws Exception
      */
@@ -48,5 +55,63 @@ class Validate extends ValidateCore
         return $toReturn;
     }
 
+    /**
+     * @throws Exception
+     */
+    public static function checkDNICode($dni)
+    {
+        $dni = Tools::strtoupper($dni);
+        $regex = '/^[a-zA-Z]{6}[0-9]{2}[AaBbCcDdEeHhLlMmPpRrSsTt][0-9]{2}[a-zA-Z][0-9LlQqUuMmRrVvNnSsPpTt]{3}[a-zA-Z]$/';
+        if (empty($dni) || Tools::strlen($dni) !== 16) {
+            return false;
+        }
+        if (!preg_match($regex, $dni)) {
+            return false;
+        }
+
+        $sum = 0;
+        for ($i = 0; $i < Tools::strlen($dni) - 1; $i++) {
+            $extracted = $dni[$i];
+            if ($i % 2 === 0) {
+                $sum += OddPositionTranslationTable::getValue($extracted);
+            } else {
+                $sum += EvenPositionAndControlCharTranslationTable::getValue($extracted);
+            }
+        }
+
+        $divisionRemainder = $sum % 26;
+        $controlChar = EvenPositionAndControlCharTranslationTable::fromOrdinal($divisionRemainder);
+        if ($controlChar !== $dni[Tools::strlen($dni) - 1]) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function checkVatNumber($vat_number, $country_iso)
+    {
+        $country_iso = Tools::strtoupper($country_iso);
+        if (!in_array($country_iso, self::VIES_COUNTRY)) {
+            PrestaShopLogger::addLog("No VIES Verification for " . $country_iso);
+            return true;
+        }
+
+        $vat_number = Tools::strtoupper($vat_number);
+
+        $url = self::VIES_URL;
+        $url = str_replace(['%iso%', '%vat%',], [$country_iso, $vat_number,], $url);
+        try {
+            $client = new Client();
+            $response = $client->get($url);
+            $data = json_decode($response->getBody(), true);
+            return $data['isValid'];
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+            PrestaShopLogger::addLog('Status error ' . $response->getStatusCode() . ', reason ' . $response->getReasonPhrase());
+            return false;
+        }
+    }
 
 }
