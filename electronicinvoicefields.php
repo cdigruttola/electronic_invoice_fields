@@ -98,7 +98,6 @@ class Electronicinvoicefields extends Module
         }
 
         return parent::install() &&
-            $this->registerHook('header') &&
             $this->registerHooks() &&
             $this->insertAddressCustomerType();
     }
