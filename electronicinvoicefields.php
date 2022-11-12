@@ -561,7 +561,7 @@ class Electronicinvoicefields extends Module
             $id_shop = $this->context->shop->id;
             if (isset($dni) && Configuration::get(self::EINVOICE_DNI_VALIDATE, null, null, $id_shop)) {
                 $dni_value = $dni->getValue();
-                if (!Validate::checkDNICode($dni_value, Configuration::get(self::EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API, null, null, $id_shop))) {
+                if (!empty($dni_value) && !Validate::checkDNICode($dni_value, Configuration::get(self::EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API, null, null, $id_shop))) {
                     $is_valid &= false;
                     $dni->addError($this->trans('Invalid DNI Code', [], 'Modules.Electronicinvoicefields.Einvoice'));
                 }
