@@ -131,22 +131,25 @@ class Electronicinvoicefields extends Module
     {
         if (!$reset) {
             include dirname(__FILE__) . '/sql/uninstall.php';
-        }
-        Configuration::deleteByName(self::EINVOICE_PEC_REQUIRED);
-        Configuration::deleteByName(self::EINVOICE_SDI_REQUIRED);
-        Configuration::deleteByName(self::EINVOICE_DNI_VALIDATE);
-        Configuration::deleteByName(self::EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API);
-        Configuration::deleteByName(self::EINVOICE_CHECK_USER_AGE);
-        Configuration::deleteByName(self::EINVOICE_MINIMUM_USER_AGE);
 
-        return parent::uninstall();
+            Configuration::deleteByName(self::EINVOICE_PEC_REQUIRED);
+            Configuration::deleteByName(self::EINVOICE_SDI_REQUIRED);
+            Configuration::deleteByName(self::EINVOICE_DNI_VALIDATE);
+            Configuration::deleteByName(self::EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API);
+            Configuration::deleteByName(self::EINVOICE_CHECK_USER_AGE);
+            Configuration::deleteByName(self::EINVOICE_MINIMUM_USER_AGE);
+
+            return parent::uninstall();
+        }
+        return true;
     }
 
     public function onclickOption($opt, $href)
     {
-        if ($opt == 'reset') {
+        if ($opt === 'reset') {
             return $this->uninstall(true) && $this->install(true);
         }
+        return true;
     }
 
     /**
