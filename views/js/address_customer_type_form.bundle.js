@@ -50,7 +50,7 @@ const o=new(n.n(r).a);
  */
 const{$:i}=window;var s=class{constructor(e){const t=e||{};return this.localeItemSelector=t.localeItemSelector||".js-locale-item",this.localeButtonSelector=t.localeButtonSelector||".js-locale-btn",this.localeInputSelector=t.localeInputSelector||".js-locale-input",this.selectedLocale=i(this.localeItemSelector).data("locale"),i("body").on("click",this.localeItemSelector,this.toggleLanguage.bind(this)),o.on("languageSelected",this.toggleInputs.bind(this)),{localeItemSelector:this.localeItemSelector,localeButtonSelector:this.localeButtonSelector,localeInputSelector:this.localeInputSelector,refreshFormInputs:e=>{this.refreshInputs(e)},getSelectedLocale:()=>this.selectedLocale}}refreshInputs(e){this.selectedLocale&&o.emit("languageSelected",{selectedLocale:this.selectedLocale,form:e})}toggleLanguage(e){const t=i(e.target),n=t.closest("form");this.selectedLocale=t.data("locale"),this.refreshInputs(n)}toggleInputs(e){const{form:t}=e;this.selectedLocale=e.selectedLocale;const n=t.find(this.localeButtonSelector),r=n.data("change-language-url");n.text(this.selectedLocale),t.find(this.localeInputSelector).addClass("d-none"),t.find(`${this.localeInputSelector}.js-locale-${this.selectedLocale}`).removeClass("d-none"),r&&this.saveSelectedLanguage(r,this.selectedLocale)}saveSelectedLanguage(e,t){i.post({url:e,data:{language_iso_code:t}})}};
 /**
- * 2007-2022 Carmine Di Gruttola
+ * Copyright since 2007 Carmine Di Gruttola
  *
  * NOTICE OF LICENSE
  *
@@ -69,7 +69,7 @@ const{$:i}=window;var s=class{constructor(e){const t=e||{};return this.localeIte
  * needs please refer to http://www.prestashop.com for more information.
  *
  *  @author    cdigruttola <c.digruttola@hotmail.it>
- *  @copyright 2007-2022 Carmine Di Gruttola
+ *  @copyright Copyright since 2007 Carmine Di Gruttola
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *
  */const{$:l}=window;l(()=>{new s})}]);

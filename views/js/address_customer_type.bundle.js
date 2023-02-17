@@ -265,7 +265,7 @@ const{$:n}=window;class i{constructor(t){this.id=t,this.$container=n(`#${this.id
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  */const{$:_}=window;class x{extend(t){t.getHeaderContainer().on("click",".js-common_show_query-grid-action",()=>this.onShowSqlQueryClick(t)),t.getHeaderContainer().on("click",".js-common_export_sql_manager-grid-action",()=>this.onExportSqlManagerClick(t))}onShowSqlQueryClick(t){const e=_(`#${t.getId()}_common_show_query_modal_form`);this.fillExportForm(e,t);const o=_(`#${t.getId()}_grid_common_show_query_modal`);o.modal("show"),o.on("click",".btn-sql-submit",()=>e.submit())}onExportSqlManagerClick(t){const e=_(`#${t.getId()}_common_show_query_modal_form`);this.fillExportForm(e,t),e.submit()}fillExportForm(t,e){const o=e.getContainer().find(".js-grid-table").data("query");t.find('textarea[name="sql"]').val(o),t.find('input[name="name"]').val(this.getNameFromBreadcrumb())}getNameFromBreadcrumb(){const t=_(".header-toolbar").find(".breadcrumb-item");let e="";return t.each((t,o)=>{const n=_(o),i=n.find("a").length>0?n.find("a").text():n.text();e.length>0&&(e=e.concat(" > ")),e=e.concat(i)}),e}}
 /**
- * 2007-2022 Carmine Di Gruttola
+ * Copyright since 2007 Carmine Di Gruttola
  *
  * NOTICE OF LICENSE
  *
@@ -284,7 +284,7 @@ const{$:n}=window;class i{constructor(t){this.id=t,this.$container=n(`#${this.id
  * needs please refer to http://www.prestashop.com for more information.
  *
  *  @author    cdigruttola <c.digruttola@hotmail.it>
- *  @copyright 2007-2022 Carmine Di Gruttola
+ *  @copyright Copyright since 2007 Carmine Di Gruttola
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *
  */const{$:B}=window;B(()=>{const t=new i("address_customer_type");t.addExtension(new f),t.addExtension(new a),t.addExtension(new l),t.addExtension(new w),t.addExtension(new p),t.addExtension(new C),t.addExtension(new x)})}});
