@@ -30,29 +30,31 @@ $(document).ready(function () {
     var chk = $('select[name=id_addresscustomertype] option:selected').val();
 
     var need_invoice = false;
-    needInvoice(chk).then((result) => {
-        if (result) {
-            need_invoice = result.need_invoice;
-            toggleCustomerType(need_invoice);
+    if ($('select[name=id_addresscustomertype]').val() !== undefined) {
+        needInvoice(chk).then((result) => {
+            if (result) {
+                need_invoice = result.need_invoice;
+                toggleCustomerType(need_invoice);
+            }
+        });
+
+        if (address_delivery_checked != null && address_delivery_checked != 'undefined') {
+            addressNeedInvoice(address_delivery_checked).then((result) => {
+                if (result) {
+                    need_invoice = result.need_invoice;
+                    toggleCustomerType(need_invoice);
+                }
+            });
         }
-    });
 
-    if (address_delivery_checked != null && address_delivery_checked != 'undefined') {
-        addressNeedInvoice(address_delivery_checked).then((result) => {
-            if (result) {
-                need_invoice = result.need_invoice;
-                toggleCustomerType(need_invoice);
-            }
-        });
-    }
-
-    if (address_invoice_checked != null && address_invoice_checked != 'undefined') {
-        addressNeedInvoice(address_invoice_checked).then((result) => {
-            if (result) {
-                need_invoice = result.need_invoice;
-                toggleCustomerType(need_invoice);
-            }
-        });
+        if (address_invoice_checked != null && address_invoice_checked != 'undefined') {
+            addressNeedInvoice(address_invoice_checked).then((result) => {
+                if (result) {
+                    need_invoice = result.need_invoice;
+                    toggleCustomerType(need_invoice);
+                }
+            });
+        }
     }
 
     $('select[name=id_addresscustomertype]').change(function (e) {
