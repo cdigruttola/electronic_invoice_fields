@@ -80,7 +80,8 @@ final class AddressCustomerTypeGridDefinitionFactory extends AbstractFilterableG
                         'field' => 'id_addresscustomertype',
                     ])
             )
-            ->add((new DataColumn('name'))
+            ->add(
+                (new DataColumn('name'))
                 ->setName($this->trans('Customer Type', [], 'Modules.Electronicinvoicefields.Einvoice'))
                 ->setOptions([
                     'field' => 'name'
@@ -217,5 +218,4 @@ final class AddressCustomerTypeGridDefinitionFactory extends AbstractFilterableG
                     ->setIcon('storage')
             );
     }
-
 }

@@ -41,5 +41,4 @@ class HTMLTemplateOrderSlip extends HTMLTemplateOrderSlipCore
         }
         return $this->smarty->fetch($this->getTemplate('header'));
     }
-
 }

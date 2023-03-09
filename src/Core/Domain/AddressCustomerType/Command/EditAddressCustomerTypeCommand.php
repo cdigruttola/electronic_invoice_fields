@@ -125,6 +125,4 @@ class EditAddressCustomerTypeCommand
         $this->need_invoice = $need_invoice;
         return $this;
     }
-
-
 }

@@ -41,5 +41,4 @@ class HTMLTemplateInvoice extends HTMLTemplateInvoiceCore
         }
         return $this->smarty->fetch($this->getTemplate('header'));
     }
-
 }

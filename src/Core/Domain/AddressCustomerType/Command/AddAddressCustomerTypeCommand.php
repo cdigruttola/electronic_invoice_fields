@@ -48,7 +48,10 @@ class AddAddressCustomerTypeCommand
     private $need_invoice;
 
     public function __construct(
-        array $localizedNames, bool $active, bool $need_invoice)
+        array $localizedNames,
+        bool $active,
+        bool $need_invoice
+    )
     {
         $this->setLocalizedNames($localizedNames);
         $this->setActive($active);
@@ -112,5 +115,4 @@ class AddAddressCustomerTypeCommand
     {
         $this->need_invoice = $need_invoice;
     }
-
 }

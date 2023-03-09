@@ -68,5 +68,4 @@ final class EvenPositionAndControlCharTranslationTable extends BasicEnum
         $values = array_keys($constants);
         return $values[$var];
     }
-
 }

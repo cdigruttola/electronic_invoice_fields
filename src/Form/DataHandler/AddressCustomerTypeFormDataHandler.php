@@ -45,8 +45,7 @@ final class AddressCustomerTypeFormDataHandler implements FormDataHandlerInterfa
 
     public function __construct(
         CommandBusInterface $bus
-    )
-    {
+    ) {
         $this->bus = $bus;
     }
 

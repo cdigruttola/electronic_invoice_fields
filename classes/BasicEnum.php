@@ -25,11 +25,11 @@
 
 abstract class BasicEnum
 {
-    protected static $constCacheArray = NULL;
+    protected static $constCacheArray = null;
 
     protected static function getConstants()
     {
-        if (self::$constCacheArray == NULL) {
+        if (self::$constCacheArray == null) {
             self::$constCacheArray = [];
         }
         $calledClass = get_called_class();
@@ -39,5 +39,4 @@ abstract class BasicEnum
         }
         return self::$constCacheArray[$calledClass];
     }
-
 }

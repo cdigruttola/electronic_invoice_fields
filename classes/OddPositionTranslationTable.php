@@ -62,5 +62,4 @@ final class OddPositionTranslationTable extends BasicEnum
         }
         return $constants[$var];
     }
-
 }

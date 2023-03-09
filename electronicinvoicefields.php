@@ -799,5 +799,4 @@ class Electronicinvoicefields extends Module
         }
         return true;
     }
-
 }

@@ -44,8 +44,7 @@ final class AddressCustomerTypeFormDataProvider implements FormDataProviderInter
 
     public function __construct(
         CommandBusInterface $queryBus
-    )
-    {
+    ) {
         $this->queryBus = $queryBus;
     }
 

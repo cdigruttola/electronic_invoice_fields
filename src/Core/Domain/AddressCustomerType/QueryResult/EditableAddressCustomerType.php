@@ -56,8 +56,7 @@ class EditableAddressCustomerType
         array                 $name,
         bool                  $active,
         bool                  $need_invoice
-    )
-    {
+    ) {
         $this->addressCustomerTypeId = $addressCustomerTypeId;
         $this->localizedNames = $name;
         $this->active = $active;
@@ -95,5 +94,4 @@ class EditableAddressCustomerType
     {
         return $this->need_invoice;
     }
-
 }

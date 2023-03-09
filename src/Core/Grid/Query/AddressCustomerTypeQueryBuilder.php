@@ -60,8 +60,7 @@ final class AddressCustomerTypeQueryBuilder extends AbstractDoctrineQueryBuilder
         string                                    $dbPrefix,
         DoctrineSearchCriteriaApplicatorInterface $criteriaApplicator,
         int                                       $contextLangId
-    )
-    {
+    ) {
         parent::__construct($connection, $dbPrefix);
 
         $this->contextLangId = $contextLangId;

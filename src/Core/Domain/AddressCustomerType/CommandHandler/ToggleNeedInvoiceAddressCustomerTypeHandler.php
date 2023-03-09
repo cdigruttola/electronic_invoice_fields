@@ -58,5 +58,4 @@ final class ToggleNeedInvoiceAddressCustomerTypeHandler extends AbstractAddressC
             throw new CannotToggleStatusAddressCustomerTypeException(sprintf('Unable to toggle need invoice of address customer type with id "%d"', $addressCustomerTypeId->getValue()));
         }
     }
-
 }

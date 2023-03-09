@@ -57,5 +57,4 @@ class AddressFormat extends AddressFormatCore
 
         return array_unique(array_merge($address->getFieldsRequiredDB(), AddressFormat::$requireFormFieldsList));
     }
-
 }

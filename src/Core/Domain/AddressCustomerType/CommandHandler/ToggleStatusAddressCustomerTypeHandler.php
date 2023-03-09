@@ -56,5 +56,4 @@ final class ToggleStatusAddressCustomerTypeHandler extends AbstractAddressCustom
             throw new CannotToggleStatusAddressCustomerTypeException(sprintf('Unable to toggle status of address customer type with id "%d"', $addressCustomerTypeId->getValue()));
         }
     }
-
 }

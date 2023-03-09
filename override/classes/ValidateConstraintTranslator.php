@@ -27,7 +27,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class ValidateConstraintTranslator extends ValidateConstraintTranslatorCore
 {
-
     private $translator;
 
     /**
@@ -57,6 +56,4 @@ class ValidateConstraintTranslator extends ValidateConstraintTranslatorCore
         }
         return parent::translate($validator);
     }
-
-
 }

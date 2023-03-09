@@ -36,8 +36,7 @@ class CustomerAddressFormatter extends CustomerAddressFormatterCore
         Country             $country,
         TranslatorInterface $translator,
         array               $availableCountries
-    )
-    {
+    ) {
         $this->country = $country;
         $this->translator = $translator;
         $this->availableCountries = $availableCountries;

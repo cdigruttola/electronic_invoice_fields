@@ -102,7 +102,9 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
                     return [
                         'id' => $language['iso_code'],
                         'value' => sprintf('%s - %s', $language['iso_code'], $language['name']),];
-                }, $this->get('prestashop.adapter.legacy.context')->getLanguages()),
+                },
+                $this->get('prestashop.adapter.legacy.context')->getLanguages()
+            ),
         ]);
     }
 
@@ -158,11 +160,11 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
             $errors[] = ['key' => 'Could not delete %i%, there is at least one address associated',
                 'domain' => 'Modules.Electronicinvoicefields.Einvoice',
                 'parameters' => ['%i%' => $addressCustomerTypeId],];
-        } else if (!$addressCustomerType->removable) {
+        } elseif (!$addressCustomerType->removable) {
             $errors[] = ['key' => 'Could not delete %i%',
                 'domain' => 'Modules.Electronicinvoicefields.Einvoice',
                 'parameters' => ['%i%' => $addressCustomerTypeId],];
-        } else if (!$addressCustomerType->delete()) {
+        } elseif (!$addressCustomerType->delete()) {
             $errors[] = ['key' => 'Could not delete %i%',
                 'domain' => 'Modules.Electronicinvoicefields.Einvoice',
                 'parameters' => ['%i%' => $addressCustomerTypeId],];
@@ -257,5 +259,4 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
             ),
         ];
     }
-
 }
