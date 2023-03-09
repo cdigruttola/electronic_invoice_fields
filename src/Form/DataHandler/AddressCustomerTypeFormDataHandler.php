@@ -95,7 +95,7 @@ final class AddressCustomerTypeFormDataHandler implements FormDataHandlerInterfa
     {
         return (new EditAddressCustomerTypeCommand($AddressCustomerTypeId))
             ->setName($data['name'])
-            ->setActive((bool)$data['active'])
-            ->setNeedInvoice((bool)$data['need_invoice']);
+            ->setActive((bool) $data['active'])
+            ->setNeedInvoice((bool) $data['need_invoice']);
     }
 }

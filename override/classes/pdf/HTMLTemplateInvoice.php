@@ -22,10 +22,8 @@
  * @copyright Copyright since 2007 Carmine Di Gruttola
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
-
 class HTMLTemplateInvoice extends HTMLTemplateInvoiceCore
 {
-
     /**
      * Returns the template's HTML header.
      *
@@ -39,6 +37,7 @@ class HTMLTemplateInvoice extends HTMLTemplateInvoiceCore
         } else {
             $this->smarty->assign(['header' => Context::getContext()->getTranslator()->trans('Receipt', [], 'Modules.Electronicinvoicefields.Einvoice')]);
         }
+
         return $this->smarty->fetch($this->getTemplate('header'));
     }
 }

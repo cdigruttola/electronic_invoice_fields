@@ -41,17 +41,19 @@ class Validate extends ValidateCore
 
         $einvoice = Module::getInstanceByName('electronicinvoicefields');
         if (isset($einvoice) && isset($einvoice->active) && $einvoice->active) {
-            $id_shop = (int)Context::getContext()->shop->id;
+            $id_shop = (int) Context::getContext()->shop->id;
             if (Configuration::get(Electronicinvoicefields::EINVOICE_CHECK_USER_AGE, null, null, $id_shop)) {
-                $minimum = (int)Configuration::get(Electronicinvoicefields::EINVOICE_MINIMUM_USER_AGE, null, null, $id_shop);
+                $minimum = (int) Configuration::get(Electronicinvoicefields::EINVOICE_MINIMUM_USER_AGE, null, null, $id_shop);
                 $d = DateTime::createFromFormat($format, $date);
                 if (!empty(DateTime::getLastErrors()['warning_count']) || false === $d) {
                     return false;
                 }
                 $d->add(new DateInterval('P' . $minimum . 'Y'));
+
                 return $toReturn && $d->setTime(0, 0, 0)->getTimestamp() <= time();
             }
         }
+
         return $toReturn;
     }
 
@@ -70,7 +72,7 @@ class Validate extends ValidateCore
         }
 
         $sum = 0;
-        for ($i = 0; $i < Tools::strlen($dni) - 1; $i++) {
+        for ($i = 0; $i < Tools::strlen($dni) - 1; ++$i) {
             $extracted = $dni[$i];
             if ($i % 2 === 0) {
                 $sum += OddPositionTranslationTable::getValue($extracted);
@@ -87,17 +89,19 @@ class Validate extends ValidateCore
 
         if ($api !== '') {
             $url = self::MIOCODICEFISCALE_URL;
-            $url = str_replace(['%api%', '%dni%',], [$api, $dni], $url);
+            $url = str_replace(['%api%', '%dni%'], [$api, $dni], $url);
             try {
                 $client = new Client();
                 $response = $client->get($url);
                 $data = json_decode($response->getBody(), true);
+
                 return $data['status'];
             } catch (ClientException $e) {
                 $response = $e->getResponse();
                 PrestaShopLogger::addLog('Status error ' . $response->getStatusCode() . ', reason ' . $response->getReasonPhrase());
             }
         }
+
         return true;
     }
 
@@ -108,22 +112,25 @@ class Validate extends ValidateCore
     {
         $country_iso = Tools::strtoupper($country_iso);
         if (!in_array($country_iso, self::VIES_COUNTRY)) {
-            PrestaShopLogger::addLog("No VIES Verification for " . $country_iso);
+            PrestaShopLogger::addLog('No VIES Verification for ' . $country_iso);
+
             return true;
         }
 
         $vat_number = Tools::strtoupper($vat_number);
 
         $url = self::VIES_URL;
-        $url = str_replace(['%iso%', '%vat%',], [$country_iso, $vat_number,], $url);
+        $url = str_replace(['%iso%', '%vat%'], [$country_iso, $vat_number], $url);
         try {
             $client = new Client();
             $response = $client->get($url);
             $data = json_decode($response->getBody(), true);
+
             return $data['isValid'];
         } catch (ClientException $e) {
             $response = $e->getResponse();
             PrestaShopLogger::addLog('Status error ' . $response->getStatusCode() . ', reason ' . $response->getReasonPhrase());
+
             return false;
         }
     }

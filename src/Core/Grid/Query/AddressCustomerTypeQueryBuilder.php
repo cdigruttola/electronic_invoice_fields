@@ -56,10 +56,10 @@ final class AddressCustomerTypeQueryBuilder extends AbstractDoctrineQueryBuilder
      * @param int[] $contextShopIds
      */
     public function __construct(
-        Connection                                $connection,
-        string                                    $dbPrefix,
+        Connection $connection,
+        string $dbPrefix,
         DoctrineSearchCriteriaApplicatorInterface $criteriaApplicator,
-        int                                       $contextLangId
+        int $contextLangId
     ) {
         parent::__construct($connection, $dbPrefix);
 
@@ -130,7 +130,7 @@ final class AddressCustomerTypeQueryBuilder extends AbstractDoctrineQueryBuilder
             'id_addresscustomertype',
             'name',
             'active',
-            'need_invoice'
+            'need_invoice',
         ];
 
         foreach ($filters as $filterName => $filterValue) {

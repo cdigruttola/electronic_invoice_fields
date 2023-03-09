@@ -25,7 +25,6 @@
 
 declare(strict_types=1);
 
-
 namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception;
 
 /**

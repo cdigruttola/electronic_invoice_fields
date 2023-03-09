@@ -33,9 +33,9 @@ class CustomerAddressFormatter extends CustomerAddressFormatterCore
     private $definition;
 
     public function __construct(
-        Country             $country,
+        Country $country,
         TranslatorInterface $translator,
-        array               $availableCountries
+        array $availableCountries
     ) {
         $this->country = $country;
         $this->translator = $translator;

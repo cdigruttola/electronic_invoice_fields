@@ -31,7 +31,7 @@ class AddressFormat extends AddressFormatCore
         $einvoice = Module::getInstanceByName('electronicinvoicefields');
         if (isset($einvoice) && isset($einvoice->active) && $einvoice->active) {
             if (isset($tab['sdi'])) {
-                if (in_array((string)$tab['sdi'], ['000000', '0000000', 'XXXXXX', 'XXXXXXX'])) {
+                if (in_array((string) $tab['sdi'], ['000000', '0000000', 'XXXXXX', 'XXXXXXX'])) {
                     $tab['sdi'] = '';
                 }
             }
@@ -45,12 +45,12 @@ class AddressFormat extends AddressFormatCore
         $address = new CustomerAddress();
         $einvoice = Module::getInstanceByName('electronicinvoicefields');
         if ($einvoice->active) {
-            $id_shop = (int)Context::getContext()->shop->id;
+            $id_shop = (int) Context::getContext()->shop->id;
             $type = new Addresscustomertype($address->id_addresscustomertype);
-            if ($type->need_invoice && (int)Configuration::get('EINVOICE_PEC_REQUIRED', null, null, $id_shop)) {
+            if ($type->need_invoice && (int) Configuration::get('EINVOICE_PEC_REQUIRED', null, null, $id_shop)) {
                 AddressFormat::$requireFormFieldsList[] = 'pec';
             }
-            if ($type->need_invoice && (int)Configuration::get('EINVOICE_SDI_REQUIRED', null, null, $id_shop)) {
+            if ($type->need_invoice && (int) Configuration::get('EINVOICE_SDI_REQUIRED', null, null, $id_shop)) {
                 AddressFormat::$requireFormFieldsList[] = 'sdi';
             }
         }

@@ -45,15 +45,17 @@ class ValidateConstraintTranslator extends ValidateConstraintTranslatorCore
         $einvoice = Module::getInstanceByName('electronicinvoicefields');
         if (isset($einvoice) && isset($einvoice->active) && $einvoice->active) {
             if ($validator === 'isBirthDate') {
-                $id_shop = (int)Context::getContext()->shop->id;
+                $id_shop = (int) Context::getContext()->shop->id;
+
                 return $this->translator->trans(
                     'Format should be %s and your age must be greater then %s.',
                     [Tools::formatDateStr('31 May 1970'),
-                        Configuration::get(Electronicinvoicefields::EINVOICE_MINIMUM_USER_AGE, null, null, $id_shop)],
+                        Configuration::get(Electronicinvoicefields::EINVOICE_MINIMUM_USER_AGE, null, null, $id_shop), ],
                     'Modules.Electronicinvoicefields.Einvoice'
                 );
             }
         }
+
         return parent::translate($validator);
     }
 }

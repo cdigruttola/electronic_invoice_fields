@@ -22,10 +22,8 @@
  * @copyright Copyright since 2007 Carmine Di Gruttola
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
-
 class HTMLTemplateOrderSlip extends HTMLTemplateOrderSlipCore
 {
-
     /**
      * Returns the template's HTML header.
      *
@@ -39,6 +37,7 @@ class HTMLTemplateOrderSlip extends HTMLTemplateOrderSlipCore
         } else {
             $this->smarty->assign(['header' => Context::getContext()->getTranslator()->trans('Credit slip on receipt', [], 'Modules.Electronicinvoicefields.Einvoice')]);
         }
+
         return $this->smarty->fetch($this->getTemplate('header'));
     }
 }

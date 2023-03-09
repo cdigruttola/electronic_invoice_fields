@@ -54,7 +54,7 @@ final class AddressCustomerTypeFormDataProvider implements FormDataProviderInter
     public function getData($id)
     {
         /** @var EditableAddressCustomerType $editableAddressCustomerType */
-        $editableAddressCustomerType = $this->queryBus->handle(new GetAddressCustomerTypeForEditing((int)$id));
+        $editableAddressCustomerType = $this->queryBus->handle(new GetAddressCustomerTypeForEditing((int) $id));
 
         return [
             'name' => $editableAddressCustomerType->getLocalizedNames(),

@@ -59,6 +59,7 @@ class AddressCustomerTypeId
 
     /**
      * @param int $addressCustomerTypeId
+     *
      * @throws AddressCustomerTypeException
      */
     private function assertIntegerIsGreaterThanZero($addressCustomerTypeId)

@@ -22,7 +22,6 @@
  * @copyright Copyright since 2007 Carmine Di Gruttola
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
-
 class ElectronicinvoicefieldsAjaxModuleFrontController extends ModuleFrontController
 {
     public function initContent()
@@ -40,17 +39,17 @@ class ElectronicinvoicefieldsAjaxModuleFrontController extends ModuleFrontContro
         header('Content-Type: application/json');
         $value = Tools::getValue('id');
         if (!empty($value)) {
-            $addressCustomerType = new Addresscustomertype((int)$value);
-            $json_encode = json_encode(['need_invoice' => (bool)$addressCustomerType->need_invoice,]);
+            $addressCustomerType = new Addresscustomertype((int) $value);
+            $json_encode = json_encode(['need_invoice' => (bool) $addressCustomerType->need_invoice]);
             unset($addressCustomerType);
         } else {
             $value = Tools::getValue('id_address');
             if (!empty($value)) {
-                $address = new Address((int)$value);
-                $json_encode = json_encode(['need_invoice' => (bool)$address->needInvoice(),]);
+                $address = new Address((int) $value);
+                $json_encode = json_encode(['need_invoice' => (bool) $address->needInvoice()]);
                 unset($address);
             } else {
-                $json_encode = json_encode(['need_invoice' => false,]);
+                $json_encode = json_encode(['need_invoice' => false]);
             }
         }
         $this->ajaxRender($json_encode);

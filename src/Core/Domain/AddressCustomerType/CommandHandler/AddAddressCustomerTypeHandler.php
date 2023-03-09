@@ -55,7 +55,7 @@ final class AddAddressCustomerTypeHandler extends AbstractAddressCustomerTypeHan
 
         $addressCustomerType->add();
 
-        return new AddressCustomerTypeId((int)$addressCustomerType->id);
+        return new AddressCustomerTypeId((int) $addressCustomerType->id);
     }
 
     private function fillAddressCustomerTypeWithCommandData(Addresscustomertype $addressCustomerType, AddAddressCustomerTypeCommand $command)

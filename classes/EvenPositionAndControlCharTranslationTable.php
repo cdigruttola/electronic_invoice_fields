@@ -22,7 +22,6 @@
  * @copyright Copyright since 2007 Carmine Di Gruttola
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
-
 final class EvenPositionAndControlCharTranslationTable extends BasicEnum
 {
     const A = 0;
@@ -58,6 +57,7 @@ final class EvenPositionAndControlCharTranslationTable extends BasicEnum
             return $var;
         }
         $constants = parent::getConstants();
+
         return $constants[$var];
     }
 
@@ -66,6 +66,7 @@ final class EvenPositionAndControlCharTranslationTable extends BasicEnum
         $constants = parent::getConstants();
 
         $values = array_keys($constants);
+
         return $values[$var];
     }
 }

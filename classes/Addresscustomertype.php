@@ -52,7 +52,6 @@ class Addresscustomertype extends ObjectModel
     /**
      * @see ObjectModel::$definition
      */
-
     public static $definition = [
         'table' => 'einvoice_customer_type',
         'primary' => 'id_addresscustomertype',
@@ -70,7 +69,9 @@ class Addresscustomertype extends ObjectModel
 
     /**
      * @param $idLang
+     *
      * @return array|bool|mysqli_result|PDOStatement|resource|null
+     *
      * @throws PrestaShopDatabaseException
      */
     public static function getAddressCustomerTypes($idLang)
@@ -78,13 +79,15 @@ class Addresscustomertype extends ObjectModel
         return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
         SELECT *
 		FROM `' . _DB_PREFIX_ . 'einvoice_customer_type` c
-		LEFT JOIN `' . _DB_PREFIX_ . 'einvoice_customer_type_lang` cl ON (c.`id_addresscustomertype` = cl.`id_addresscustomertype` AND cl.`id_lang` = ' . (int)$idLang . ')');
+		LEFT JOIN `' . _DB_PREFIX_ . 'einvoice_customer_type_lang` cl ON (c.`id_addresscustomertype` = cl.`id_addresscustomertype` AND cl.`id_lang` = ' . (int) $idLang . ')');
     }
 
     /**
      * @param $idLang
      * @param bool $activeOnly
+     *
      * @return array
+     *
      * @throws PrestaShopDatabaseException
      */
     public static function getAddressCustomerType($idLang, bool $activeOnly = true): array
@@ -92,7 +95,7 @@ class Addresscustomertype extends ObjectModel
         $customerTypes = [];
         $sql = 'SELECT c.*, cl.`name`
 		FROM `' . _DB_PREFIX_ . 'einvoice_customer_type` c
-		LEFT JOIN `' . _DB_PREFIX_ . 'einvoice_customer_type_lang` cl ON (c.`id_addresscustomertype` = cl.`id_addresscustomertype` AND cl.`id_lang` = ' . (int)$idLang . ')';
+		LEFT JOIN `' . _DB_PREFIX_ . 'einvoice_customer_type_lang` cl ON (c.`id_addresscustomertype` = cl.`id_addresscustomertype` AND cl.`id_lang` = ' . (int) $idLang . ')';
         if ($activeOnly) {
             $sql .= ' WHERE c.`active` = 1 ';
         }
@@ -101,12 +104,15 @@ class Addresscustomertype extends ObjectModel
         foreach ($result as $row) {
             $customerTypes[$row['id_addresscustomertype']] = $row;
         }
+
         return $customerTypes;
     }
 
     /**
      * @param $idLang
+     *
      * @return array
+     *
      * @throws PrestaShopDatabaseException
      */
     public static function getAddressCustomerTypeChoice($idLang): array
@@ -116,11 +122,13 @@ class Addresscustomertype extends ObjectModel
         foreach ($customerTypes as $customerType) {
             $choices[$customerType['name']] = $customerType['id_addresscustomertype'];
         }
+
         return $choices;
     }
 
     /**
      * @param $addressCustomerTypeId
+     *
      * @return bool
      */
     public static function checkAssociatedAddressToAddressCustomerType($addressCustomerTypeId): bool

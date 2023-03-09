@@ -55,12 +55,14 @@ class Address extends AddressCore
 
     /**
      * @return bool
+     *
      * @throws PrestaShopDatabaseException
      * @throws PrestaShopException
      */
     public function needInvoice(): bool
     {
         $address_type = new Addresscustomertype($this->id_addresscustomertype);
-        return (bool)$address_type->need_invoice;
+
+        return (bool) $address_type->need_invoice;
     }
 }

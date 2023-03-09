@@ -53,9 +53,9 @@ class EditableAddressCustomerType
 
     public function __construct(
         AddressCustomerTypeId $addressCustomerTypeId,
-        array                 $name,
-        bool                  $active,
-        bool                  $need_invoice
+        array $name,
+        bool $active,
+        bool $need_invoice
     ) {
         $this->addressCustomerTypeId = $addressCustomerTypeId;
         $this->localizedNames = $name;

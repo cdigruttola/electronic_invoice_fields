@@ -51,8 +51,7 @@ class AddAddressCustomerTypeCommand
         array $localizedNames,
         bool $active,
         bool $need_invoice
-    )
-    {
+    ) {
         $this->setLocalizedNames($localizedNames);
         $this->setActive($active);
         $this->setNeedInvoice($need_invoice);

@@ -42,6 +42,7 @@ final class ToggleStatusAddressCustomerTypeHandler extends AbstractAddressCustom
 {
     /**
      * {@inheritdoc}
+     *
      * @throws PrestaShopException
      * @throws CannotToggleStatusAddressCustomerTypeException|AddressCustomerTypeNotFoundException
      */

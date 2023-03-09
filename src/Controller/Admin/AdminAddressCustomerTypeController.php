@@ -101,13 +101,12 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
                 function (array $language) {
                     return [
                         'id' => $language['iso_code'],
-                        'value' => sprintf('%s - %s', $language['iso_code'], $language['name']),];
+                        'value' => sprintf('%s - %s', $language['iso_code'], $language['name']), ];
                 },
                 $this->get('prestashop.adapter.legacy.context')->getLanguages()
             ),
         ]);
     }
-
 
     /**
      * @AdminSecurity("is_granted(['update'], request.get('_legacy_controller'))")
@@ -140,7 +139,7 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
         return $this->render('@Modules/electronicinvoicefields/views/templates/admin/edit.html.twig', [
             'addressCustomerTypeForm' => $addressCustomerTypeForm->createView(),
             'help_link' => $this->generateSidebarLink($request->attributes->get('_legacy_controller')),
-            'editableAddressCustomerType' => $this->getQueryBus()->handle(new GetAddressCustomerTypeForEditing((int)$addressCustomerTypeId)),
+            'editableAddressCustomerType' => $this->getQueryBus()->handle(new GetAddressCustomerTypeForEditing((int) $addressCustomerTypeId)),
             'contextLangId' => $this->getContextLangId(),
         ]);
     }
@@ -159,15 +158,15 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
         if (Addresscustomertype::checkAssociatedAddressToAddressCustomerType($addressCustomerTypeId)) {
             $errors[] = ['key' => 'Could not delete %i%, there is at least one address associated',
                 'domain' => 'Modules.Electronicinvoicefields.Einvoice',
-                'parameters' => ['%i%' => $addressCustomerTypeId],];
+                'parameters' => ['%i%' => $addressCustomerTypeId], ];
         } elseif (!$addressCustomerType->removable) {
             $errors[] = ['key' => 'Could not delete %i%',
                 'domain' => 'Modules.Electronicinvoicefields.Einvoice',
-                'parameters' => ['%i%' => $addressCustomerTypeId],];
+                'parameters' => ['%i%' => $addressCustomerTypeId], ];
         } elseif (!$addressCustomerType->delete()) {
             $errors[] = ['key' => 'Could not delete %i%',
                 'domain' => 'Modules.Electronicinvoicefields.Einvoice',
-                'parameters' => ['%i%' => $addressCustomerTypeId],];
+                'parameters' => ['%i%' => $addressCustomerTypeId], ];
         }
 
         if (0 === count($errors)) {
@@ -176,6 +175,7 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
             $this->flashErrors($errors);
         }
         unset($addressCustomerType);
+
         return $this->redirectToRoute(self::INDEX_ROUTE);
     }
 

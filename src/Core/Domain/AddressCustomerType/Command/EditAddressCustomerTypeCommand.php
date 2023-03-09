@@ -89,6 +89,7 @@ class EditAddressCustomerTypeCommand
     public function setName(array $name): EditAddressCustomerTypeCommand
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -106,6 +107,7 @@ class EditAddressCustomerTypeCommand
     public function setActive(bool $active): EditAddressCustomerTypeCommand
     {
         $this->active = $active;
+
         return $this;
     }
 
@@ -123,6 +125,7 @@ class EditAddressCustomerTypeCommand
     public function setNeedInvoice(bool $need_invoice): EditAddressCustomerTypeCommand
     {
         $this->need_invoice = $need_invoice;
+
         return $this;
     }
 }

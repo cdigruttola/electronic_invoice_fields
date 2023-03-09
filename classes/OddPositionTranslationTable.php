@@ -22,7 +22,6 @@
  * @copyright Copyright since 2007 Carmine Di Gruttola
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
-
 final class OddPositionTranslationTable extends BasicEnum
 {
     const A = 1;
@@ -58,8 +57,10 @@ final class OddPositionTranslationTable extends BasicEnum
 
         if (is_numeric($var)) {
             $values = array_values($constants);
+
             return $values[$var];
         }
+
         return $constants[$var];
     }
 }
