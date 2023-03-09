@@ -163,7 +163,7 @@ class Electronicinvoicefields extends Module
          * If values have been submitted in the form, process.
          */
         $output = '';
-        if (((bool) Tools::isSubmit('submitEinvoiceModule'))) {
+        if ((Tools::isSubmit('submitEinvoiceModule'))) {
             if ($this->postProcess()) {
                 $output .= $this->displayConfirmation($this->trans('Settings updated succesfully', [], 'Modules.Electronicinvoicefields.Einvoice'));
             } else {
