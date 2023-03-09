@@ -22,7 +22,6 @@
  * @copyright Copyright since 2007 Carmine Di Gruttola
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
-
 class Customer extends CustomerCore
 {
     public function getAddresses($id_lang)
