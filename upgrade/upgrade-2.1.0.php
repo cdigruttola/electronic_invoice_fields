@@ -26,11 +26,6 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-/**
- * This function updates your module from previous versions to the version 1.1,
- * usefull when you modify your database, or register a new hook ...
- * Don't forget to create one file per version.
- */
 function upgrade_module_2_1_0($module)
 {
     $list_fields = Db::getInstance()->executeS('SHOW FIELDS FROM `' . _DB_PREFIX_ . 'einvoice_customer_type`');
@@ -45,7 +40,7 @@ function upgrade_module_2_1_0($module)
         }
 
         if (!$isFieldDefaultExist) {
-            return (bool)Db::getInstance()->execute('ALTER TABLE `' . _DB_PREFIX_ . 'einvoice_customer_type` ADD COLUMN `need_invoice` tinyint(1) unsigned DEFAULT 0 NOT NULL');
+            return Db::getInstance()->execute('ALTER TABLE `' . _DB_PREFIX_ . 'einvoice_customer_type` ADD COLUMN `need_invoice` tinyint(1) unsigned DEFAULT 0 NOT NULL');
         }
     }
 
