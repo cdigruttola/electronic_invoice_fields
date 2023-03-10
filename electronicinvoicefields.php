@@ -323,7 +323,7 @@ class Electronicinvoicefields extends Module
      */
     protected function getConfigFormValues()
     {
-        $id_shop = (int)$this->context->shop->id;
+        $id_shop = (int) $this->context->shop->id;
 
         return [
             self::EINVOICE_PEC_REQUIRED => Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop),
@@ -357,10 +357,10 @@ class Electronicinvoicefields extends Module
         if (!$this->active) {
             return;
         }
-        $id_shop = (int)$this->context->shop->id;
+        $id_shop = (int) $this->context->shop->id;
 
-        $sdi_required = (int)Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop);
-        $pec_required = (int)Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop);
+        $sdi_required = (int) Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop);
+        $pec_required = (int) Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop);
 
         $this->context->controller->addJS($this->_path . '/views/js/front.js');
         $this->context->controller->addCSS($this->_path . '/views/css/front.css');
@@ -371,8 +371,8 @@ class Electronicinvoicefields extends Module
         Media::addJsDef(
             [
                 'virtual' => $virtual ?? false,
-                'sdi_required' => (int)$sdi_required,
-                'pec_required' => (int)$pec_required,
+                'sdi_required' => (int) $sdi_required,
+                'pec_required' => (int) $pec_required,
                 'ajax_link' => $this->context->link->getModuleLink($this->name, 'ajax'),
             ]
         );
@@ -423,7 +423,7 @@ class Electronicinvoicefields extends Module
         $sdi_required = Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop);
         $pec_required = Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop);
 
-        $id_address = isset($params['id']) ? (int)$params['id'] : null;
+        $id_address = isset($params['id']) ? (int) $params['id'] : null;
         $obj = new EInvoiceAddress($id_address);
 
         $formBuilder = $params['form_builder'];
@@ -444,7 +444,7 @@ class Electronicinvoicefields extends Module
             ]
         );
 
-        $params['data']['sdi'] = Tools::strtoupper((string)$obj->sdi);
+        $params['data']['sdi'] = Tools::strtoupper((string) $obj->sdi);
 
         $formBuilder->add(
             'pec',
@@ -458,7 +458,7 @@ class Electronicinvoicefields extends Module
             ]
         );
 
-        $params['data']['pec'] = (string)$obj->pec;
+        $params['data']['pec'] = (string) $obj->pec;
 
         $formBuilder->add(
             'id_addresscustomertype',
@@ -470,7 +470,7 @@ class Electronicinvoicefields extends Module
             ]
         );
 
-        $params['data']['id_addresscustomertype'] = (int)$obj->id_addresscustomertype;
+        $params['data']['id_addresscustomertype'] = (int) $obj->id_addresscustomertype;
 
         $formBuilder->setData($params['data']);
         unset($obj);
@@ -524,15 +524,15 @@ class Electronicinvoicefields extends Module
         $params['fields'][0]['form']['input'] = array_merge($part1, $fields, $part2);
 
         if (version_compare(_PS_VERSION_, '1.7', '>=')) {
-            $id_address = (int)$params['object']->id;
+            $id_address = (int) $params['object']->id;
         } else {
-            $id_address = (int)Tools::getValue('id_address');
+            $id_address = (int) Tools::getValue('id_address');
         }
         $obj = new EInvoiceAddress($id_address);
 
-        $params['fields_value']['sdi'] = Tools::strtoupper((string)$obj->sdi);
-        $params['fields_value']['pec'] = (string)$obj->pec;
-        $params['fields_value']['id_addresscustomertype'] = (int)$obj->id_addresscustomertype;
+        $params['fields_value']['sdi'] = Tools::strtoupper((string) $obj->sdi);
+        $params['fields_value']['pec'] = (string) $obj->pec;
+        $params['fields_value']['id_addresscustomertype'] = (int) $obj->id_addresscustomertype;
         unset($obj);
     }
 
@@ -641,8 +641,8 @@ class Electronicinvoicefields extends Module
         if (!$this->active) {
             return;
         }
-        $id_address = (int)$params['object']->id;
-        $address = new Address((int)$id_address);
+        $id_address = (int) $params['object']->id;
+        $address = new Address((int) $id_address);
         if (!$address->isUsed()) {
             $eiaddress = new EInvoiceAddress($id_address);
             $eiaddress->delete();
@@ -675,20 +675,20 @@ class Electronicinvoicefields extends Module
 
         $datas = [];
         $datas[$params['object']->id] = [
-            'id_addresscustomertype' => isset($params['object']->id_addresscustomertype) ? (int)$params['object']->id_addresscustomertype : '',
-            'sdi' => isset($params['object']->sdi) ? (string)$params['object']->sdi : '',
-            'pec' => isset($params['object']->pec) ? (string)$params['object']->pec : '',
+            'id_addresscustomertype' => isset($params['object']->id_addresscustomertype) ? (int) $params['object']->id_addresscustomertype : '',
+            'sdi' => isset($params['object']->sdi) ? (string) $params['object']->sdi : '',
+            'pec' => isset($params['object']->pec) ? (string) $params['object']->pec : '',
         ];
 
         foreach ($datas as $id_address => $data) {
-            $id_addresscustomertype = isset($data['id_addresscustomertype']) ? trim((int)$data['id_addresscustomertype']) : 0;
-            $sdi = isset($data['sdi']) ? trim((string)$data['sdi']) : '';
-            $pec = isset($data['pec']) ? trim((string)$data['pec']) : '';
+            $id_addresscustomertype = isset($data['id_addresscustomertype']) ? trim((int) $data['id_addresscustomertype']) : 0;
+            $sdi = isset($data['sdi']) ? trim((string) $data['sdi']) : '';
+            $pec = isset($data['pec']) ? trim((string) $data['pec']) : '';
 
             if (empty($sdi)) {
-                $address = new Address((int)$id_address);
+                $address = new Address((int) $id_address);
                 if (isset($address) && $address->id) {
-                    $country = new Country((int)$address->id_country);
+                    $country = new Country((int) $address->id_country);
                     if ($country->iso_code !== 'IT') {
                         if (!empty($address->company) || !empty($address->vat_number)) {
                             $sdi = 'XXXXXXX';
@@ -705,10 +705,10 @@ class Electronicinvoicefields extends Module
             if ($id_address) {
                 $eiaddress = new $eiaddress($id_address);
             }
-            $eiaddress->id_address = (int)$id_address;
-            $eiaddress->sdi = Tools::strtoupper((string)$sdi);
-            $eiaddress->pec = (string)$pec;
-            $eiaddress->id_addresscustomertype = (int)$id_addresscustomertype;
+            $eiaddress->id_address = (int) $id_address;
+            $eiaddress->sdi = Tools::strtoupper((string) $sdi);
+            $eiaddress->pec = (string) $pec;
+            $eiaddress->id_addresscustomertype = (int) $id_addresscustomertype;
             $eiaddress->save();
         }
     }
@@ -723,13 +723,13 @@ class Electronicinvoicefields extends Module
         if (!$this->active) {
             return;
         }
-        $id_addresscustomertype = (int)Tools::getValue('id_addresscustomertype');
-        $sdi = (string)Tools::getValue('sdi');
-        $pec = (string)Tools::getValue('pec');
+        $id_addresscustomertype = (int) Tools::getValue('id_addresscustomertype');
+        $sdi = (string) Tools::getValue('sdi');
+        $pec = (string) Tools::getValue('pec');
 
-        $params['object']->id_addresscustomertype = (int)$id_addresscustomertype;
-        $params['object']->sdi = (string)$sdi;
-        $params['object']->pec = (string)$pec;
+        $params['object']->id_addresscustomertype = (int) $id_addresscustomertype;
+        $params['object']->sdi = (string) $sdi;
+        $params['object']->pec = (string) $pec;
 
         $this->setAddressParams($params);
     }
@@ -746,13 +746,13 @@ class Electronicinvoicefields extends Module
         }
         if (version_compare(_PS_VERSION_, '1.7.7', '>=')) {
             if (!isset($params['object'])) {
-                $params['object'] = (object)null;
+                $params['object'] = (object) null;
             }
 
-            $params['object']->id = (int)$params['id'];
-            $params['object']->id_addresscustomertype = isset($params['form_data']['id_addresscustomertype']) ? (int)$params['form_data']['id_addresscustomertype'] : '';
-            $params['object']->sdi = isset($params['form_data']['sdi']) ? (string)$params['form_data']['sdi'] : '';
-            $params['object']->pec = isset($params['form_data']['pec']) ? (string)$params['form_data']['pec'] : '';
+            $params['object']->id = (int) $params['id'];
+            $params['object']->id_addresscustomertype = isset($params['form_data']['id_addresscustomertype']) ? (int) $params['form_data']['id_addresscustomertype'] : '';
+            $params['object']->sdi = isset($params['form_data']['sdi']) ? (string) $params['form_data']['sdi'] : '';
+            $params['object']->pec = isset($params['form_data']['pec']) ? (string) $params['form_data']['pec'] : '';
 
             $this->setAddressParams($params);
         }
@@ -770,9 +770,9 @@ class Electronicinvoicefields extends Module
         }
         $customer_address = Tools::getValue('customer_address');
         if (isset($customer_address) && !empty($customer_address)) {
-            $params['object']->id_addresscustomertype = (int)$customer_address['id_addresscustomertype'];
-            $params['object']->sdi = (string)$customer_address['sdi'];
-            $params['object']->pec = (string)$customer_address['pec'];
+            $params['object']->id_addresscustomertype = (int) $customer_address['id_addresscustomertype'];
+            $params['object']->sdi = (string) $customer_address['sdi'];
+            $params['object']->pec = (string) $customer_address['pec'];
         }
         $this->setAddressParams($params);
     }
