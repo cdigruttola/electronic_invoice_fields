@@ -2,7 +2,7 @@
 <module>
     <name>electronicinvoicefields</name>
     <displayName><![CDATA[Fatturazione Elettronica - Campi]]></displayName>
-    <version><![CDATA[2.3.3]]></version>
+    <version><![CDATA[2.3.4]]></version>
     <description><![CDATA[Questo modulo permette di aggiungere i campi PEC e SDI negli indirizzi]]></description>
     <author><![CDATA[cdigruttola]]></author>
     <tab><![CDATA[administration]]></tab>
