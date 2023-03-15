@@ -42,7 +42,7 @@ class ElectronicinvoicefieldsAjaxModuleFrontController extends ModuleFrontContro
             $cacheId = 'Addresscustomertype::needInvoice_' . $value;
             if (!Cache::isStored($cacheId)) {
                 $addressCustomerType = new Addresscustomertype((int) $value);
-                $var = ['need_invoice' => $addressCustomerType->need_invoice];
+                $var = ['need_invoice' => (bool) $addressCustomerType->need_invoice];
                 Cache::store($cacheId, $var);
             }
             $json_encode = json_encode(Cache::retrieve($cacheId));
@@ -53,7 +53,7 @@ class ElectronicinvoicefieldsAjaxModuleFrontController extends ModuleFrontContro
                 $cacheId = 'Address::needInvoice_' . $value;
                 if (!Cache::isStored($cacheId)) {
                     $address = new Address((int) $value);
-                    $var = ['need_invoice' => $address->needInvoice()];
+                    $var = ['need_invoice' => (bool) $address->needInvoice()];
                     Cache::store($cacheId, $var);
                 }
                 $json_encode = json_encode(Cache::retrieve($cacheId));
