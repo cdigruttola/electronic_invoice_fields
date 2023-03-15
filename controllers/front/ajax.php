@@ -39,14 +39,24 @@ class ElectronicinvoicefieldsAjaxModuleFrontController extends ModuleFrontContro
         header('Content-Type: application/json');
         $value = Tools::getValue('id');
         if (!empty($value)) {
-            $addressCustomerType = new Addresscustomertype((int) $value);
-            $json_encode = json_encode(['need_invoice' => (bool) $addressCustomerType->need_invoice]);
+            $cacheId = 'Addresscustomertype::needInvoice_' . $value;
+            if (!Cache::isStored($cacheId)) {
+                $addressCustomerType = new Addresscustomertype((int) $value);
+                $var = ['need_invoice' => $addressCustomerType->need_invoice];
+                Cache::store($cacheId, $var);
+            }
+            $json_encode = json_encode(Cache::retrieve($cacheId));
             unset($addressCustomerType);
         } else {
             $value = Tools::getValue('id_address');
             if (!empty($value)) {
-                $address = new Address((int) $value);
-                $json_encode = json_encode(['need_invoice' => (bool) $address->needInvoice()]);
+                $cacheId = 'Address::needInvoice_' . $value;
+                if (!Cache::isStored($cacheId)) {
+                    $address = new Address((int) $value);
+                    $var = ['need_invoice' => $address->needInvoice()];
+                    Cache::store($cacheId, $var);
+                }
+                $json_encode = json_encode(Cache::retrieve($cacheId));
                 unset($address);
             } else {
                 $json_encode = json_encode(['need_invoice' => false]);

@@ -362,7 +362,7 @@ class Electronicinvoicefields extends Module
         $sdi_required = (int) Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop);
         $pec_required = (int) Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop);
 
-        $this->context->controller->addJS($this->_path . '/views/js/front.js');
+        $this->context->controller->addJS($this->_path . '/views/js/front.bundle.js');
         $this->context->controller->addCSS($this->_path . '/views/css/front.css');
 
         if (isset($this->context->cart)) {

@@ -29,7 +29,7 @@ const keepLicense = require('uglify-save-license');
 const TerserPlugin = require('terser-webpack-plugin');
 const {merge} = require('webpack-merge');
 
-const psRootDir = path.resolve(process.env.PWD, '../../../admin874u409o8/themes/new-theme/');
+const psRootDir = path.resolve(process.env.PWD, '../../../admin117tpej3r/themes/new-theme/');
 const psJsDir = path.resolve(psRootDir, 'js');
 
 module.exports = {
