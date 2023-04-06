@@ -69,7 +69,7 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
     /**
      * Show address_customer_type create form & handle processing of it.
      *
-     * @AdminSecurity("is_granted(['create'], request.get('_legacy_controller'))")
+     * @AdminSecurity("is_granted('create', request.get('_legacy_controller'))")
      *
      * @return Response
      */
@@ -109,7 +109,7 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
     }
 
     /**
-     * @AdminSecurity("is_granted(['update'], request.get('_legacy_controller'))")
+     * @AdminSecurity("is_granted('update', request.get('_legacy_controller'))")
      *
      * @return Response
      */
