@@ -22,6 +22,7 @@
  * @copyright Copyright since 2007 Carmine Di Gruttola
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
+require_once _PS_MODULE_DIR_ . '/electronicinvoicefields/vendor/autoload.php';
 class Address extends AddressCore
 {
     /** @var int Customer Type */
