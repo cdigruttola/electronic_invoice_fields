@@ -28,7 +28,6 @@ declare(strict_types=1);
 namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception;
 
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
-use Exception;
 
 /**
  * Is thrown when address customer type is not found
@@ -43,7 +42,7 @@ class AddressCustomerTypeNotFoundException extends AddressCustomerTypeException
     /**
      * @param string $message
      * @param int $code
-     * @param Exception|null $previous
+     * @param \Exception|null $previous
      */
     public function __construct(AddressCustomerTypeId $addressCustomerTypeId, $message = '', $code = 0, $previous = null)
     {

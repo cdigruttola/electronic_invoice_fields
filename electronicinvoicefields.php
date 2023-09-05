@@ -97,29 +97,29 @@ class Electronicinvoicefields extends Module
             include dirname(__FILE__) . '/sql/install.php';
         }
 
-        return parent::install() &&
-            $this->registerHooks() &&
-            $this->insertAddressCustomerType();
+        return parent::install()
+            && $this->registerHooks()
+            && $this->insertAddressCustomerType();
     }
 
     public function registerHooks(): bool
     {
-        if (!$this->registerHook('displayHeader') ||
-            !$this->registerHook('displayPDFInvoice') ||
-            !$this->registerHook('displayPDFOrderSlip') ||
-            !$this->registerHook('actionCustomerAddressFormBuilderModifier') ||
-            !$this->registerHook('actionAdminAddressesFormModifier') ||
-            !$this->registerHook('actionValidateCustomerAddressForm') ||
-            !$this->registerHook('actionObjectAddressAddAfter') ||
-            !$this->registerHook('actionObjectAddressUpdateAfter') ||
-            !$this->registerHook('actionObjectAddressDeleteAfter') ||
-            !$this->registerHook('actionObjectCustomerAddressAddAfter') ||
-            !$this->registerHook('actionObjectCustomerAddressUpdateAfter') ||
-            !$this->registerHook('actionSubmitCustomerAddressForm') ||
-            !$this->registerHook('actionAfterUpdateCustomerAddressFormHandler') ||
-            !$this->registerHook('actionAfterCreateCustomerAddressFormHandler') ||
-            !$this->registerHook('additionalCustomerFormFields') ||
-            !$this->registerHook('addWebserviceResources')
+        if (!$this->registerHook('displayHeader')
+            || !$this->registerHook('displayPDFInvoice')
+            || !$this->registerHook('displayPDFOrderSlip')
+            || !$this->registerHook('actionCustomerAddressFormBuilderModifier')
+            || !$this->registerHook('actionAdminAddressesFormModifier')
+            || !$this->registerHook('actionValidateCustomerAddressForm')
+            || !$this->registerHook('actionObjectAddressAddAfter')
+            || !$this->registerHook('actionObjectAddressUpdateAfter')
+            || !$this->registerHook('actionObjectAddressDeleteAfter')
+            || !$this->registerHook('actionObjectCustomerAddressAddAfter')
+            || !$this->registerHook('actionObjectCustomerAddressUpdateAfter')
+            || !$this->registerHook('actionSubmitCustomerAddressForm')
+            || !$this->registerHook('actionAfterUpdateCustomerAddressFormHandler')
+            || !$this->registerHook('actionAfterCreateCustomerAddressFormHandler')
+            || !$this->registerHook('additionalCustomerFormFields')
+            || !$this->registerHook('addWebserviceResources')
         ) {
             return false;
         }

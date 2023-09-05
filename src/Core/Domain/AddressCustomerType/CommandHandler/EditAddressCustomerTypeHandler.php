@@ -27,7 +27,6 @@ declare(strict_types=1);
 
 namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\CommandHandler;
 
-use AddressCustomerType;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\EditAddressCustomerTypeCommand;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeException;
 
@@ -44,7 +43,7 @@ final class EditAddressCustomerTypeHandler extends AbstractAddressCustomerTypeHa
     public function handle(EditAddressCustomerTypeCommand $command)
     {
         $addressCustomerTypeId = $command->getAddressCustomerTypeId();
-        $addressCustomerType = new AddressCustomerType($addressCustomerTypeId->getValue());
+        $addressCustomerType = new \AddressCustomerType($addressCustomerTypeId->getValue());
 
         $this->assertAddressCustomerTypeWasFound($addressCustomerTypeId, $addressCustomerType);
 
@@ -61,7 +60,7 @@ final class EditAddressCustomerTypeHandler extends AbstractAddressCustomerTypeHa
         }
     }
 
-    private function updateAddressCustomerTypeWithCommandData(AddressCustomerType $addressCustomerType, EditAddressCustomerTypeCommand $command)
+    private function updateAddressCustomerTypeWithCommandData(\AddressCustomerType $addressCustomerType, EditAddressCustomerTypeCommand $command)
     {
         if (null !== $command->getName()) {
             $addressCustomerType->name = $command->getName();

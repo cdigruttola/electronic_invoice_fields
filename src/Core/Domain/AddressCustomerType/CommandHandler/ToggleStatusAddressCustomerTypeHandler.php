@@ -27,11 +27,9 @@ declare(strict_types=1);
 
 namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\CommandHandler;
 
-use Addresscustomertype;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\ToggleStatusAddressCustomerTypeCommand;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeNotFoundException;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\CannotToggleStatusAddressCustomerTypeException;
-use PrestaShopException;
 
 /**
  * Handles command that toggle status of address customer type
@@ -43,13 +41,13 @@ final class ToggleStatusAddressCustomerTypeHandler extends AbstractAddressCustom
     /**
      * {@inheritdoc}
      *
-     * @throws PrestaShopException
+     * @throws \PrestaShopException
      * @throws CannotToggleStatusAddressCustomerTypeException|AddressCustomerTypeNotFoundException
      */
     public function handle(ToggleStatusAddressCustomerTypeCommand $command)
     {
         $addressCustomerTypeId = $command->getAddressCustomerTypeId();
-        $addressCustomerType = new Addresscustomertype($addressCustomerTypeId->getValue());
+        $addressCustomerType = new \Addresscustomertype($addressCustomerTypeId->getValue());
 
         $this->assertAddressCustomerTypeWasFound($addressCustomerTypeId, $addressCustomerType);
 

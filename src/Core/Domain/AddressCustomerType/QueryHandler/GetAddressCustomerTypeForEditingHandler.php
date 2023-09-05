@@ -27,7 +27,6 @@ declare(strict_types=1);
 
 namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\QueryHandler;
 
-use Addresscustomertype;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeNotFoundException;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Query\GetAddressCustomerTypeForEditing;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\QueryResult\EditableAddressCustomerType;
@@ -45,7 +44,7 @@ final class GetAddressCustomerTypeForEditingHandler implements GetAddressCustome
     public function handle(GetAddressCustomerTypeForEditing $query)
     {
         $addressCustomerTypeId = $query->getAddressCustomerTypeId();
-        $addressCustomerType = new Addresscustomertype($addressCustomerTypeId->getValue());
+        $addressCustomerType = new \Addresscustomertype($addressCustomerTypeId->getValue());
 
         if ($addressCustomerType->id !== $addressCustomerTypeId->getValue()) {
             throw new AddressCustomerTypeNotFoundException($addressCustomerTypeId, sprintf('AddressCustomerType with id "%s" was not found', $addressCustomerTypeId->getValue()));

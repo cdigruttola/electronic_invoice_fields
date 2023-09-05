@@ -25,7 +25,6 @@
 
 namespace cdigruttola\Module\Electronicinvoicefields\Controller\Admin;
 
-use Addresscustomertype;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\ToggleNeedInvoiceAddressCustomerTypeCommand;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\ToggleStatusAddressCustomerTypeCommand;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeConstraintException;
@@ -35,7 +34,6 @@ use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\E
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\MissingAddressCustomerTypeRequiredFieldsException;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Query\GetAddressCustomerTypeForEditing;
 use cdigruttola\Module\Electronicinvoicefields\Core\Search\Filters\AddressCustomerTypeFilters;
-use Exception;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use PrestaShopBundle\Security\Annotation\AdminSecurity;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -153,9 +151,9 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
      */
     public function deleteAction($addressCustomerTypeId)
     {
-        $addressCustomerType = new Addresscustomertype($addressCustomerTypeId);
+        $addressCustomerType = new \Addresscustomertype($addressCustomerTypeId);
         $errors = [];
-        if (Addresscustomertype::checkAssociatedAddressToAddressCustomerType($addressCustomerTypeId)) {
+        if (\Addresscustomertype::checkAssociatedAddressToAddressCustomerType($addressCustomerTypeId)) {
             $errors[] = ['key' => 'Could not delete %i%, there is at least one address associated',
                 'domain' => 'Modules.Electronicinvoicefields.Einvoice',
                 'parameters' => ['%i%' => $addressCustomerTypeId], ];
@@ -228,7 +226,7 @@ class AdminAddressCustomerTypeController extends FrameworkBundleAdminController
      *
      * @return array
      */
-    private function getErrorMessages(Exception $e)
+    private function getErrorMessages(\Exception $e)
     {
         return [
             AddressCustomerTypeNotFoundException::class => $this->trans(

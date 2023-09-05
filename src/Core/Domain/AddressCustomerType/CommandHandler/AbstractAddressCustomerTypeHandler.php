@@ -27,7 +27,6 @@ declare(strict_types=1);
 
 namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\CommandHandler;
 
-use AddressCustomerType;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeNotFoundException;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\MissingAddressCustomerTypeRequiredFieldsException;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
@@ -42,7 +41,7 @@ abstract class AbstractAddressCustomerTypeHandler
     /**
      * @throws AddressCustomerTypeNotFoundException
      */
-    protected function assertAddressCustomerTypeWasFound(AddressCustomerTypeId $addressCustomerTypeId, AddressCustomerType $addressCustomerType)
+    protected function assertAddressCustomerTypeWasFound(AddressCustomerTypeId $addressCustomerTypeId, \AddressCustomerType $addressCustomerType)
     {
         if ($addressCustomerType->id !== $addressCustomerTypeId->getValue()) {
             throw new AddressCustomerTypeNotFoundException($addressCustomerTypeId, sprintf('AddressCustomerType with id "%s" was not found.', $addressCustomerTypeId->getValue()));
@@ -52,7 +51,7 @@ abstract class AbstractAddressCustomerTypeHandler
     /**
      * @throws MissingAddressCustomerTypeRequiredFieldsException
      */
-    protected function assertRequiredFieldsAreNotMissing(AddressCustomerType $addressCustomerType)
+    protected function assertRequiredFieldsAreNotMissing(\AddressCustomerType $addressCustomerType)
     {
         $errors = $addressCustomerType->validateFieldsRequiredDatabase();
 

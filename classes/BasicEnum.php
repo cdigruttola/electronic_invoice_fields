@@ -24,7 +24,7 @@
  */
 abstract class BasicEnum
 {
-    protected static $constCacheArray = null;
+    protected static $constCacheArray;
 
     protected static function getConstants()
     {
