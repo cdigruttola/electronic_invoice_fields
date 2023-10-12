@@ -29,6 +29,10 @@ namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomer
 
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeConstraintException;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Adds new address customer type with provided data
  */

@@ -31,6 +31,10 @@ use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\E
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\MissingAddressCustomerTypeRequiredFieldsException;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Provides reusable methods for address customer type command handlers.
  *

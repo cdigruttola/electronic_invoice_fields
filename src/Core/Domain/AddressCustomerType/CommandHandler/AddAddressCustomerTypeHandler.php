@@ -31,6 +31,10 @@ use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\C
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeException;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Handles command that adds new address customer type
  *

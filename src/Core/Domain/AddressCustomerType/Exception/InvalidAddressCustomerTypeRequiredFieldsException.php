@@ -27,6 +27,10 @@ declare(strict_types=1);
 
 namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Thrown when trying to set invalid required fields for address customer type
  */

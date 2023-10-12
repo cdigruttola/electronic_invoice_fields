@@ -26,6 +26,10 @@
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 class Validate extends ValidateCore
 {
     const VIES_URL = 'https://ec.europa.eu/taxation_customs/vies/rest-api/ms/%iso%/vat/%vat%';

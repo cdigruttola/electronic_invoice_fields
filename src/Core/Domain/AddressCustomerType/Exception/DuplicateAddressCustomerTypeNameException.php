@@ -29,6 +29,10 @@ namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomer
 
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\ValueObject\Name;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Exception is thrown when name which already exists is being used to create or update other address customer type
  */

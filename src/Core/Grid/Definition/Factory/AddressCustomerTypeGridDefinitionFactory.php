@@ -44,6 +44,10 @@ use PrestaShopBundle\Form\Admin\Type\YesAndNoChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Class OrderStatesGridDefinitionFactory defines order_states grid structure.
  */

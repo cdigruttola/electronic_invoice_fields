@@ -29,6 +29,10 @@ namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomer
 
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\EditAddressCustomerTypeCommand;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Interface for service that handles order return  state editing command
  */

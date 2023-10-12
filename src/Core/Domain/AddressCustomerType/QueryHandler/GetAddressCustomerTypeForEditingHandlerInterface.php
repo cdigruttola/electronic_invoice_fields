@@ -30,6 +30,10 @@ namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomer
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Query\GetAddressCustomerTypeForEditing;
 use PrestaShop\PrestaShop\Core\Domain\OrderReturnState\QueryResult\EditableOrderReturnState;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Interface for service that gets address customer type data for editing
  */

@@ -29,6 +29,10 @@ namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomer
 
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Edits provided address customer type.
  * It can edit either all or partial data.

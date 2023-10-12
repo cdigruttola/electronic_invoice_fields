@@ -31,6 +31,10 @@ use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\C
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeNotFoundException;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\CannotToggleStatusAddressCustomerTypeException;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Handles command that toggle status of address customer type
  *

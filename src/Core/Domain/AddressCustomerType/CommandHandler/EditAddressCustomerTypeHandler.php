@@ -30,6 +30,10 @@ namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomer
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\EditAddressCustomerTypeCommand;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception\AddressCustomerTypeException;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Handles commands which edits given address customer type with provided data.
  *

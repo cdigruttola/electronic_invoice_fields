@@ -36,6 +36,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Type is used to created form for order return state add/edit actions
  */

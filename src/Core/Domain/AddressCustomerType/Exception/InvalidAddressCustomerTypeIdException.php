@@ -27,6 +27,10 @@ declare(strict_types=1);
 
 namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Exception;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Class InvalidAddressCustomerTypeIdException is thrown when AddressCustomerTypeId with invalid value is being created.
  */

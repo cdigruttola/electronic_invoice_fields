@@ -33,6 +33,10 @@ use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\V
 use PrestaShop\PrestaShop\Core\CommandBus\CommandBusInterface;
 use PrestaShop\PrestaShop\Core\Form\IdentifiableObject\DataHandler\FormDataHandlerInterface;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Saves or updates order return state data submitted in form
  */

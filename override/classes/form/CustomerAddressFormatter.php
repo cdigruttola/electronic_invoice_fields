@@ -25,6 +25,10 @@
 
 use Symfony\Component\Translation\TranslatorInterface;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 class CustomerAddressFormatter extends CustomerAddressFormatterCore
 {
     private $country;

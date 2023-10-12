@@ -29,6 +29,10 @@ namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomer
 
 use PrestaShop\PrestaShop\Core\Domain\Exception\DomainException;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Class AddressCustomerTypeException is base "AddressCustomerType" context exception
  */

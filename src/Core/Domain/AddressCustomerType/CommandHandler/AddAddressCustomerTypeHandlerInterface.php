@@ -30,6 +30,10 @@ namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomer
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\AddAddressCustomerTypeCommand;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Interface for service that handles command that adds new address customer type
  */

@@ -22,6 +22,9 @@
  * @copyright Copyright since 2007 Carmine Di Gruttola
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 // the name isn't in UpperCamelCase because of AddressFormat::_checkLiableAssociation calls on _checkValidateClassField
 class Addresscustomertype extends ObjectModel
@@ -136,7 +139,7 @@ class Addresscustomertype extends ObjectModel
         $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
 		SELECT COUNT(DISTINCT a.id_address)
 		FROM `' . _DB_PREFIX_ . 'einvoice_customer_type` c
-		JOIN `' . _DB_PREFIX_ . 'einvoice_address` a ON a.`id_addresscustomertype` = c.`id_addresscustomertype` 
+		JOIN `' . _DB_PREFIX_ . 'einvoice_address` a ON a.`id_addresscustomertype` = c.`id_addresscustomertype`
 		WHERE c.`id_addresscustomertype` = ' . $addressCustomerTypeId);
 
         return $result > 0;

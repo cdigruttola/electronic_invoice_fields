@@ -32,6 +32,10 @@ use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Q
 use PrestaShop\PrestaShop\Core\CommandBus\CommandBusInterface;
 use PrestaShop\PrestaShop\Core\Form\IdentifiableObject\DataProvider\FormDataProviderInterface;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Provides data for  AddressCustomerTypeDataProvider form.
  */

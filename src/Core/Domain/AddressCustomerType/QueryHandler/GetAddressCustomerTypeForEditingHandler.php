@@ -31,6 +31,10 @@ use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\E
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Query\GetAddressCustomerTypeForEditing;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\QueryResult\EditableAddressCustomerType;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Handles command that gets orderReturnState for editing
  *

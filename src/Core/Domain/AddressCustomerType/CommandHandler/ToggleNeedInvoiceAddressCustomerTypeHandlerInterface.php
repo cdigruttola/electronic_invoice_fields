@@ -30,6 +30,10 @@ namespace cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomer
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\Command\ToggleNeedInvoiceAddressCustomerTypeCommand;
 use cdigruttola\Module\Electronicinvoicefields\Core\Domain\AddressCustomerType\ValueObject\AddressCustomerTypeId;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Interface for service that handles command that toggle status of address customer type
  */

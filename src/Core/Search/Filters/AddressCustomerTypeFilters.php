@@ -28,6 +28,10 @@ namespace cdigruttola\Module\Electronicinvoicefields\Core\Search\Filters;
 use cdigruttola\Module\Electronicinvoicefields\Core\Grid\Definition\Factory\AddressCustomerTypeGridDefinitionFactory;
 use PrestaShop\PrestaShop\Core\Search\Filters;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Stores filters for Order grid
  */
