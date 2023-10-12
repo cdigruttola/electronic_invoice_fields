@@ -44,10 +44,9 @@ class Electronicinvoicefields extends Module
     {
         $this->name = 'electronicinvoicefields';
         $this->tab = 'administration';
-        $this->version = '2.3.5';
+        $this->version = '2.3.6';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
-        $this->module_key = '313961649878a2c1b5c13a42d213c3e9';
 
         /*
          * Set $this->bootstrap to true if your module is compliant with bootstrap (PrestaShop 1.6)
