@@ -281,7 +281,7 @@ class Electronicinvoicefields extends Module
                         'type' => 'text',
                         'label' => $this->trans('Mio Codice Fiscale API Token', [], 'Modules.Electronicinvoicefields.Einvoice'),
                         'name' => self::EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API,
-                        'desc' => $this->trans('Use <a href="https://www.miocodicefiscale.com/it/api-rest-verifica-e-calcolo-codice-fiscale">Mio Codice Fiscale</a> API to validate DNI.', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                        'desc' => $this->trans('Use https://www.miocodicefiscale.com/it/api-rest-verifica-e-calcolo-codice-fiscale API to validate DNI.', [], 'Modules.Electronicinvoicefields.Einvoice'),
                     ],
                     [
                         'type' => 'switch',
@@ -303,11 +303,11 @@ class Electronicinvoicefields extends Module
                         ],
                     ],
                     [
-                        'type' => 'html',
+                        'type' => 'text',
                         'label' => $this->trans('Minimum age for user', [], 'Modules.Electronicinvoicefields.Einvoice'),
                         'desc' => $this->trans('Minimum age for customer, if not set default is 16', [], 'Modules.Exportorderstodanea.Main'),
                         'name' => self::EINVOICE_MINIMUM_USER_AGE,
-                        'html_content' => '<input type="number" name="EINVOICE_MINIMUM_USER_AGE" min="16" max="150" value="' . $this->getConfigFormValues()[self::EINVOICE_MINIMUM_USER_AGE] . '"/>',
+                        'validation' => 'isInt',
                     ],
                 ],
                 'submit' => [

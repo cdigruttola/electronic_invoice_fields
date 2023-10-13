@@ -108,8 +108,8 @@
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="d34ca38249c2ed38a26d70cdd3f5e350">
-        <source><![CDATA[Use <a href="https://www.miocodicefiscale.com/it/api-rest-verifica-e-calcolo-codice-fiscale">Mio Codice Fiscale</a> API to validate DNI.]]></source>
-        <target><![CDATA[Utilizza le API di <a href="https://www.miocodicefiscale.com/it/api-rest-verifica-e-calcolo-codice-fiscale">Mio Codice Fiscale</a> per validare il codice fiscale.]]></target>
+        <source><![CDATA[Use https://www.miocodicefiscale.com/it/api-rest-verifica-e-calcolo-codice-fiscale API to validate DNI.]]></source>
+        <target><![CDATA[Utilizza le API di https://www.miocodicefiscale.com/it/api-rest-verifica-e-calcolo-codice-fiscale per validare il codice fiscale.]]></target>
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="f0fb2776238c2febd631d7a7badf0be0">
