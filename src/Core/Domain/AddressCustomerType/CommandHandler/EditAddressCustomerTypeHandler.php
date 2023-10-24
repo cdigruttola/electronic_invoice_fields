@@ -47,7 +47,7 @@ final class EditAddressCustomerTypeHandler extends AbstractAddressCustomerTypeHa
     public function handle(EditAddressCustomerTypeCommand $command)
     {
         $addressCustomerTypeId = $command->getAddressCustomerTypeId();
-        $addressCustomerType = new \AddressCustomerType($addressCustomerTypeId->getValue());
+        $addressCustomerType = new \Addresscustomertype($addressCustomerTypeId->getValue());
 
         $this->assertAddressCustomerTypeWasFound($addressCustomerTypeId, $addressCustomerType);
 

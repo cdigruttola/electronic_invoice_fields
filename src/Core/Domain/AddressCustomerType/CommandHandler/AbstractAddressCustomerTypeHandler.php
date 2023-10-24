@@ -45,7 +45,7 @@ abstract class AbstractAddressCustomerTypeHandler
     /**
      * @throws AddressCustomerTypeNotFoundException
      */
-    protected function assertAddressCustomerTypeWasFound(AddressCustomerTypeId $addressCustomerTypeId, \AddressCustomerType $addressCustomerType)
+    protected function assertAddressCustomerTypeWasFound(AddressCustomerTypeId $addressCustomerTypeId, \Addresscustomertype $addressCustomerType)
     {
         if ($addressCustomerType->id !== $addressCustomerTypeId->getValue()) {
             throw new AddressCustomerTypeNotFoundException($addressCustomerTypeId, sprintf('AddressCustomerType with id "%s" was not found.', $addressCustomerTypeId->getValue()));

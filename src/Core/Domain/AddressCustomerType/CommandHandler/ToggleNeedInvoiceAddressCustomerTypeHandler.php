@@ -51,7 +51,7 @@ final class ToggleNeedInvoiceAddressCustomerTypeHandler extends AbstractAddressC
     public function handle(ToggleNeedInvoiceAddressCustomerTypeCommand $command)
     {
         $addressCustomerTypeId = $command->getAddressCustomerTypeId();
-        $addressCustomerType = new \AddressCustomerType($addressCustomerTypeId->getValue());
+        $addressCustomerType = new \Addresscustomertype($addressCustomerTypeId->getValue());
 
         $this->assertAddressCustomerTypeWasFound($addressCustomerTypeId, $addressCustomerType);
 
