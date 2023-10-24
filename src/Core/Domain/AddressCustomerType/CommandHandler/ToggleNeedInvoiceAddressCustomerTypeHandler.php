@@ -55,7 +55,7 @@ final class ToggleNeedInvoiceAddressCustomerTypeHandler extends AbstractAddressC
 
         $this->assertAddressCustomerTypeWasFound($addressCustomerTypeId, $addressCustomerType);
 
-        $addressCustomerType->need_invoice = !(int) $addressCustomerType->need_invoice;
+        $addressCustomerType->need_invoice = !$addressCustomerType->need_invoice;
         if (false === $addressCustomerType->update()) {
             throw new CannotToggleStatusAddressCustomerTypeException(sprintf('Unable to toggle need invoice of address customer type with id "%d"', $addressCustomerTypeId->getValue()));
         }
