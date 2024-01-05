@@ -44,7 +44,7 @@ class Electronicinvoicefields extends Module
     {
         $this->name = 'electronicinvoicefields';
         $this->tab = 'administration';
-        $this->version = '2.3.7';
+        $this->version = '2.3.8';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
 
@@ -372,6 +372,7 @@ class Electronicinvoicefields extends Module
                 'virtual' => $virtual ?? false,
                 'sdi_required' => (int) $sdi_required,
                 'pec_required' => (int) $pec_required,
+                'dni_required' => Address::dniRequired($this->context->country->id),
                 'ajax_link' => $this->context->link->getModuleLink($this->name, 'ajax'),
             ]
         );
