@@ -44,7 +44,7 @@ class Electronicinvoicefields extends Module
     {
         $this->name = 'electronicinvoicefields';
         $this->tab = 'administration';
-        $this->version = '2.3.8';
+        $this->version = '2.3.9';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
 
@@ -589,7 +589,9 @@ class Electronicinvoicefields extends Module
     {
         if ($this->active) {
             $format = $params['fields'];
-            $format['birthday']->setRequired(true);
+            if (isset($format['birthday'])) {
+                $format['birthday']->setRequired(true);
+            }
         }
     }
 

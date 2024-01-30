@@ -57,16 +57,14 @@ $(document).ready(function () {
     }
   }
 
-  $('select[name=id_addresscustomertype]').change(function (e) {
-    e.preventDefault();
-    chk = $('select[name=id_addresscustomertype] option:selected').val();
-    needInvoice(chk).then((result) => {
-      if (result) {
-        need_invoice = result.need_invoice;
-        toggleCustomerType(need_invoice);
-      }
-    });
+  prestashop.on('updatedAddressForm', () => {
+    if ($('select[name=id_addresscustomertype]') != 'undefined') {
+      addEventOnSelectCustomerType();
+    }
   });
+
+  addEventOnSelectCustomerType();
+
   $('#checkout-addresses-step div.js-address-form #delivery-addresses input[name=id_address_delivery]').change(function (e) {
     e.preventDefault();
     chk = $('#checkout-addresses-step div.js-address-form #delivery-addresses input[name=id_address_delivery]:checked').val();
@@ -226,4 +224,17 @@ function toggleCustomerType(need_invoice) {
       obj_pec.closest('.form-group').find('label.form-control-label').removeClass('required');
     }
   }
+}
+
+function addEventOnSelectCustomerType() {
+  $('select[name=id_addresscustomertype]').change(function (e) {
+    e.preventDefault();
+    var chk = $('select[name=id_addresscustomertype] option:selected').val();
+    needInvoice(chk).then((result) => {
+      if (result) {
+        var need_invoice = result.need_invoice;
+        toggleCustomerType(need_invoice);
+      }
+    });
+  });
 }
