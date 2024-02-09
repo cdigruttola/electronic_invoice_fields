@@ -34,6 +34,7 @@ class Electronicinvoicefields extends Module
 {
     public const EINVOICE_PEC_REQUIRED = 'EINVOICE_PEC_REQUIRED';
     public const EINVOICE_SDI_REQUIRED = 'EINVOICE_SDI_REQUIRED';
+    public const EINVOICE_VAT_VIES_VALIDATE = 'EINVOICE_VAT_VIES_VALIDATE';
     public const EINVOICE_DNI_VALIDATE = 'EINVOICE_DNI_VALIDATE';
     public const EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API = 'EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API';
     public const EINVOICE_CHECK_USER_AGE = 'EINVOICE_CHECK_USER_AGE';
@@ -44,7 +45,7 @@ class Electronicinvoicefields extends Module
     {
         $this->name = 'electronicinvoicefields';
         $this->tab = 'administration';
-        $this->version = '2.3.9';
+        $this->version = '2.3.10';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
 
@@ -133,6 +134,7 @@ class Electronicinvoicefields extends Module
 
             Configuration::deleteByName(self::EINVOICE_PEC_REQUIRED);
             Configuration::deleteByName(self::EINVOICE_SDI_REQUIRED);
+            Configuration::deleteByName(self::EINVOICE_VAT_VIES_VALIDATE);
             Configuration::deleteByName(self::EINVOICE_DNI_VALIDATE);
             Configuration::deleteByName(self::EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API);
             Configuration::deleteByName(self::EINVOICE_CHECK_USER_AGE);
@@ -260,6 +262,25 @@ class Electronicinvoicefields extends Module
                     ],
                     [
                         'type' => 'switch',
+                        'label' => $this->trans('VAT Code validation with VIES', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                        'name' => self::EINVOICE_VAT_VIES_VALIDATE,
+                        'is_bool' => true,
+                        'desc' => $this->trans('This options set enable the VAT Code validation with VIES.', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                        'values' => [
+                            [
+                                'id' => 'active_on',
+                                'value' => true,
+                                'label' => $this->trans('Enabled', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                            ],
+                            [
+                                'id' => 'active_off',
+                                'value' => false,
+                                'label' => $this->trans('Disabled', [], 'Modules.Electronicinvoicefields.Einvoice'),
+                            ],
+                        ],
+                    ],
+                    [
+                        'type' => 'switch',
                         'label' => $this->trans('DNI field validation', [], 'Modules.Electronicinvoicefields.Einvoice'),
                         'name' => self::EINVOICE_DNI_VALIDATE,
                         'is_bool' => true,
@@ -327,6 +348,7 @@ class Electronicinvoicefields extends Module
         return [
             self::EINVOICE_PEC_REQUIRED => Configuration::get(self::EINVOICE_PEC_REQUIRED, null, null, $id_shop),
             self::EINVOICE_SDI_REQUIRED => Configuration::get(self::EINVOICE_SDI_REQUIRED, null, null, $id_shop),
+            self::EINVOICE_VAT_VIES_VALIDATE => Configuration::get(self::EINVOICE_VAT_VIES_VALIDATE, null, null, $id_shop),
             self::EINVOICE_DNI_VALIDATE => Configuration::get(self::EINVOICE_DNI_VALIDATE, null, null, $id_shop),
             self::EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API => Configuration::get(self::EINVOICE_DNI_VALIDATE_MIOCODICEFISCALE_API, null, null, $id_shop),
             self::EINVOICE_CHECK_USER_AGE => Configuration::get(self::EINVOICE_CHECK_USER_AGE, null, null, $id_shop),
@@ -574,7 +596,7 @@ class Electronicinvoicefields extends Module
         }
 
         $vat_number = $form->getField('vat_number');
-        if (isset($vat_number)) {
+        if (isset($vat_number) && Configuration::get(self::EINVOICE_VAT_VIES_VALIDATE, null, null, $id_shop)) {
             $vat_number_value = $vat_number->getValue();
             if (!empty($vat_number_value) && !Validate::checkVatNumber($vat_number_value, $iso_country)) {
                 $is_valid &= false;

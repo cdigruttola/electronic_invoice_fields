@@ -75,7 +75,11 @@ function toggleCustomerType() {
                 obj_company.closest('.form-group').find('label.form-control-label').addClass('required');
             }
 
-            obj_dni.closest('.form-group').hide(100);
+          if (obj_dni.hasClass('required')) {
+            obj_dni.removeClass('required');
+          }
+
+          obj_dni.closest('.form-group').hide(100);
 
             obj_company.closest('.form-group').find('.form-control-comment').html('');
             obj_vat_number.closest('.form-group').show(100);
