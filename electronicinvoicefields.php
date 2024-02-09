@@ -452,13 +452,13 @@ class Electronicinvoicefields extends Module
 
         $formBuilder->add(
             'sdi',
-            \Symfony\Component\Form\Extension\Core\Type\TextType::class,
+            Symfony\Component\Form\Extension\Core\Type\TextType::class,
             [
                 'label' => $this->trans('SDI Code', [], 'Modules.Electronicinvoicefields.Einvoice'),
                 'required' => $sdi_required,
                 'constraints' => [
                     new PrestaShop\PrestaShop\Core\ConstraintValidator\Constraints\CleanHtml(),
-                    new \Symfony\Component\Validator\Constraints\Length([
+                    new Symfony\Component\Validator\Constraints\Length([
                         'max' => 7,
                         'maxMessage' => $this->trans('Max caracters allowed : 7', [], 'Modules.Electronicinvoicefields.Einvoice'),
                     ]),
